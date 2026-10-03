@@ -1,0 +1,21 @@
+.home__hero {
+  margin-bottom: 32px;
+}
+
+.home__subtitle {
+  max-width: 720px;
+  color: var(--lm-color-slate-700);
+  font-size: 16px;
+}
+
+/* Blue Tint background requires Slate 600 text or darker. */
+.home__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 720px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-color-blue-tint);
+  color: var(--lm-color-info-text);
+}

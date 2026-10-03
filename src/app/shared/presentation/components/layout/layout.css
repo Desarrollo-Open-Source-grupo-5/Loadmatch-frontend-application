@@ -1,0 +1,147 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-toolbar {
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.app-toolbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Orange on Dark Navy keeps a 5.98:1 contrast ratio (WCAG AA). */
+.app-toolbar__brand-accent {
+  color: var(--lm-color-primary-orange);
+}
+
+.mat-spacer {
+  flex: 1 1 auto;
+}
+
+.app-toolbar__profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.app-toolbar__link--active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.app-container {
+  flex: 1 1 auto;
+}
+
+.app-sidenav {
+  width: 240px;
+  padding-top: 16px;
+}
+
+.app-sidenav__role {
+  margin: 0 24px 8px;
+  color: var(--lm-color-slate-300);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.app-sidenav__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--lm-color-white);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.app-sidenav__link:hover {
+  background-color: rgb(255 255 255 / 8%);
+}
+
+.app-sidenav__link:focus-visible {
+  outline: 2px solid var(--lm-color-white);
+  outline-offset: 2px;
+}
+
+/* Active entry: Primary Orange background with Dark Navy text (5.98:1). */
+.app-sidenav__link--active,
+.app-sidenav__link--active:hover {
+  background-color: var(--lm-color-primary-orange);
+  color: var(--lm-color-dark-navy);
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Light focus indicator on the Dark Navy toolbar. */
+.app-toolbar :focus-visible {
+  outline-color: var(--lm-color-white);
+}
+
+.app-toolbar .app-toolbar__compact-icon {
+  display: none;
+}
+
+@media (max-width: 959.98px) {
+  .app-toolbar__label {
+    display: none;
+  }
+
+  .app-toolbar .app-toolbar__compact-icon {
+    display: inline-block;
+    margin: 0;
+  }
+
+  /* Icon-only toolbar buttons keep a 40 px touch target without extra padding. */
+  .app-toolbar a[mat-button],
+  .app-toolbar button[mat-stroked-button] {
+    --mat-button-text-horizontal-padding: 8px;
+    --mat-button-outlined-horizontal-padding: 8px;
+    --mat-button-outlined-icon-spacing: 0;
+    --mat-button-text-icon-spacing: 0;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .app-toolbar {
+    gap: 4px;
+    padding: 0 8px;
+  }
+
+  .app-toolbar__brand-name {
+    display: none;
+  }
+
+  .app-main {
+    padding: 16px;
+  }
+}

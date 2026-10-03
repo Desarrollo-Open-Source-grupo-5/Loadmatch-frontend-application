@@ -1,0 +1,25 @@
+.profile-required {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 32px 24px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  text-align: center;
+}
+
+.profile-required mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  color: var(--lm-color-slate-600);
+}
+
+.profile-required h1 {
+  font-size: 20px;
+}
+
+.profile-required p {
+  margin-bottom: 24px;
+  color: var(--lm-color-slate-600);
+}
