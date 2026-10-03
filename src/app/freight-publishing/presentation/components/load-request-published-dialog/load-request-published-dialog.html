@@ -1,0 +1,38 @@
+<div class="published-dialog__icon" aria-hidden="true">
+  <mat-icon>check_circle</mat-icon>
+</div>
+<h2 mat-dialog-title>{{ 'load-request-published.title' | translate }}</h2>
+<mat-dialog-content>
+  <p class="published-dialog__message">
+    {{ 'load-request-published.message' | translate: {code: data.loadRequest.code, destination: data.loadRequest.route.destination.district} }}
+  </p>
+  <dl class="published-dialog__summary">
+    <div>
+      <dt>{{ 'load-request-published.origin' | translate }}</dt>
+      <dd>{{ data.loadRequest.route.origin.district }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'load-request-published.destination' | translate }}</dt>
+      <dd>{{ data.loadRequest.route.destination.district }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'load-request-published.pickup' | translate }}</dt>
+      <dd>{{ data.loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'load-request-published.rate' | translate }}</dt>
+      <dd>{{ data.loadRequest.offeredRate | money }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'load-request-published.status' | translate }}</dt>
+      <dd>{{ 'load-request-status.' + data.loadRequest.status | translate }}</dd>
+    </div>
+  </dl>
+</mat-dialog-content>
+<mat-dialog-actions class="published-dialog__actions">
+  <button mat-flat-button type="button" [mat-dialog-close]="viewListResult">
+    {{ 'load-request-published.view-list' | translate }}
+    <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+  </button>
+  <button mat-button type="button" [mat-dialog-close]="stayResult">{{ 'load-request-published.stay' | translate }}</button>
+</mat-dialog-actions>
