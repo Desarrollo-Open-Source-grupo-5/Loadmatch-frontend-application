@@ -1,0 +1,76 @@
+@if (store.loading()) {
+  <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+}
+@if (store.error()) {
+  <p class="profile-chooser__error" role="alert">
+    <mat-icon aria-hidden="true">cloud_off</mat-icon>
+    {{ 'common.api-error' | translate }}
+  </p>
+}
+
+<div class="profile-chooser">
+  <mat-card appearance="outlined" class="profile-chooser__card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar class="profile-chooser__avatar" aria-hidden="true">domain</mat-icon>
+      <mat-card-title><h2>{{ 'profiles.enter-as-shipper' | translate }}</h2></mat-card-title>
+      <mat-card-subtitle>{{ 'profiles.shipper-description' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ul class="profile-chooser__list" [attr.aria-label]="'profiles.shipper-list' | translate">
+        @for (shipper of store.shippers(); track shipper.id) {
+          <li>
+            <button type="button" class="profile-chooser__option" (click)="enterAsShipper(shipper)">
+              <span class="profile-chooser__name">{{ shipper.businessName }}</span>
+              <span class="profile-chooser__detail">{{ 'profiles.ruc' | translate }} {{ shipper.ruc }}</span>
+              <span class="profile-chooser__detail">
+                <mat-icon aria-hidden="true" class="profile-chooser__star">star</mat-icon>
+                {{ 'profiles.rating' | translate: {average: (shipper.reputation.average | localizedNumber: '1.1-1'), total: shipper.reputation.totalRatings} }}
+              </span>
+              <mat-icon aria-hidden="true" class="profile-chooser__arrow">arrow_forward</mat-icon>
+            </button>
+          </li>
+        } @empty {
+          @if (!store.loading()) {
+            <li class="profile-chooser__detail">{{ 'profiles.no-profiles' | translate }}</li>
+          }
+        }
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="profile-chooser__card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar class="profile-chooser__avatar" aria-hidden="true">local_shipping</mat-icon>
+      <mat-card-title><h2>{{ 'profiles.enter-as-carrier' | translate }}</h2></mat-card-title>
+      <mat-card-subtitle>{{ 'profiles.carrier-description' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ul class="profile-chooser__list" [attr.aria-label]="'profiles.carrier-list' | translate">
+        @for (carrier of store.carriers(); track carrier.id) {
+          <li>
+            <button type="button" class="profile-chooser__option" (click)="enterAsCarrier(carrier)">
+              <span class="profile-chooser__name">{{ carrier.fullName() }}</span>
+              <span class="profile-chooser__detail">
+                <mat-icon aria-hidden="true">{{ carrier.canAcceptTrips() ? 'verified' : 'pending' }}</mat-icon>
+                {{ 'profiles.enablement-status.' + carrier.enablementStatus | translate }}
+              </span>
+              <span class="profile-chooser__detail">
+                <mat-icon aria-hidden="true" class="profile-chooser__star">star</mat-icon>
+                @if (carrier.reputation.hasRatings()) {
+                  {{ 'profiles.rating' | translate: {average: (carrier.reputation.average | localizedNumber: '1.1-1'), total: carrier.reputation.totalRatings} }}
+                } @else {
+                  {{ 'profiles.no-ratings' | translate }}
+                }
+              </span>
+              <mat-icon aria-hidden="true" class="profile-chooser__arrow">arrow_forward</mat-icon>
+            </button>
+          </li>
+        } @empty {
+          @if (!store.loading()) {
+            <li class="profile-chooser__detail">{{ 'profiles.no-profiles' | translate }}</li>
+          }
+        }
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
