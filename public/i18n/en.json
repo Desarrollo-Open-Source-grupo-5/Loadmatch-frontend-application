@@ -1,0 +1,78 @@
+{
+  "app": {
+    "brand-load": "Load",
+    "brand-match": "Match"
+  },
+  "nav": {
+    "main": "Main navigation",
+    "open-menu": "Open navigation menu",
+    "shipper-role": "Shipper",
+    "carrier-role": "Carrier",
+    "my-loads": "My Loads",
+    "publish-load": "Publish Load",
+    "find-loads": "Find Loads",
+    "about": "About",
+    "switch-profile": "Switch profile",
+    "language": "Preferred language",
+    "language-en": "English",
+    "language-es": "Spanish"
+  },
+  "common": {
+    "loading": "Loading",
+    "api-error": "The data could not be loaded. Check that the mock API is running (npm run api) and try again.",
+    "close": "Close",
+    "kg": "kg",
+    "m": "m",
+    "pen-symbol": "S/"
+  },
+  "load-request-status": {
+    "DRAFT": "Draft",
+    "PUBLISHED": "Searching for vehicle",
+    "ASSIGNED": "Assigned",
+    "IN_TRANSIT": "In transit",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled"
+  },
+  "home": {
+    "title": "Welcome to LoadMatch",
+    "content": "LoadMatch connects companies that need to move cargo with carriers that have available capacity across Peru."
+  },
+  "profiles": {
+    "enter-as-shipper": "Enter as Shipper",
+    "shipper-description": "Publish load requests and manage them by status.",
+    "shipper-list": "Demo shipper companies",
+    "enter-as-carrier": "Enter as Carrier",
+    "carrier-description": "Find available loads near you that fit your vehicle.",
+    "carrier-list": "Demo carriers",
+    "ruc": "RUC",
+    "rating": "{{average}} ({{total}} ratings)",
+    "no-ratings": "No ratings yet",
+    "no-profiles": "No demo profiles available.",
+    "enablement-status": {
+      "PENDING": "Pending validation",
+      "ENABLED": "Enabled",
+      "SUSPENDED": "Suspended"
+    }
+  },
+  "about": {
+    "logo-alt": "LoadMatch logo",
+    "title": "About LoadMatch",
+    "content": "LoadMatch is a B2B road freight platform that connects small and medium-sized companies that need to move cargo with independent carriers that have available capacity in Peru.",
+    "team": "LoadMatch is developed by CargoLink Labs for the Open Source Applications Development course at UPC."
+  },
+  "profile-required": {
+    "title": "Choose a profile first",
+    "shipper": "This page is for shippers. Enter as a shipper to see it.",
+    "carrier": "This page is for carriers. Enter as a carrier to see it.",
+    "action": "Choose a profile"
+  },
+  "page-not-found": {
+    "title": "Page not found",
+    "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
+    "go-home": "Go Home"
+  },
+  "footer": {
+    "company": "CargoLink Labs",
+    "rights": "All rights reserved."
+  }
+}

@@ -1,0 +1,57 @@
+<mat-toolbar class="app-toolbar">
+  @if (options().length && isHandset()) {
+    <button mat-icon-button type="button" (click)="sidenav.toggle()" [attr.aria-label]="'nav.open-menu' | translate">
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
+  <a class="app-toolbar__brand" routerLink="/home">
+    <img src="loadmatch-logo.png" alt="" width="32" height="32"/>
+    <span class="app-toolbar__brand-name">{{ 'app.brand-load' | translate }}<span class="app-toolbar__brand-accent">{{ 'app.brand-match' | translate }}</span></span>
+  </a>
+  <span class="mat-spacer"></span>
+  @if (activeProfile(); as profile) {
+    <span class="app-toolbar__profile app-toolbar__label">
+      <mat-icon aria-hidden="true">{{ profile.role === 'SHIPPER' ? 'domain' : 'local_shipping' }}</mat-icon>
+      <span>{{ profile.displayName }}</span>
+    </span>
+    <button mat-stroked-button type="button" (click)="switchProfile()"
+            [attr.aria-label]="'nav.switch-profile' | translate"
+            [matTooltip]="'nav.switch-profile' | translate" [matTooltipDisabled]="!isHandset()">
+      <mat-icon>switch_account</mat-icon>
+      <span class="app-toolbar__label">{{ 'nav.switch-profile' | translate }}</span>
+    </button>
+  }
+  <a mat-button routerLink="/about" routerLinkActive="app-toolbar__link--active"
+     [attr.aria-label]="'nav.about' | translate">
+    <mat-icon class="app-toolbar__compact-icon">info</mat-icon>
+    <span class="app-toolbar__label">{{ 'nav.about' | translate }}</span>
+  </a>
+  <app-language-switcher/>
+</mat-toolbar>
+
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #sidenav class="app-sidenav"
+               [mode]="isHandset() ? 'over' : 'side'"
+               [opened]="options().length > 0 && !isHandset()">
+    <nav [attr.aria-label]="'nav.main' | translate">
+      <p class="app-sidenav__role">{{ roleLabel() | translate }}</p>
+      @for (option of options(); track option.link) {
+        <a class="app-sidenav__link"
+           [routerLink]="option.link"
+           routerLinkActive="app-sidenav__link--active"
+           ariaCurrentWhenActive="page"
+           [routerLinkActiveOptions]="{exact: true}"
+           (click)="isHandset() && sidenav.close()">
+          <mat-icon aria-hidden="true">{{ option.icon }}</mat-icon>
+          <span>{{ option.label | translate }}</span>
+        </a>
+      }
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="app-content">
+    <main class="app-main">
+      <router-outlet/>
+    </main>
+    <app-footer-content/>
+  </mat-sidenav-content>
+</mat-sidenav-container>
