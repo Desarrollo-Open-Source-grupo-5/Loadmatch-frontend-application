@@ -1,35 +1,128 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
+// LoadMatch Angular Material theme.
+// Material 3 palettes generated from Primary Orange #FE6B00 with
+// `ng generate @angular/material:theme-color` (see _theme-colors.scss). Tone 40 of the primary
+// palette is Orange Pressed #A04100, so text-like primary elements (links, text buttons, focused
+// form fields) meet WCAG AA on light backgrounds. Typography: Inter. Density: 0.
 @use '@angular/material' as mat;
+@use './theme-colors' as loadmatch;
+
+@include mat.core();
+
+:root {
+  // Dark Navy toolbar with white text.
+  @include mat.toolbar-overrides((
+    container-background-color: #0B1C30,
+    container-text-color: #FFFFFF,
+  ));
+
+  // Sidebar Dark side navigation with white text; light content background.
+  @include mat.sidenav-overrides((
+    container-background-color: #131B2E,
+    container-text-color: #FFFFFF,
+    container-shape: 0,
+    content-background-color: #F8FAFC,
+  ));
+
+  // Filled (primary) buttons: Primary Orange background with Dark Navy text, never white.
+  // Contrast 5.98:1.
+  @include mat.button-overrides((
+    filled-container-color: #FE6B00,
+    filled-label-text-color: #0B1C30,
+    filled-state-layer-color: #0B1C30,
+    filled-ripple-color: rgb(11 28 48 / 16%),
+    filled-label-text-weight: 600,
+    filled-container-shape: 8px,
+    outlined-container-shape: 8px,
+    outlined-label-text-color: #0B1C30,
+    outlined-outline-color: #CBD5E1,
+    text-container-shape: 8px,
+    text-label-text-color: #A04100,
+  ));
+
+  // Rounded outlined form fields, as defined by the Web Style Guidelines.
+  @include mat.form-field-overrides((
+    outlined-container-shape: 8px,
+  ));
+
+  // Light surfaces for overlays (select panels, calendar, dialogs).
+  @include mat.select-overrides((
+    panel-background-color: #FFFFFF,
+  ));
+  @include mat.datepicker-overrides((
+    calendar-container-background-color: #FFFFFF,
+  ));
+  @include mat.dialog-overrides((
+    container-color: #FFFFFF,
+  ));
+
+  // White cards with subtle Slate 200 borders.
+  @include mat.card-overrides((
+    outlined-container-color: #FFFFFF,
+    outlined-outline-color: #E2E8F0,
+    outlined-container-shape: 12px,
+  ));
+
+  // Selected filter chips: Dark Navy with white text (17.17:1); unselected chips keep dark text.
+  @include mat.chips-overrides((
+    elevated-selected-container-color: #0B1C30,
+    selected-label-text-color: #FFFFFF,
+    with-icon-selected-icon-color: #FFFFFF,
+    selected-hover-state-layer-color: #FFFFFF,
+    selected-focus-state-layer-color: #FFFFFF,
+    label-text-color: #334155,
+    outline-color: #CBD5E1,
+  ));
+}
+
+// Controls placed on the Dark Navy toolbar use white text, outlines and focus indicators.
+.app-toolbar {
+  @include mat.button-overrides((
+    text-label-text-color: #FFFFFF,
+    text-state-layer-color: #FFFFFF,
+    outlined-label-text-color: #FFFFFF,
+    outlined-outline-color: rgb(255 255 255 / 60%),
+    outlined-state-layer-color: #FFFFFF,
+  ));
+  @include mat.icon-button-overrides((
+    icon-color: #FFFFFF,
+    state-layer-color: #FFFFFF,
+  ));
+  @include mat.button-toggle-overrides((
+    background-color: transparent,
+    text-color: #FFFFFF,
+    state-layer-color: #FFFFFF,
+    divider-color: rgb(255 255 255 / 60%),
+    selected-state-background-color: #FE6B00,
+    selected-state-text-color: #0B1C30,
+  ));
+  @include mat.strong-focus-indicators-color(#FFFFFF);
+}
+
+// Keyboard focus indicator: Dark Navy, never Primary Orange (WCAG 1.4.11).
+@include mat.strong-focus-indicators((
+  border-color: #0B1C30,
+));
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
+  @include mat.theme((
+    color: (
+      primary: loadmatch.$primary-palette,
+      tertiary: loadmatch.$tertiary-palette,
+      theme-type: light,
+    ),
+    typography: Inter,
+    density: 0,
+  ));
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+  // The application uses the light color theme of the Design System.
   color-scheme: light;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  // Background Light surface, Slate 700 body text and Inter body typography.
+  background-color: #F8FAFC;
+  color: #334155;
   font: var(--mat-sys-body-medium);
 
   // Reset the user agent margin.
