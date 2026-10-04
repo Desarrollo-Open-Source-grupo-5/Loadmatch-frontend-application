@@ -105,6 +105,26 @@
       "SUSPENDED": "Suspended"
     }
   },
+  "load-request-list": {
+    "title": "My load requests",
+    "count-one": "{{count}} load request",
+    "count-other": "{{count}} load requests",
+    "subtitle": "Follow your load requests by status and manage the ones still searching for a vehicle.",
+    "publish": "Publish load",
+    "filter-label": "Filter by status",
+    "filter-all": "All",
+    "empty-all": "You have not published any load requests yet.",
+    "empty-action": "Publish your first load",
+    "empty-filtered": "You have no load requests with status \"{{status}}\".",
+    "column-id": "ID",
+    "column-route": "Route",
+    "column-pickup": "Pickup",
+    "column-rate": "Offered rate",
+    "column-status": "Status",
+    "column-actions": "Actions",
+    "view-tracking": "View tracking",
+    "no-actions": "No actions"
+  },
   "about": {
     "logo-alt": "LoadMatch logo",
     "title": "About LoadMatch",

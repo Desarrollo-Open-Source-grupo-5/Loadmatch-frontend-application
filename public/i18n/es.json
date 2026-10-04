@@ -105,6 +105,26 @@
       "SUSPENDED": "Suspendido"
     }
   },
+  "load-request-list": {
+    "title": "Mis solicitudes de carga",
+    "count-one": "{{count}} solicitud",
+    "count-other": "{{count}} solicitudes",
+    "subtitle": "Sigue tus solicitudes por estado y gestiona las que aún buscan unidad.",
+    "publish": "Publicar carga",
+    "filter-label": "Filtrar por estado",
+    "filter-all": "Todas",
+    "empty-all": "Aún no has publicado solicitudes de carga.",
+    "empty-action": "Publica tu primera carga",
+    "empty-filtered": "No tienes solicitudes con el estado \"{{status}}\".",
+    "column-id": "ID",
+    "column-route": "Ruta",
+    "column-pickup": "Recojo",
+    "column-rate": "Tarifa ofrecida",
+    "column-status": "Estado",
+    "column-actions": "Acciones",
+    "view-tracking": "Ver seguimiento",
+    "no-actions": "Sin acciones"
+  },
   "about": {
     "logo-alt": "Logotipo de LoadMatch",
     "title": "Acerca de LoadMatch",
