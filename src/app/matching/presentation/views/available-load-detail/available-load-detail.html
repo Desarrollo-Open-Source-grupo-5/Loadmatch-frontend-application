@@ -1,0 +1,138 @@
+@if (!isCarrier()) {
+  <app-profile-required role="CARRIER"/>
+} @else {
+  <section class="available-load-detail">
+    <a class="available-load-detail__back" routerLink="/carrier/available-loads">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+      {{ 'available-load-detail.back' | translate }}
+    </a>
+
+    @if (isUnavailable()) {
+      <div class="available-load-detail__unavailable" role="alert">
+        <mat-icon aria-hidden="true">block</mat-icon>
+        <h1>{{ 'available-load-detail.unavailable-title' | translate }}</h1>
+        <p>{{ 'available-load-detail.unavailable-message' | translate }}</p>
+        <a mat-flat-button routerLink="/carrier/available-loads">
+          <mat-icon>search</mat-icon>
+          {{ 'available-load-detail.back' | translate }}
+        </a>
+      </div>
+    } @else if (loadDetail(); as load) {
+      <header class="available-load-detail__header">
+        <div>
+          <div class="available-load-detail__code">
+            <span>{{ load.code }}</span>
+            @if (load.urgent) {
+              <span class="available-load-detail__urgent">
+                <mat-icon aria-hidden="true">bolt</mat-icon>
+                {{ 'available-load-detail.urgent' | translate }}
+              </span>
+            }
+          </div>
+          <h1>{{ 'available-load-detail.title' | translate: {origin: load.originDistrict, destination: load.destinationDistrict} }}</h1>
+        </div>
+        <button mat-flat-button type="button" disabled>
+          <mat-icon>check_circle</mat-icon>
+          {{ 'available-load-detail.accept' | translate: {rate: (load.offeredRate | money)} }}
+        </button>
+      </header>
+
+      <div class="available-load-detail__layout">
+        <section class="available-load-detail__card" aria-labelledby="available-load-detail-trip">
+          <h2 id="available-load-detail-trip">{{ 'available-load-detail.section-trip' | translate }}</h2>
+          <ol class="available-load-detail__route">
+            <li>
+              <span class="available-load-detail__label">{{ 'available-load-detail.origin' | translate }}</span>
+              <span class="available-load-detail__place">{{ load.originDistrict }}</span>
+              <span class="available-load-detail__address">{{ load.originAddress }}</span>
+            </li>
+            <li>
+              <span class="available-load-detail__label">{{ 'available-load-detail.destination' | translate }}</span>
+              <span class="available-load-detail__place">{{ load.destinationDistrict }}</span>
+              <span class="available-load-detail__address">{{ load.destinationAddress }}</span>
+            </li>
+          </ol>
+
+          <div class="available-load-detail__distances">
+            @if (load.distanceToCarrierKm !== null) {
+              <span>
+                <mat-icon aria-hidden="true">near_me</mat-icon>
+                {{ 'available-load-detail.distance-to-you' | translate: {distance: (load.distanceToCarrierKm | localizedNumber: '1.0-1')} }}
+              </span>
+            }
+            <span>
+              <mat-icon aria-hidden="true">route</mat-icon>
+              {{ 'available-load-detail.trip-distance' | translate: {distance: (load.distanceKm | localizedNumber: '1.0-1')} }}
+            </span>
+          </div>
+
+          <dl class="available-load-detail__facts">
+            <div>
+              <dt>{{ 'available-load-detail.pickup' | translate }}</dt>
+              <dd>{{ load.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'available-load-detail.cargo-type' | translate }}</dt>
+              <dd>{{ load.cargoType }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'available-load-detail.weight' | translate }}</dt>
+              <dd>{{ load.weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'available-load-detail.dimensions' | translate }}</dt>
+              <dd>
+                {{ 'available-load-detail.dimensions-value' | translate: {
+                  length: (load.dimensions.lengthM | localizedNumber: '1.0-2'),
+                  width: (load.dimensions.widthM | localizedNumber: '1.0-2'),
+                  height: (load.dimensions.heightM | localizedNumber: '1.0-2')
+                } }}
+              </dd>
+            </div>
+            <div>
+              <dt>{{ 'available-load-detail.vehicle-type' | translate }}</dt>
+              <dd>{{ load.vehicleTypeName }}</dd>
+            </div>
+          </dl>
+
+          <div class="available-load-detail__rate">
+            <span class="available-load-detail__label">{{ 'available-load-detail.offered-rate' | translate }}</span>
+            <span class="available-load-detail__rate-value">{{ load.offeredRate | money }}</span>
+          </div>
+        </section>
+
+        <section class="available-load-detail__card" aria-labelledby="available-load-detail-shipper">
+          <h2 id="available-load-detail-shipper" class="available-load-detail__label">{{ 'available-load-detail.shipper' | translate }}</h2>
+          <p class="available-load-detail__shipper">{{ load.shipperBusinessName }}</p>
+          @if (load.hasShipperRatings()) {
+            <p class="available-load-detail__rating"
+               [attr.aria-label]="'available-load-detail.rating-aria' | translate: {average: (load.shipperReputationAverage | localizedNumber: '1.1-1'), total: load.shipperReputationTotalRatings}">
+              <span class="available-load-detail__stars" aria-hidden="true">
+                @for (star of shipperStars(); track $index) {
+                  <mat-icon>{{ star }}</mat-icon>
+                }
+              </span>
+              <span aria-hidden="true">
+                <strong>{{ load.shipperReputationAverage | localizedNumber: '1.1-1' }}</strong>
+                {{ 'available-load-detail.ratings-count' | translate: {total: load.shipperReputationTotalRatings} }}
+              </span>
+            </p>
+          } @else {
+            <p class="available-load-detail__rating">{{ 'available-load-detail.no-ratings' | translate }}</p>
+          }
+          <p class="available-load-detail__hint">
+            <mat-icon aria-hidden="true">info</mat-icon>
+            {{ 'available-load-detail.shipper-hint' | translate }}
+          </p>
+        </section>
+      </div>
+    } @else if (store.detailLoading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    } @else if (store.error()) {
+      <p class="available-load-detail__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+  </section>
+}
