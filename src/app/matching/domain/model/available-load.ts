@@ -1,5 +1,6 @@
 import {BaseEntity} from '../../../shared/domain/model/base-entity';
 import {Coordinates} from '../../../shared/domain/model/coordinates';
+import {Dimensions} from '../../../shared/domain/model/dimensions';
 import {Money} from '../../../shared/domain/model/money';
 
 /**
@@ -8,13 +9,17 @@ import {Money} from '../../../shared/domain/model/money';
  */
 export class AvailableLoad implements BaseEntity {
   readonly #id: number;
+  readonly #shipperId: number;
+  readonly #status: string;
   readonly #originDistrict: string;
   readonly #originAddress: string;
   readonly #originCoordinates: Coordinates;
   readonly #destinationDistrict: string;
   readonly #destinationAddress: string;
+  readonly #destinationCoordinates: Coordinates;
   readonly #distanceKm: number;
   readonly #weightKg: number;
+  readonly #dimensions: Dimensions;
   readonly #cargoType: string;
   readonly #vehicleTypeId: number;
   readonly #offeredRate: Money;
@@ -29,13 +34,17 @@ export class AvailableLoad implements BaseEntity {
    */
   constructor(load: {
     id: number;
+    shipperId: number;
+    status: string;
     originDistrict: string;
     originAddress: string;
     originCoordinates: Coordinates;
     destinationDistrict: string;
     destinationAddress: string;
+    destinationCoordinates: Coordinates;
     distanceKm: number;
     weightKg: number;
+    dimensions: Dimensions;
     cargoType: string;
     vehicleTypeId: number;
     offeredRate: Money;
@@ -45,13 +54,17 @@ export class AvailableLoad implements BaseEntity {
     distanceToCarrierKm?: number | null;
   }) {
     this.#id = load.id;
+    this.#shipperId = load.shipperId;
+    this.#status = load.status;
     this.#originDistrict = load.originDistrict;
     this.#originAddress = load.originAddress;
     this.#originCoordinates = load.originCoordinates;
     this.#destinationDistrict = load.destinationDistrict;
     this.#destinationAddress = load.destinationAddress;
+    this.#destinationCoordinates = load.destinationCoordinates;
     this.#distanceKm = load.distanceKm;
     this.#weightKg = load.weightKg;
+    this.#dimensions = load.dimensions;
     this.#cargoType = load.cargoType;
     this.#vehicleTypeId = load.vehicleTypeId;
     this.#offeredRate = load.offeredRate;
@@ -73,6 +86,20 @@ export class AvailableLoad implements BaseEntity {
    */
   get code(): string {
     return `LR-${String(this.#id).padStart(4, '0')}`;
+  }
+
+  /**
+   * Identifier of the shipper that published the load (reference by id to Profiles).
+   */
+  get shipperId(): number {
+    return this.#shipperId;
+  }
+
+  /**
+   * Status of the underlying load request; `PUBLISHED` while it is available (searching for a vehicle).
+   */
+  get status(): string {
+    return this.#status;
   }
 
   /**
@@ -111,6 +138,13 @@ export class AvailableLoad implements BaseEntity {
   }
 
   /**
+   * Destination coordinates.
+   */
+  get destinationCoordinates(): Coordinates {
+    return this.#destinationCoordinates;
+  }
+
+  /**
    * Trip distance between origin and destination, in kilometres.
    */
   get distanceKm(): number {
@@ -122,6 +156,13 @@ export class AvailableLoad implements BaseEntity {
    */
   get weightKg(): number {
     return this.#weightKg;
+  }
+
+  /**
+   * Cargo dimensions.
+   */
+  get dimensions(): Dimensions {
+    return this.#dimensions;
   }
 
   /**
@@ -174,6 +215,14 @@ export class AvailableLoad implements BaseEntity {
   }
 
   /**
+   * A load is available while its load request is published, i.e. no carrier accepted it yet.
+   * @returns True when the status is `PUBLISHED`.
+   */
+  isAvailable(): boolean {
+    return this.#status === 'PUBLISHED';
+  }
+
+  /**
    * Returns a copy of this read model with the distance to the carrier computed.
    * @param carrierLocation - Coordinates of the carrier.
    * @returns A new available load with `distanceToCarrierKm` rounded to one decimal.
@@ -181,13 +230,17 @@ export class AvailableLoad implements BaseEntity {
   withDistanceTo(carrierLocation: Coordinates): AvailableLoad {
     return new AvailableLoad({
       id: this.#id,
+      shipperId: this.#shipperId,
+      status: this.#status,
       originDistrict: this.#originDistrict,
       originAddress: this.#originAddress,
       originCoordinates: this.#originCoordinates,
       destinationDistrict: this.#destinationDistrict,
       destinationAddress: this.#destinationAddress,
+      destinationCoordinates: this.#destinationCoordinates,
       distanceKm: this.#distanceKm,
       weightKg: this.#weightKg,
+      dimensions: this.#dimensions,
       cargoType: this.#cargoType,
       vehicleTypeId: this.#vehicleTypeId,
       offeredRate: this.#offeredRate,
