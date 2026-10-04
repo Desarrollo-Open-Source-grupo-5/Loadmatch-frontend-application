@@ -1,0 +1,12 @@
+.footer-content {
+  padding: 16px 24px;
+  border-top: 1px solid var(--lm-color-slate-200);
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+  text-align: center;
+}
+
+.footer-content p {
+  margin: 4px 0;
+}

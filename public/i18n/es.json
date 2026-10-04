@@ -1,0 +1,78 @@
+{
+  "app": {
+    "brand-load": "Load",
+    "brand-match": "Match"
+  },
+  "nav": {
+    "main": "Navegación principal",
+    "open-menu": "Abrir el menú de navegación",
+    "shipper-role": "Empresa",
+    "carrier-role": "Transportista",
+    "my-loads": "Mis Cargas",
+    "publish-load": "Publicar Carga",
+    "find-loads": "Buscar Fletes",
+    "about": "Acerca de",
+    "switch-profile": "Cambiar perfil",
+    "language": "Idioma preferido",
+    "language-en": "Inglés",
+    "language-es": "Español"
+  },
+  "common": {
+    "loading": "Cargando",
+    "api-error": "No se pudieron cargar los datos. Verifica que la API simulada esté en ejecución (npm run api) e inténtalo de nuevo.",
+    "close": "Cerrar",
+    "kg": "kg",
+    "m": "m",
+    "pen-symbol": "S/"
+  },
+  "load-request-status": {
+    "DRAFT": "Borrador",
+    "PUBLISHED": "Buscando unidad",
+    "ASSIGNED": "Asignada",
+    "IN_TRANSIT": "En tránsito",
+    "DELIVERED": "Entregada",
+    "CANCELLED": "Cancelada"
+  },
+  "home": {
+    "title": "Bienvenido a LoadMatch",
+    "content": "LoadMatch conecta a las empresas que necesitan trasladar carga con transportistas que tienen capacidad disponible en todo el Perú."
+  },
+  "profiles": {
+    "enter-as-shipper": "Ingresar como Empresa",
+    "shipper-description": "Publica solicitudes de carga y gestiónalas por estado.",
+    "shipper-list": "Empresas de demostración",
+    "enter-as-carrier": "Ingresar como Transportista",
+    "carrier-description": "Encuentra cargas disponibles cerca de ti y compatibles con tu unidad.",
+    "carrier-list": "Transportistas de demostración",
+    "ruc": "RUC",
+    "rating": "{{average}} ({{total}} calificaciones)",
+    "no-ratings": "Aún sin calificaciones",
+    "no-profiles": "No hay perfiles de demostración disponibles.",
+    "enablement-status": {
+      "PENDING": "Pendiente de validación",
+      "ENABLED": "Habilitado",
+      "SUSPENDED": "Suspendido"
+    }
+  },
+  "about": {
+    "logo-alt": "Logotipo de LoadMatch",
+    "title": "Acerca de LoadMatch",
+    "content": "LoadMatch es una plataforma B2B de transporte de carga por carretera que conecta a pequeñas y medianas empresas que necesitan trasladar mercadería con transportistas independientes que tienen capacidad disponible en el Perú.",
+    "team": "LoadMatch es desarrollado por CargoLink Labs para el curso Desarrollo de Aplicaciones Open Source de la UPC."
+  },
+  "profile-required": {
+    "title": "Primero elige un perfil",
+    "shipper": "Esta página es para empresas. Ingresa como empresa para verla.",
+    "carrier": "Esta página es para transportistas. Ingresa como transportista para verla.",
+    "action": "Elegir un perfil"
+  },
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta <strong>{{ invalid_path }}</strong> no es válida.",
+    "go-home": "Ir al inicio"
+  },
+  "footer": {
+    "company": "CargoLink Labs",
+    "rights": "Todos los derechos reservados."
+  }
+}
