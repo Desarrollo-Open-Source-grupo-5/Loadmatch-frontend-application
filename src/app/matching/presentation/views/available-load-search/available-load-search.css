@@ -1,0 +1,97 @@
+.available-load-search__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.available-load-search__subtitle {
+  margin: 0;
+  color: var(--lm-color-slate-600);
+}
+
+/* Blue Tint background requires Slate 600 text or darker. */
+.available-load-search__vehicle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: var(--lm-color-blue-tint);
+  color: var(--lm-color-slate-700);
+}
+
+.available-load-search__vehicle-label {
+  display: block;
+  color: var(--lm-color-slate-600);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.available-load-search__vehicle-value {
+  color: var(--lm-color-slate-900);
+  font-weight: 600;
+}
+
+.available-load-search__criteria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+.available-load-search__error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
+
+.available-load-search__count {
+  min-height: 20px;
+  margin: 8px 0 16px;
+  color: var(--lm-color-slate-700);
+  font-weight: 600;
+}
+
+.available-load-search__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.available-load-search__empty {
+  padding: 48px 24px;
+  border: 1px dashed var(--lm-color-slate-300);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-600);
+  text-align: center;
+}
+
+.available-load-search__empty mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.available-load-search__empty h2 {
+  color: var(--lm-color-slate-900);
+  font-size: 20px;
+}
