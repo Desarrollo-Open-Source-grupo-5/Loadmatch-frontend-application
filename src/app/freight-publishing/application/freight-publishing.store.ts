@@ -1,13 +1,14 @@
 import {computed, effect, inject, Injectable, Signal, signal, untracked} from '@angular/core';
 import {retry} from 'rxjs';
 import {ActiveProfileStore} from '../../shared/application/active-profile.store';
+import {AssignedCarrier} from '../domain/model/assigned-carrier';
 import {LoadRequest} from '../domain/model/load-request.entity';
 import {VehicleTypeOption} from '../domain/model/vehicle-type-option';
 import {FreightPublishingApi} from '../infrastructure/freight-publishing-api';
 
 /**
- * Holds Freight Publishing state: the active shipper's load requests and the vehicle type catalog, and coordinates
- * publishing, editing and cancelling load requests.
+ * Holds Freight Publishing state: the active shipper's load requests, the vehicle type catalog and the carrier
+ * assigned to the load request being consulted.
  */
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,26 @@ export class FreightPublishingStore {
    */
   readonly error = this.errorSignal.asReadonly();
 
+  private readonly assignedCarrierSignal = signal<AssignedCarrier | null>(null);
+
+  /**
+   * Readonly signal with the carrier and vehicle assigned to the consulted load request, or null when the request has
+   * no carrier yet or it was not loaded.
+   */
+  readonly assignedCarrier = this.assignedCarrierSignal.asReadonly();
+
+  private readonly assignedCarrierLoadingSignal = signal<boolean>(false);
+
+  /**
+   * Readonly signal indicating if the assigned carrier is loading.
+   */
+  readonly assignedCarrierLoading = this.assignedCarrierLoadingSignal.asReadonly();
+
+  /**
+   * Identifier of the load request whose assigned carrier was last requested, used to ignore late responses.
+   */
+  private assignedCarrierRequestId: number | null = null;
+
   /**
    * Creates an instance of FreightPublishingStore, loads the vehicle type catalog and reloads the load requests every
    * time the active shipper changes.
@@ -63,6 +84,7 @@ export class FreightPublishingStore {
     effect(() => {
       const shipperId = this.activeProfileStore.shipperId();
       untracked(() => {
+        this.resetAssignedCarrier();
         if (shipperId) {
           this.loadLoadRequests(shipperId);
         } else {
@@ -162,6 +184,49 @@ export class FreightPublishingStore {
         this.loadingSignal.set(false);
       }
     });
+  };
+
+  /**
+   * Loads the carrier and vehicle assigned to a load request of the active shipper.
+   * @param loadRequestId - Load request identifier.
+   */
+  loadAssignedCarrier = (loadRequestId: number): void => {
+    const loadRequest = this.loadRequests().find(candidate => candidate.id === loadRequestId);
+    if (!loadRequest?.hasAssignedCarrier()) {
+      this.resetAssignedCarrier();
+      return;
+    }
+    if (this.assignedCarrierRequestId === loadRequestId && (this.assignedCarrier() || this.assignedCarrierLoading())) {
+      return;
+    }
+    this.assignedCarrierRequestId = loadRequestId;
+    this.assignedCarrierSignal.set(null);
+    this.assignedCarrierLoadingSignal.set(true);
+    this.errorSignal.set(null);
+    this.freightPublishingApi.getAssignedCarrier(loadRequestId).pipe(retry(2)).subscribe({
+      next: assignedCarrier => {
+        // Ignore late responses that belong to a previously consulted request.
+        if (this.assignedCarrierRequestId === loadRequestId) {
+          this.assignedCarrierSignal.set(assignedCarrier);
+          this.assignedCarrierLoadingSignal.set(false);
+        }
+      },
+      error: err => {
+        if (this.assignedCarrierRequestId === loadRequestId) {
+          this.errorSignal.set(this.formatError(err, 'Failed to load the assigned carrier'));
+          this.assignedCarrierLoadingSignal.set(false);
+        }
+      }
+    });
+  };
+
+  /**
+   * Clears the assigned carrier, e.g. when the consulted request is published or cancelled.
+   */
+  private resetAssignedCarrier = (): void => {
+    this.assignedCarrierRequestId = null;
+    this.assignedCarrierSignal.set(null);
+    this.assignedCarrierLoadingSignal.set(false);
   };
 
   /**
