@@ -1,1 +1,106 @@
-<p>available-load-search works!</p>
+@if (!isCarrier()) {
+  <app-profile-required role="CARRIER"/>
+} @else {
+  <section class="available-load-search">
+    <header class="available-load-search__header">
+      <div>
+        <h1>{{ 'available-loads.title' | translate }}</h1>
+        <p class="available-load-search__subtitle">{{ 'available-loads.subtitle' | translate }}</p>
+      </div>
+      <div class="available-load-search__vehicle" role="note">
+        <mat-icon aria-hidden="true">local_shipping</mat-icon>
+        @if (store.activeVehicle(); as vehicle) {
+          <div>
+            <span class="available-load-search__vehicle-label">{{ 'available-loads.my-vehicle' | translate }}</span>
+            <span class="available-load-search__vehicle-value">
+              {{ 'available-loads.vehicle-summary' | translate: {type: store.vehicleTypeName(vehicle.vehicleTypeId), plate: vehicle.licensePlate, payload: (vehicle.payloadKg | localizedNumber: '1.0-0')} }}
+            </span>
+          </div>
+        } @else {
+          <span>{{ 'available-loads.no-vehicle' | translate }}</span>
+        }
+      </div>
+    </header>
+
+    <section class="available-load-search__criteria" [attr.aria-label]="'available-loads.criteria' | translate">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'available-loads.location' | translate }}</mat-label>
+        <mat-select [value]="store.criteria().originLocation.code" (selectionChange)="onLocationChange($event.value)">
+          @for (location of locations; track location.code) {
+            <mat-option [value]="location.code">{{ location.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix aria-hidden="true">my_location</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'available-loads.radius' | translate }}</mat-label>
+        <mat-select [value]="store.criteria().radiusKm ?? anyDistance" (selectionChange)="onRadiusChange($event.value)">
+          @for (radius of radiusOptions; track radius) {
+            <mat-option [value]="radius">
+              @if (radius === anyDistance) {
+                {{ 'available-loads.radius-any' | translate }}
+              } @else {
+                {{ 'available-loads.radius-km' | translate: {km: radius} }}
+              }
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'available-loads.sort-by' | translate }}</mat-label>
+        <mat-select [value]="store.criteria().sortBy" (selectionChange)="onSortChange($event.value)">
+          @for (sortBy of sortOptions; track sortBy) {
+            <mat-option [value]="sortBy">{{ 'available-loads.sort.' + sortBy | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-slide-toggle class="available-load-search__toggle"
+                        [checked]="store.criteria().compatibleWithVehicleOnly"
+                        [disabled]="!store.activeVehicle()"
+                        (change)="onCompatibilityChange($event.checked)">
+        {{ 'available-loads.compatible-only' | translate }}
+      </mat-slide-toggle>
+    </section>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="available-load-search__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    <p class="available-load-search__count" aria-live="polite">
+      @if (!store.loading()) {
+        {{ (store.resultCount() === 1 ? 'available-loads.result-count-one' : 'available-loads.result-count-other') | translate: {count: store.resultCount()} }}
+      }
+    </p>
+
+    @if (store.results().length) {
+      <ul class="available-load-search__results">
+        @for (load of store.results(); track load.id) {
+          <li>
+            <app-available-load-card [load]="load" [vehicleTypeName]="store.vehicleTypeName(load.vehicleTypeId)"/>
+          </li>
+        }
+      </ul>
+    } @else if (!store.loading()) {
+      <div class="available-load-search__empty" role="status">
+        <mat-icon aria-hidden="true">search_off</mat-icon>
+        <h2>{{ 'available-loads.empty-title' | translate }}</h2>
+        <p>{{ 'available-loads.empty-hint' | translate }}</p>
+        @if (store.criteria().radiusKm !== null) {
+          <button mat-stroked-button type="button" (click)="searchAnyDistance()">
+            <mat-icon>zoom_out_map</mat-icon>
+            {{ 'available-loads.search-any-distance' | translate }}
+          </button>
+        }
+      </div>
+    }
+  </section>
+}
