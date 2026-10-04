@@ -7,8 +7,10 @@ import {map} from 'rxjs';
 import {MatButton} from '@angular/material/button';
 import {MatCard, MatCardActions, MatCardContent} from '@angular/material/card';
 import {MatChipListbox, MatChipOption, MatChipSelectionChange} from '@angular/material/chips';
+import {MatDialog} from '@angular/material/dialog';
 import {MatIcon} from '@angular/material/icon';
 import {MatProgressBar} from '@angular/material/progress-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {
   MatCell,
   MatCellDef,
@@ -21,7 +23,7 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ActiveProfileStore} from '../../../../shared/application/active-profile.store';
 import {ProfileRequired} from '../../../../shared/presentation/components/profile-required/profile-required';
 import {LocalizedDatePipe} from '../../../../shared/presentation/pipes/localized-date.pipe';
@@ -36,6 +38,10 @@ import {
 } from '../../../application/load-request-status-filter';
 import {LoadRequest} from '../../../domain/model/load-request.entity';
 import {LoadRequestStatusChip} from '../../components/load-request-status-chip/load-request-status-chip';
+import {
+  CancelLoadRequestDialog,
+  CancelLoadRequestDialogData
+} from '../../components/cancel-load-request-dialog/cancel-load-request-dialog';
 
 /**
  * "My Loads": the active shipper's load requests filtered by status, with the actions allowed by each status.
@@ -75,6 +81,9 @@ import {LoadRequestStatusChip} from '../../components/load-request-status-chip/l
 })
 export class LoadRequestList {
   private readonly activeProfileStore = inject(ActiveProfileStore);
+  private readonly dialog = inject(MatDialog);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly translate = inject(TranslateService);
   private readonly breakpointObserver = inject(BreakpointObserver);
 
   /**
@@ -137,9 +146,33 @@ export class LoadRequestList {
   /**
    * Indicates whether a load request has no available action.
    * @param loadRequest - Load request of the row.
-   * @returns True when it cannot be tracked.
+   * @returns True when it can be neither edited, cancelled nor tracked.
    */
   protected hasNoActions(loadRequest: LoadRequest): boolean {
-    return !loadRequest.isTrackable();
+    return !loadRequest.isEditable() && !loadRequest.isCancellable() && !loadRequest.isTrackable();
+  }
+
+  /**
+   * Asks for the cancellation reason and cancels the load request.
+   * @param loadRequest - Load request to cancel.
+   */
+  protected openCancelDialog(loadRequest: LoadRequest): void {
+    this.dialog
+      .open<CancelLoadRequestDialog, CancelLoadRequestDialogData, string>(CancelLoadRequestDialog, {
+        data: {loadRequest},
+        width: '440px'
+      })
+      .afterClosed()
+      .subscribe(reason => {
+        if (reason) {
+          this.store.cancelLoadRequest(loadRequest.id, reason, cancelled =>
+            this.snackBar.open(
+              this.translate.instant('load-request-list.cancelled', {code: cancelled.code}),
+              this.translate.instant('common.close'),
+              {duration: 4000}
+            )
+          );
+        }
+      });
   }
 }

@@ -131,6 +131,20 @@
 
 <!-- Actions allowed by status. -->
 <ng-template #actions let-loadRequest>
+  @if (loadRequest.isEditable()) {
+    <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id, 'edit']"
+       [attr.aria-label]="'load-request-list.edit-aria' | translate: {code: loadRequest.code}">
+      <mat-icon>edit</mat-icon>
+      {{ 'load-request-list.edit' | translate }}
+    </a>
+  }
+  @if (loadRequest.isCancellable()) {
+    <button mat-button type="button" class="load-request-list__danger" (click)="openCancelDialog(loadRequest)"
+            [attr.aria-label]="'load-request-list.cancel-aria' | translate: {code: loadRequest.code}">
+      <mat-icon>cancel</mat-icon>
+      {{ 'load-request-list.cancel' | translate }}
+    </button>
+  }
   @if (loadRequest.isTrackable()) {
     <button mat-button type="button" disabled>
       <mat-icon>my_location</mat-icon>
