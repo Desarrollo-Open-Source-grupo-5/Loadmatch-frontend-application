@@ -1,5 +1,6 @@
 import {BaseAssembler} from '../../shared/infrastructure/base-assembler';
 import {Coordinates} from '../../shared/domain/model/coordinates';
+import {Dimensions} from '../../shared/domain/model/dimensions';
 import {Money} from '../../shared/domain/model/money';
 import {AvailableLoad} from '../domain/model/available-load';
 import {AvailableLoadResource, AvailableLoadsResponse} from './available-loads-response';
@@ -17,13 +18,17 @@ export class AvailableLoadAssembler implements BaseAssembler<AvailableLoad, Avai
   toEntityFromResource = (resource: AvailableLoadResource): AvailableLoad =>
     new AvailableLoad({
       id: resource.id,
+      shipperId: resource.shipperId,
+      status: resource.status,
       originDistrict: resource.originDistrict,
       originAddress: resource.originAddress,
       originCoordinates: new Coordinates({latitude: resource.originLat, longitude: resource.originLng}),
       destinationDistrict: resource.destinationDistrict,
       destinationAddress: resource.destinationAddress,
+      destinationCoordinates: new Coordinates({latitude: resource.destinationLat, longitude: resource.destinationLng}),
       distanceKm: resource.distanceKm,
       weightKg: resource.weightKg,
+      dimensions: new Dimensions({lengthM: resource.dimLengthM, widthM: resource.dimWidthM, heightM: resource.dimHeightM}),
       cargoType: resource.cargoType,
       vehicleTypeId: resource.vehicleTypeId,
       offeredRate: new Money({amount: resource.rateAmount, currency: resource.rateCurrency}),
@@ -40,6 +45,7 @@ export class AvailableLoadAssembler implements BaseAssembler<AvailableLoad, Avai
   toResourceFromEntity = (entity: AvailableLoad): AvailableLoadResource =>
     ({
       id: entity.id,
+      shipperId: entity.shipperId,
       vehicleTypeId: entity.vehicleTypeId,
       originAddress: entity.originAddress,
       originDistrict: entity.originDistrict,
@@ -47,11 +53,17 @@ export class AvailableLoadAssembler implements BaseAssembler<AvailableLoad, Avai
       originLng: entity.originCoordinates.longitude,
       destinationAddress: entity.destinationAddress,
       destinationDistrict: entity.destinationDistrict,
+      destinationLat: entity.destinationCoordinates.latitude,
+      destinationLng: entity.destinationCoordinates.longitude,
       distanceKm: entity.distanceKm,
       weightKg: entity.weightKg,
+      dimLengthM: entity.dimensions.lengthM,
+      dimWidthM: entity.dimensions.widthM,
+      dimHeightM: entity.dimensions.heightM,
       cargoType: entity.cargoType,
       rateAmount: entity.offeredRate.amount,
       rateCurrency: entity.offeredRate.currency,
+      status: entity.status,
       pickupAt: entity.pickupAt.toISOString(),
       publishedAt: entity.publishedAt?.toISOString() ?? null,
       urgent: entity.urgent
