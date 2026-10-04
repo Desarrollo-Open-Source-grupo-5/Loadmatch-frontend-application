@@ -36,7 +36,10 @@
   "load-request-form": {
     "back": "Volver a Mis Cargas",
     "new-title": "Publicar una solicitud de carga",
+    "edit-title": "Editar la solicitud {{code}}",
     "subtitle": "Completa los datos del traslado y de la carga. Los transportistas con una unidad compatible verán tu carga de inmediato.",
+    "not-found": "No se encontró esta solicitud entre tus solicitudes de carga.",
+    "not-editable": "Esta solicitud está \"{{status}}\", por lo que ya no se puede editar. Comunícate con el transportista asignado si necesitas cambios.",
     "summary": "La información está incompleta. Completa o corrige estos campos:",
     "save-error": "No se pudo guardar la solicitud. Verifica que la API simulada esté en ejecución e inténtalo de nuevo.",
     "section-route": "Ruta",
@@ -64,6 +67,8 @@
     "pickup-time": "Hora de recojo",
     "cancel": "Cancelar",
     "submit-create": "Publicar carga",
+    "submit-update": "Guardar cambios",
+    "updated": "La solicitud {{code}} fue actualizada.",
     "error": {
       "required": "Este campo es obligatorio.",
       "positive": "Ingresa un valor mayor que cero.",
@@ -122,8 +127,23 @@
     "column-rate": "Tarifa ofrecida",
     "column-status": "Estado",
     "column-actions": "Acciones",
+    "edit": "Editar",
+    "edit-aria": "Editar la solicitud {{code}}",
+    "cancel": "Cancelar",
+    "cancel-aria": "Cancelar la solicitud {{code}}",
     "view-tracking": "Ver seguimiento",
-    "no-actions": "Sin acciones"
+    "no-actions": "Sin acciones",
+    "cancelled": "La solicitud {{code}} fue cancelada."
+  },
+  "cancel-load-request": {
+    "title": "¿Cancelar esta solicitud?",
+    "message": "Se retirará del mercado y los transportistas ya no la verán. Esta acción no se puede deshacer.",
+    "reason": "Motivo de la cancelación",
+    "reason-placeholder": "p. ej. El cliente postergó el pedido",
+    "reason-required": "Cuéntanos por qué cancelas.",
+    "reason-min-length": "Usa al menos {{min}} caracteres.",
+    "keep": "No, mantener",
+    "confirm": "Sí, cancelar solicitud"
   },
   "about": {
     "logo-alt": "Logotipo de LoadMatch",
