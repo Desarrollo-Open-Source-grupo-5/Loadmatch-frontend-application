@@ -1,0 +1,49 @@
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.status-chip mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+/* Text/background pairs keep a contrast ratio of at least 4.5:1. */
+.status-chip--draft {
+  background-color: var(--lm-status-draft-bg);
+  color: var(--lm-status-draft-text);
+}
+
+.status-chip--published {
+  background-color: var(--lm-status-published-bg);
+  color: var(--lm-status-published-text);
+}
+
+.status-chip--assigned {
+  background-color: var(--lm-status-assigned-bg);
+  color: var(--lm-status-assigned-text);
+}
+
+.status-chip--in-transit {
+  background-color: var(--lm-status-in-transit-bg);
+  color: var(--lm-status-in-transit-text);
+}
+
+.status-chip--delivered {
+  background-color: var(--lm-status-delivered-bg);
+  color: var(--lm-status-delivered-text);
+}
+
+.status-chip--cancelled {
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
