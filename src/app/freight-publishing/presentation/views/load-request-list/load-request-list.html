@@ -129,8 +129,13 @@
   </section>
 }
 
-<!-- Actions allowed by status. -->
+<!-- View details for every status plus the actions allowed by status. -->
 <ng-template #actions let-loadRequest>
+  <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id]"
+     [attr.aria-label]="'load-request-list.view-details-aria' | translate: {code: loadRequest.code}">
+    <mat-icon>visibility</mat-icon>
+    {{ 'load-request-list.view-details' | translate }}
+  </a>
   @if (loadRequest.isEditable()) {
     <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id, 'edit']"
        [attr.aria-label]="'load-request-list.edit-aria' | translate: {code: loadRequest.code}">
@@ -150,8 +155,5 @@
       <mat-icon>my_location</mat-icon>
       {{ 'load-request-list.view-tracking' | translate }}
     </button>
-  }
-  @if (hasNoActions(loadRequest)) {
-    <span class="load-request-list__no-actions">{{ 'load-request-list.no-actions' | translate }}</span>
   }
 </ng-template>

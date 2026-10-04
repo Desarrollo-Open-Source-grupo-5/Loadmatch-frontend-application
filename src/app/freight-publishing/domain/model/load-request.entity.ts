@@ -265,6 +265,14 @@ export class LoadRequest implements BaseEntity {
   }
 
   /**
+   * A carrier accepted the request, so its assigned carrier and vehicle can be shown.
+   * @returns True when the status is `ASSIGNED`, `IN_TRANSIT` or `DELIVERED`.
+   */
+  hasAssignedCarrier(): boolean {
+    return this.#status === 'ASSIGNED' || this.#status === 'IN_TRANSIT' || this.#status === 'DELIVERED';
+  }
+
+  /**
    * Publishes a draft so carriers can find it.
    * @param now - Current date, injectable for tests.
    * @throws Error when the request is not a draft or its data is invalid.

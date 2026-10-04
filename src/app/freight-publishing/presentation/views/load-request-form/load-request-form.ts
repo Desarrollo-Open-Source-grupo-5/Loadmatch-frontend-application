@@ -212,8 +212,17 @@ export class LoadRequestForm {
    * @returns Whether editing is blocked.
    */
   protected isEditBlocked(): boolean {
+    return this.editBlockedLoadRequest() !== null;
+  }
+
+  /**
+   * Edited request when it can no longer be edited: the form is not shown and the shipper is sent to its detail,
+   * which shows the assigned carrier to contact.
+   * @returns The non-editable request, or null when editing is allowed or not in edit mode.
+   */
+  protected editBlockedLoadRequest(): LoadRequest | null {
     const loadRequest = this.editedLoadRequest();
-    return !!loadRequest && !loadRequest.isEditable();
+    return loadRequest && !loadRequest.isEditable() ? loadRequest : null;
   }
 
   /**

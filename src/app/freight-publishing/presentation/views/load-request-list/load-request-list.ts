@@ -44,7 +44,8 @@ import {
 } from '../../components/cancel-load-request-dialog/cancel-load-request-dialog';
 
 /**
- * "My Loads": the active shipper's load requests filtered by status, with the actions allowed by each status.
+ * "My Loads": the active shipper's load requests filtered by status, with a link to the detail of each request and
+ * the actions allowed by each status.
  */
 @Component({
   imports: [
@@ -141,15 +142,6 @@ export class LoadRequestList {
     if (change.selected) {
       this.statusFilter.set(filter);
     }
-  }
-
-  /**
-   * Indicates whether a load request has no available action.
-   * @param loadRequest - Load request of the row.
-   * @returns True when it can be neither edited, cancelled nor tracked.
-   */
-  protected hasNoActions(loadRequest: LoadRequest): boolean {
-    return !loadRequest.isEditable() && !loadRequest.isCancellable() && !loadRequest.isTrackable();
   }
 
   /**

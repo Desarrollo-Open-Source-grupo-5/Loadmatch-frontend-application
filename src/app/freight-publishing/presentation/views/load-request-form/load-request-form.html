@@ -14,7 +14,9 @@
           {{ 'load-request-form.new-title' | translate }}
         }
       </h1>
-      <p class="load-request-form__subtitle">{{ 'load-request-form.subtitle' | translate }}</p>
+      @if (!isEditBlocked()) {
+        <p class="load-request-form__subtitle">{{ 'load-request-form.subtitle' | translate }}</p>
+      }
     </header>
 
     @if (store.loading()) {
@@ -26,14 +28,25 @@
         <mat-icon aria-hidden="true">error</mat-icon>
         {{ 'load-request-form.not-found' | translate }}
       </p>
+    } @else if (editBlockedLoadRequest(); as blocked) {
+      <!-- A request already accepted by a carrier, or no longer published, is not editable. -->
+      <div class="load-request-form__blocked" role="status">
+        <mat-icon aria-hidden="true">lock</mat-icon>
+        <div>
+          <h2>{{ 'load-request-form.not-editable-title' | translate }}</h2>
+          <p>
+            {{ (blocked.hasAssignedCarrier() ? 'load-request-form.not-editable-assigned' : 'load-request-form.not-editable-unpublished') | translate: {code: blocked.code, status: ('load-request-status.' + blocked.status | translate)} }}
+          </p>
+          <div class="load-request-form__actions load-request-form__actions--start">
+            <a mat-flat-button [routerLink]="['/shipper/load-requests', blocked.id]">
+              <mat-icon>visibility</mat-icon>
+              {{ (blocked.hasAssignedCarrier() ? 'load-request-form.view-carrier' : 'load-request-form.view-detail') | translate }}
+            </a>
+            <a mat-stroked-button routerLink="/shipper/load-requests">{{ 'load-request-form.back' | translate }}</a>
+          </div>
+        </div>
+      </div>
     } @else {
-      @if (isEditBlocked()) {
-        <p class="load-request-form__banner load-request-form__banner--warning" role="status">
-          <mat-icon aria-hidden="true">lock</mat-icon>
-          {{ 'load-request-form.not-editable' | translate: {status: ('load-request-status.' + editedLoadRequest()?.status | translate)} }}
-        </p>
-      }
-
       @if (submitAttempted() && form.invalid) {
         <div class="load-request-form__banner load-request-form__banner--error" role="alert">
           <mat-icon aria-hidden="true">error</mat-icon>
@@ -230,12 +243,10 @@
 
         <div class="load-request-form__actions">
           <a mat-stroked-button routerLink="/shipper/load-requests">{{ 'load-request-form.cancel' | translate }}</a>
-          @if (!isEditBlocked()) {
-            <button mat-flat-button type="submit" [disabled]="store.loading()">
-              <mat-icon>{{ isEditMode() ? 'save' : 'publish' }}</mat-icon>
-              {{ (isEditMode() ? 'load-request-form.submit-update' : 'load-request-form.submit-create') | translate }}
-            </button>
-          }
+          <button mat-flat-button type="submit" [disabled]="store.loading()">
+            <mat-icon>{{ isEditMode() ? 'save' : 'publish' }}</mat-icon>
+            {{ (isEditMode() ? 'load-request-form.submit-update' : 'load-request-form.submit-create') | translate }}
+          </button>
         </div>
       </form>
     }
