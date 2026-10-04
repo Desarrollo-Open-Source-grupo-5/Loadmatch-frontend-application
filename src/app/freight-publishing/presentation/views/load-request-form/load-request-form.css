@@ -84,9 +84,32 @@
   color: var(--lm-status-cancelled-text);
 }
 
-.load-request-form__banner--warning {
+.load-request-form__blocked {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
   background-color: var(--lm-status-assigned-bg);
   color: var(--lm-status-assigned-text);
+}
+
+.load-request-form__blocked > mat-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+}
+
+.load-request-form__blocked h2 {
+  margin: 0 0 8px;
+  color: inherit;
+  font-size: 18px;
+}
+
+.load-request-form__blocked p {
+  margin: 0 0 16px;
 }
 
 .load-request-form__actions {
@@ -94,6 +117,10 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 12px;
+}
+
+.load-request-form__actions--start {
+  justify-content: flex-start;
 }
 
 @media (max-width: 599.98px) {
