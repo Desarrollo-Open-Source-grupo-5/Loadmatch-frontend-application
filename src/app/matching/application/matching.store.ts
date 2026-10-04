@@ -1,8 +1,10 @@
 import {computed, effect, inject, Injectable, signal, untracked} from '@angular/core';
+import {of, switchMap} from 'rxjs';
 import {ActiveProfileStore} from '../../shared/application/active-profile.store';
 import {DEFAULT_LOCATION_CODE, findLocationByCode, PERU_LOCATIONS} from '../../shared/domain/model/peru-locations';
 import {AvailableLoad} from '../domain/model/available-load';
 import {CarrierVehicle} from '../domain/model/carrier-vehicle';
+import {LoadDetail} from '../domain/model/load-detail';
 import {SearchCriteria, SearchCriteriaChanges} from '../domain/model/search-criteria';
 import {VehicleTypeReference} from '../domain/model/vehicle-type-reference';
 import {MatchingService} from '../domain/services/matching-service';
@@ -10,7 +12,7 @@ import {MatchingApi} from '../infrastructure/matching-api';
 
 /**
  * Holds the state of the available loads search: published loads, the active carrier's vehicle, the search criteria
- * and the resulting ordered list.
+ * and the resulting ordered list; and the detail of the load the carrier is consulting.
  */
 @Injectable({
   providedIn: 'root'
@@ -81,6 +83,32 @@ export class MatchingStore {
    */
   readonly error = this.errorSignal.asReadonly();
 
+  private readonly loadDetailSignal = signal<LoadDetail | null>(null);
+
+  /**
+   * Readonly signal with the detail of the consulted load, or null while it loads or when it is no longer available.
+   */
+  readonly loadDetail = this.loadDetailSignal.asReadonly();
+
+  private readonly detailUnavailableSignal = signal<boolean>(false);
+
+  /**
+   * Readonly signal that is true when the consulted load was already taken by another carrier or no longer exists.
+   */
+  readonly detailUnavailable = this.detailUnavailableSignal.asReadonly();
+
+  private readonly detailLoadingSignal = signal<boolean>(false);
+
+  /**
+   * Readonly signal indicating if the consulted load is loading.
+   */
+  readonly detailLoading = this.detailLoadingSignal.asReadonly();
+
+  /**
+   * Identifier of the load whose detail was last requested, used to ignore late responses.
+   */
+  private detailRequestId: number | null = null;
+
   /**
    * Creates an instance of MatchingStore, loads the vehicle type catalog and reloads the carrier's vehicles every
    * time the active carrier changes.
@@ -126,12 +154,62 @@ export class MatchingStore {
   };
 
   /**
+   * Opens the detail of a load.
+   * @param id - Load request identifier.
+   */
+  openLoadDetail = (id: number): void => {
+    this.detailRequestId = id;
+    this.loadDetailSignal.set(null);
+    this.detailUnavailableSignal.set(false);
+    this.detailLoadingSignal.set(true);
+    this.errorSignal.set(null);
+    const carrierLocation = this.criteria().origin;
+    this.matchingApi.getLoadById(id).pipe(
+      switchMap(load => (load.isAvailable() ? this.matchingApi.getLoadDetail(load, carrierLocation) : of(null)))
+    ).subscribe({
+      next: loadDetail => {
+        // Ignore late responses that belong to a previously opened load.
+        if (this.detailRequestId !== id) {
+          return;
+        }
+        if (loadDetail) {
+          this.loadDetailSignal.set(loadDetail);
+        } else {
+          this.markDetailUnavailable(id);
+        }
+        this.detailLoadingSignal.set(false);
+      },
+      error: err => {
+        if (this.detailRequestId !== id) {
+          return;
+        }
+        const message = this.formatError(err, 'Failed to load the load detail');
+        if (message.endsWith('Not found')) {
+          this.markDetailUnavailable(id);
+        } else {
+          this.errorSignal.set(message);
+        }
+        this.detailLoadingSignal.set(false);
+      }
+    });
+  };
+
+  /**
    * Finds the name of a vehicle type.
    * @param id - Vehicle type identifier.
    * @returns The vehicle type name, or an empty string while the catalog is loading.
    */
   vehicleTypeName = (id: number): string =>
     this.vehicleTypes().find(vehicleType => vehicleType.id === id)?.name ?? '';
+
+  /**
+   * Reports the consulted load as no longer available and removes it from the available loads.
+   * @param id - Load request identifier.
+   */
+  private markDetailUnavailable = (id: number): void => {
+    this.detailUnavailableSignal.set(true);
+    this.availableLoadsSignal.update(availableLoads => availableLoads.filter(load => load.id !== id));
+  };
 
   /**
    * Loads the vehicles of a carrier from the API.
