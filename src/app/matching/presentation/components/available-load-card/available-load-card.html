@@ -59,8 +59,9 @@
       <span class="available-load-card__label">{{ 'available-loads.offered-rate' | translate }}</span>
       <span class="available-load-card__rate">{{ load().offeredRate | money }}</span>
     </div>
-    <button mat-stroked-button type="button" disabled>
+    <a mat-stroked-button [routerLink]="['/carrier/available-loads', load().id]"
+       [attr.aria-label]="'available-loads.view-details-aria' | translate: {code: load().code}">
       {{ 'available-loads.view-details' | translate }}
-    </button>
+    </a>
   </mat-card-actions>
 </mat-card>

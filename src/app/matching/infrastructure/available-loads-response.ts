@@ -6,6 +6,7 @@ import {CurrencyCode} from '../../shared/domain/model/money';
  */
 export interface AvailableLoadResource extends BaseResource {
   id: number;
+  shipperId: number;
   vehicleTypeId: number;
   originAddress: string;
   originDistrict: string;
@@ -13,11 +14,17 @@ export interface AvailableLoadResource extends BaseResource {
   originLng: number;
   destinationAddress: string;
   destinationDistrict: string;
+  destinationLat: number;
+  destinationLng: number;
   distanceKm: number;
   weightKg: number;
+  dimLengthM: number;
+  dimWidthM: number;
+  dimHeightM: number;
   cargoType: string;
   rateAmount: number;
   rateCurrency: CurrencyCode;
+  status: string;
   pickupAt: string;
   publishedAt: string | null;
   urgent: boolean;

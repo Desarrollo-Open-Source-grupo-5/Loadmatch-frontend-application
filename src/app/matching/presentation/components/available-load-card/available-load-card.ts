@@ -1,4 +1,5 @@
 import {Component, input} from '@angular/core';
+import {RouterLink} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 import {MatCard, MatCardActions, MatCardContent} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
@@ -9,10 +10,10 @@ import {MoneyPipe} from '../../../../shared/presentation/pipes/money.pipe';
 import {AvailableLoad} from '../../../domain/model/available-load';
 
 /**
- * Card that summarizes an {@link AvailableLoad} in the search results.
+ * Card that summarizes an {@link AvailableLoad} in the search results and links to its detail.
  */
 @Component({
-  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MatIcon, TranslatePipe, LocalizedDatePipe, LocalizedNumberPipe, MoneyPipe],
+  imports: [RouterLink, MatCard, MatCardContent, MatCardActions, MatButton, MatIcon, TranslatePipe, LocalizedDatePipe, LocalizedNumberPipe, MoneyPipe],
   selector: 'app-available-load-card',
   styleUrl: './available-load-card.css',
   templateUrl: './available-load-card.html',
