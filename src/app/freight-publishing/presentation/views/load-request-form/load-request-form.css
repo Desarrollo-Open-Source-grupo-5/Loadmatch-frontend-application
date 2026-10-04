@@ -1,0 +1,111 @@
+.load-request-form {
+  max-width: 960px;
+}
+
+.load-request-form__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  color: var(--lm-color-orange-pressed);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.load-request-form__back:hover {
+  text-decoration: underline;
+}
+
+.load-request-form__subtitle {
+  margin-bottom: 24px;
+  color: var(--lm-color-slate-600);
+}
+
+.load-request-form__section {
+  margin: 0 0 24px;
+  padding: 16px 24px 24px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+.load-request-form__section legend {
+  padding: 0 8px;
+}
+
+.load-request-form__section h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.load-request-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+.load-request-form__dimensions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.load-request-form__distance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  color: var(--lm-color-slate-700);
+  font-weight: 500;
+}
+
+.load-request-form__banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.load-request-form__banner p {
+  margin: 0;
+}
+
+.load-request-form__banner ul {
+  margin: 4px 0 0;
+  padding-left: 20px;
+}
+
+.load-request-form__banner--error {
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
+
+.load-request-form__banner--warning {
+  background-color: var(--lm-status-assigned-bg);
+  color: var(--lm-status-assigned-text);
+}
+
+.load-request-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 599.98px) {
+  .load-request-form__section {
+    padding: 12px 12px 16px;
+  }
+
+  .load-request-form__dimensions {
+    grid-template-columns: 1fr;
+  }
+
+  .load-request-form__actions > * {
+    flex: 1 1 100%;
+  }
+}
