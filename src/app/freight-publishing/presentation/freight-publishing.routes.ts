@@ -13,5 +13,6 @@ const baseTitle = 'LoadMatch';
 export const freightPublishingRoutes: Routes = [
   { path: 'load-requests',            loadComponent: loadRequestList, title: `${baseTitle} - My Loads` },
   { path: 'load-requests/new',        loadComponent: loadRequestForm, title: `${baseTitle} - Publish Load` },
+  { path: 'load-requests/:id/edit',   loadComponent: loadRequestForm, title: `${baseTitle} - Edit Load` },
   { path: '', redirectTo: 'load-requests', pathMatch: 'full' },
 ];

@@ -36,7 +36,10 @@
   "load-request-form": {
     "back": "Back to My Loads",
     "new-title": "Publish a load request",
+    "edit-title": "Edit load request {{code}}",
     "subtitle": "Complete the transport and cargo details. Carriers with a compatible vehicle will see your load right away.",
+    "not-found": "This load request was not found among your load requests.",
+    "not-editable": "This load request is \"{{status}}\", so it can no longer be edited. Contact the assigned carrier if you need changes.",
     "summary": "The information is incomplete. Complete or correct these fields:",
     "save-error": "The load request could not be saved. Check that the mock API is running and try again.",
     "section-route": "Route",
@@ -64,6 +67,8 @@
     "pickup-time": "Pickup time",
     "cancel": "Cancel",
     "submit-create": "Publish load",
+    "submit-update": "Save changes",
+    "updated": "Load request {{code}} was updated.",
     "error": {
       "required": "This field is required.",
       "positive": "Enter a value greater than zero.",
@@ -122,8 +127,23 @@
     "column-rate": "Offered rate",
     "column-status": "Status",
     "column-actions": "Actions",
+    "edit": "Edit",
+    "edit-aria": "Edit load request {{code}}",
+    "cancel": "Cancel",
+    "cancel-aria": "Cancel load request {{code}}",
     "view-tracking": "View tracking",
-    "no-actions": "No actions"
+    "no-actions": "No actions",
+    "cancelled": "Load request {{code}} was cancelled."
+  },
+  "cancel-load-request": {
+    "title": "Cancel this load request?",
+    "message": "It will be withdrawn from the market and carriers will no longer see it. This action cannot be undone.",
+    "reason": "Cancellation reason",
+    "reason-placeholder": "e.g. The customer postponed the order",
+    "reason-required": "Tell us why you are cancelling.",
+    "reason-min-length": "Use at least {{min}} characters.",
+    "keep": "No, keep it",
+    "confirm": "Yes, cancel request"
   },
   "about": {
     "logo-alt": "LoadMatch logo",

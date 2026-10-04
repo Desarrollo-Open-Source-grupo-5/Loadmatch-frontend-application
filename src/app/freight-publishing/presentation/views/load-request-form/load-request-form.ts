@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject, signal, untracked, viewChild} from '@angular/core';
 import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {DateAdapter, provideNativeDateAdapter} from '@angular/material/core';
 import {MatButton} from '@angular/material/button';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
@@ -11,11 +11,12 @@ import {MatInput} from '@angular/material/input';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatProgressBar} from '@angular/material/progress-bar';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ActiveProfileStore} from '../../../../shared/application/active-profile.store';
 import {Dimensions} from '../../../../shared/domain/model/dimensions';
 import {Money} from '../../../../shared/domain/model/money';
-import {findLocationByCode, PERU_LOCATIONS} from '../../../../shared/domain/model/peru-locations';
+import {findLocationByCode, findLocationByDistrict, PERU_LOCATIONS} from '../../../../shared/domain/model/peru-locations';
 import {ProfileRequired} from '../../../../shared/presentation/components/profile-required/profile-required';
 import {toLocaleId} from '../../../../shared/presentation/pipes/app-locale';
 import {LocalizedNumberPipe} from '../../../../shared/presentation/pipes/localized-number.pipe';
@@ -59,8 +60,10 @@ import {CrossFieldErrorStateMatcher, LoadRequestValidators} from './load-request
 })
 export class LoadRequestForm {
   private readonly activeProfileStore = inject(ActiveProfileStore);
+  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
+  private readonly snackBar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
   private readonly dateAdapter = inject(DateAdapter<Date>);
   private readonly formDirective = viewChild(FormGroupDirective);
@@ -84,6 +87,18 @@ export class LoadRequestForm {
    * Earliest selectable pickup day (today).
    */
   protected readonly today = new Date(new Date().setHours(0, 0, 0, 0));
+
+  /**
+   * Identifier of the edited load request, or null when publishing a new one.
+   */
+  protected readonly editedId: number | null = this.parseId(this.route.snapshot.paramMap.get('id'));
+
+  /**
+   * Load request being edited, once the store has loaded it.
+   */
+  protected readonly editedLoadRequest = computed(() =>
+    this.editedId === null ? undefined : this.store.loadRequests().find(loadRequest => loadRequest.id === this.editedId)
+  );
 
   /**
    * True after the user tried to submit, to show the summary of pending fields.
@@ -160,7 +175,7 @@ export class LoadRequestForm {
   });
 
   /**
-   * Creates the form and keeps the datepicker locale in sync with the language.
+   * Creates the form, keeps the datepicker locale in sync with the language and fills the form when editing.
    */
   constructor() {
     this.dateAdapter.setLocale(toLocaleId(this.translate.getCurrentLang()));
@@ -173,6 +188,40 @@ export class LoadRequestForm {
       this.store.vehicleTypes();
       untracked(() => this.form.updateValueAndValidity());
     });
+
+    let filled = false;
+    effect(() => {
+      const loadRequest = this.editedLoadRequest();
+      if (loadRequest && !filled) {
+        filled = true;
+        untracked(() => this.fillForm(loadRequest));
+      }
+    });
+  }
+
+  /**
+   * True when the form edits an existing load request.
+   * @returns Whether the view is in edit mode.
+   */
+  protected isEditMode(): boolean {
+    return this.editedId !== null;
+  }
+
+  /**
+   * True when the edited request exists but can no longer be edited.
+   * @returns Whether editing is blocked.
+   */
+  protected isEditBlocked(): boolean {
+    const loadRequest = this.editedLoadRequest();
+    return !!loadRequest && !loadRequest.isEditable();
+  }
+
+  /**
+   * True when the edited request is not among the shipper's load requests.
+   * @returns Whether the edited request was not found.
+   */
+  protected isEditedNotFound(): boolean {
+    return this.isEditMode() && !this.store.loading() && !this.editedLoadRequest();
   }
 
   /**
@@ -201,7 +250,7 @@ export class LoadRequestForm {
   }
 
   /**
-   * Publishes the load request.
+   * Publishes the load request or saves the changes.
    */
   protected submit(): void {
     this.domainRuleRejected.set(false);
@@ -215,11 +264,45 @@ export class LoadRequestForm {
       return;
     }
     try {
-      const loadRequest = new LoadRequest({...this.buildDetails(), id: 0, shipperId});
-      loadRequest.publish();
-      this.store.publishLoadRequest(loadRequest, created => this.onPublished(created));
+      const existing = this.editedLoadRequest();
+      if (existing) {
+        const edited = existing.clone();
+        edited.edit(this.buildDetails());
+        this.store.updateLoadRequest(edited, updated => this.onUpdated(updated));
+      } else {
+        const loadRequest = new LoadRequest({...this.buildDetails(), id: 0, shipperId});
+        loadRequest.publish();
+        this.store.publishLoadRequest(loadRequest, created => this.onPublished(created));
+      }
     } catch {
       this.domainRuleRejected.set(true);
+    }
+  }
+
+  /**
+   * Fills the form with the data of the edited load request and disables it when not editable.
+   * @param loadRequest - Load request being edited.
+   */
+  private fillForm(loadRequest: LoadRequest): void {
+    const pickupAt = loadRequest.pickupAt;
+    const pad = (value: number) => String(value).padStart(2, '0');
+    this.form.setValue({
+      originLocationCode: findLocationByDistrict(loadRequest.route.origin.district)?.code ?? '',
+      originAddress: loadRequest.route.origin.address,
+      destinationLocationCode: findLocationByDistrict(loadRequest.route.destination.district)?.code ?? '',
+      destinationAddress: loadRequest.route.destination.address,
+      vehicleTypeId: loadRequest.vehicleTypeId,
+      cargoType: loadRequest.cargoType,
+      weightKg: loadRequest.weightKg,
+      lengthM: loadRequest.dimensions.lengthM,
+      widthM: loadRequest.dimensions.widthM,
+      heightM: loadRequest.dimensions.heightM,
+      rateAmount: loadRequest.offeredRate.amount,
+      pickupDate: new Date(pickupAt.getFullYear(), pickupAt.getMonth(), pickupAt.getDate()),
+      pickupTime: `${pad(pickupAt.getHours())}:${pad(pickupAt.getMinutes())}`
+    });
+    if (!loadRequest.isEditable()) {
+      this.form.disable();
     }
   }
 
@@ -265,5 +348,28 @@ export class LoadRequestForm {
           this.formDirective()?.resetForm();
         }
       });
+  }
+
+  /**
+   * Confirms the update and returns to "My Loads".
+   * @param updated - Load request returned by the API.
+   */
+  private onUpdated(updated: LoadRequest): void {
+    this.snackBar.open(
+      this.translate.instant('load-request-form.updated', {code: updated.code}),
+      this.translate.instant('common.close'),
+      {duration: 4000}
+    );
+    this.router.navigate(['/shipper/load-requests']).then();
+  }
+
+  /**
+   * Parses the route identifier.
+   * @param id - Raw route parameter.
+   * @returns The numeric identifier, or null when absent or invalid.
+   */
+  private parseId(id: string | null): number | null {
+    const parsed = Number(id);
+    return id !== null && Number.isInteger(parsed) && parsed > 0 ? parsed : null;
   }
 }
