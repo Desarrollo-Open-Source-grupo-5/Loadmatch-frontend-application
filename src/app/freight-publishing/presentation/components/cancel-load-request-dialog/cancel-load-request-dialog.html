@@ -1,0 +1,27 @@
+<div class="cancel-dialog__icon" aria-hidden="true">
+  <mat-icon>warning</mat-icon>
+</div>
+<h2 mat-dialog-title>{{ 'cancel-load-request.title' | translate }}</h2>
+<form [formGroup]="form" (ngSubmit)="confirm()" novalidate>
+  <mat-dialog-content>
+    <p class="cancel-dialog__summary">
+      {{ data.loadRequest.code }} · {{ data.loadRequest.route.origin.district }} → {{ data.loadRequest.route.destination.district }}
+    </p>
+    <p class="cancel-dialog__message">{{ 'cancel-load-request.message' | translate }}</p>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="cancel-dialog__reason">
+      <mat-label>{{ 'cancel-load-request.reason' | translate }}</mat-label>
+      <textarea matInput formControlName="reason" rows="3" maxlength="200" cdkFocusInitial
+                [placeholder]="'cancel-load-request.reason-placeholder' | translate"></textarea>
+      <mat-hint align="end">{{ form.controls.reason.value.length }}/200</mat-hint>
+      @if (form.controls.reason.hasError('required')) {
+        <mat-error>{{ 'cancel-load-request.reason-required' | translate }}</mat-error>
+      } @else if (form.controls.reason.hasError('minlength')) {
+        <mat-error>{{ 'cancel-load-request.reason-min-length' | translate: {min: minReasonLength} }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions class="cancel-dialog__actions">
+    <button mat-stroked-button type="button" mat-dialog-close>{{ 'cancel-load-request.keep' | translate }}</button>
+    <button mat-flat-button type="submit" class="cancel-dialog__confirm">{{ 'cancel-load-request.confirm' | translate }}</button>
+  </mat-dialog-actions>
+</form>
