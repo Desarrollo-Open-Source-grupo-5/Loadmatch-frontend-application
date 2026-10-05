@@ -8,7 +8,7 @@ import {ErrorHandlingEnabledBaseType} from './error-handling-enabled-base-type';
 /**
  * Query string filters accepted by {@link BaseApiEndpoint.getAll}, e.g. `{ shipperId: 1 }`.
  */
-export type EndpointQueryParams = Record<string, string | number | boolean>;
+export type EndpointQueryParams = Record<string, string | number | boolean | readonly (string | number | boolean)[]>;
 
 /**
  * Generic REST endpoint client providing CRUD operations over one resource collection.
