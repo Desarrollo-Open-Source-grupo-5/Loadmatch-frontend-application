@@ -16,4 +16,6 @@ export const environment = {
   platformProviderVehiclesEndpointPath: '/vehicles',
   platformProviderLoadRequestsEndpointPath: '/load-requests',
   platformProviderTripsEndpointPath: '/trips',
+  platformProviderDocumentsEndpointPath: '/documents',
+  platformProviderDocumentTypesEndpointPath: '/document-types',
 };
