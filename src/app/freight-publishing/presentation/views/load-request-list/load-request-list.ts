@@ -44,8 +44,8 @@ import {
 } from '../../components/cancel-load-request-dialog/cancel-load-request-dialog';
 
 /**
- * "My Loads": the active shipper's load requests filtered by status, with a link to the detail of each request and
- * the actions allowed by each status.
+ * "My Loads": the active shipper's load requests filtered by status, with a link to the detail of each request, the
+ * actions allowed by each status and a link to the tracking of the requests a carrier accepted.
  */
 @Component({
   imports: [

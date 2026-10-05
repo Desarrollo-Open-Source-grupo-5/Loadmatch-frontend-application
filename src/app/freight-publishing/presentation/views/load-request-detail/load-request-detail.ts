@@ -21,7 +21,7 @@ import {
 
 /**
  * Detail of one of the active shipper's load requests: route, cargo and, once a carrier accepted it, the assigned
- * carrier and vehicle.
+ * carrier and vehicle with a link to its tracking.
  */
 @Component({
   imports: [
