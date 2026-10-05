@@ -231,11 +231,6 @@
   --mat-button-outlined-state-layer-color: var(--lm-color-error);
 }
 
-.load-request-detail__disabled-action {
-  display: inline-block;
-  border-radius: 20px;
-}
-
 .load-request-detail__not-found {
   padding: 48px 24px;
   border: 1px dashed var(--lm-color-slate-300);

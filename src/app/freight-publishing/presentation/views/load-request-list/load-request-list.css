@@ -121,11 +121,6 @@
   --mat-button-text-state-layer-color: var(--lm-color-error);
 }
 
-.load-request-list__disabled-action {
-  display: inline-block;
-  border-radius: 20px;
-}
-
 .load-request-list__cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
