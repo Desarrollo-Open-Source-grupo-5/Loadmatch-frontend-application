@@ -379,6 +379,22 @@
     "carrier": "This page is for carriers. Enter as a carrier to see it.",
     "action": "Choose a profile"
   },
+  "service-history": {
+    "title": "Service history",
+    "subtitle": "Your completed services, most recent first.",
+    "summary-one": "{{count}} service · {{total}} in total",
+    "summary-other": "{{count}} services · {{total}} in total",
+    "column-date": "Completed on",
+    "column-route": "Route",
+    "column-shipper": "Shipper",
+    "column-distance": "Distance",
+    "column-rate": "Rate",
+    "column-status": "Status",
+    "distance-value": "{{distance}} km",
+    "empty-title": "You have no completed services yet",
+    "empty-hint": "Your services appear here once the shipper confirms the delivery.",
+    "find-loads": "Find loads"
+  },
   "page-not-found": {
     "title": "Page not found",
     "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
