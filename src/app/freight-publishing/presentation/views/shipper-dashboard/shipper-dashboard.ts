@@ -1,55 +1,7 @@
-import {Component, inject} from '@angular/core';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {RouterLink} from '@angular/router';
-import {map} from 'rxjs';
-import {MatButton} from '@angular/material/button';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatIcon} from '@angular/material/icon';
-import {MatProgressBar} from '@angular/material/progress-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable
-} from '@angular/material/table';
-import {TranslatePipe} from '@ngx-translate/core';
-import {ActiveProfileStore} from '../../../../shared/application/active-profile.store';
-import {ProfileRequired} from '../../../../shared/presentation/components/profile-required/profile-required';
-import {LocalizedDatePipe} from '../../../../shared/presentation/pipes/localized-date.pipe';
-import {FreightPublishingStore} from '../../../application/freight-publishing.store';
-import {LoadRequestStatusChip} from '../../components/load-request-status-chip/load-request-status-chip';
-
+import { Component } from '@angular/core';
 
 @Component({
-  imports: [
-    RouterLink,
-    MatButton,
-    MatCard,
-    MatCardContent,
-    MatIcon,
-    MatProgressBar,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderCellDef,
-    MatCell,
-    MatCellDef,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    TranslatePipe,
-    LocalizedDatePipe,
-    LoadRequestStatusChip,
-    ProfileRequired
-  ],
+  imports: [],
   selector: 'app-shipper-dashboard',
   styleUrl: './shipper-dashboard.css',
   templateUrl: './shipper-dashboard.html',

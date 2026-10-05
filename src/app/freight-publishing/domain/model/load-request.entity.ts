@@ -257,11 +257,12 @@ export class LoadRequest implements BaseEntity {
   }
 
   /**
-   * Tracking is only meaningful while the cargo travels.
-   * @returns True when the status is `IN_TRANSIT`.
+   * A request has a trip to track from the moment a carrier accepts it, including after the delivery, when the
+   * shipper still follows its closing.
+   * @returns True when the status is `ASSIGNED`, `IN_TRANSIT` or `DELIVERED`.
    */
   isTrackable(): boolean {
-    return this.#status === 'IN_TRANSIT';
+    return this.#status === 'ASSIGNED' || this.#status === 'IN_TRANSIT' || this.#status === 'DELIVERED';
   }
 
   /**

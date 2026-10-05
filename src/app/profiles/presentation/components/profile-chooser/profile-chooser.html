@@ -24,7 +24,11 @@
               <span class="profile-chooser__detail">{{ 'profiles.ruc' | translate }} {{ shipper.ruc }}</span>
               <span class="profile-chooser__detail">
                 <mat-icon aria-hidden="true" class="profile-chooser__star">star</mat-icon>
-                {{ 'profiles.rating' | translate: {average: (shipper.reputation.average | localizedNumber: '1.1-1'), total: shipper.reputation.totalRatings} }}
+                @if (shipper.reputation.hasRatings()) {
+                  {{ 'profiles.rating' | translate: {average: (shipper.reputation.average | localizedNumber: '1.1-1'), total: shipper.reputation.totalRatings} }}
+                } @else {
+                  {{ 'profiles.no-ratings' | translate }}
+                }
               </span>
               <mat-icon aria-hidden="true" class="profile-chooser__arrow">arrow_forward</mat-icon>
             </button>

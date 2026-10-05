@@ -81,11 +81,17 @@ export class Layout {
     switch (this.activeProfile()?.role) {
       case 'SHIPPER':
         return [
+          {link: '/shipper/dashboard', label: 'nav.dashboard', icon: 'dashboard'},
           {link: '/shipper/load-requests', label: 'nav.my-loads', icon: 'inventory_2'},
           {link: '/shipper/load-requests/new', label: 'nav.publish-load', icon: 'add_box'}
         ];
       case 'CARRIER':
-        return [{link: '/carrier/available-loads', label: 'nav.find-loads', icon: 'travel_explore'}];
+        return [
+          {link: '/carrier/available-loads', label: 'nav.find-loads', icon: 'travel_explore'},
+          {link: '/carrier/trips', label: 'nav.my-trips', icon: 'route'},
+          {link: '/carrier/trips/history', label: 'nav.history', icon: 'history'},
+          {link: '/carrier/documents', label: 'nav.documents', icon: 'badge'}
+        ];
       default:
         return [];
     }
