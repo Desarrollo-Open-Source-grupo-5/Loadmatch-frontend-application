@@ -316,6 +316,28 @@
     "unavailable-title": "This load is no longer available",
     "unavailable-message": "Another carrier already took it, so it was removed from your search results."
   },
+  "carrier-trips": {
+    "title": "My trips",
+    "subtitle": "Your accepted trips, grouped to organize your work day.",
+    "group": {
+      "UPCOMING": "Upcoming",
+      "IN_PROGRESS": "In progress",
+      "COMPLETED": "Completed"
+    },
+    "group-empty": {
+      "UPCOMING": "You have no upcoming trips.",
+      "IN_PROGRESS": "You have no trips in progress.",
+      "COMPLETED": "You have not completed any trips yet."
+    },
+    "pickup": "Pickup",
+    "completed-on": "Completed on",
+    "vehicle": "Vehicle",
+    "shipper": "Shipper",
+    "view-history": "View your service history",
+    "empty-title": "You don't have any trips yet",
+    "empty-hint": "The loads you accept will appear here, grouped as upcoming, in progress and completed.",
+    "find-loads": "Find loads"
+  },
   "profile-required": {
     "title": "Choose a profile first",
     "shipper": "This page is for shippers. Enter as a shipper to see it.",

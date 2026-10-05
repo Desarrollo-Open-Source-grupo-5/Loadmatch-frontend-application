@@ -317,6 +317,28 @@
     "unavailable-message": "Otro transportista ya lo tomó, por lo que se retiró de tus resultados de búsqueda."
   },
 
+  "carrier-trips": {
+    "title": "Mis viajes",
+    "subtitle": "Tus viajes aceptados, agrupados para organizar tu jornada.",
+    "group": {
+      "UPCOMING": "Próximos",
+      "IN_PROGRESS": "En curso",
+      "COMPLETED": "Completados"
+    },
+    "group-empty": {
+      "UPCOMING": "No tienes viajes próximos.",
+      "IN_PROGRESS": "No tienes viajes en curso.",
+      "COMPLETED": "Aún no has completado viajes."
+    },
+    "pickup": "Recojo",
+    "completed-on": "Completado el",
+    "vehicle": "Unidad",
+    "shipper": "Empresa",
+    "view-history": "Ver tu historial de servicios",
+    "empty-title": "Aún no tienes viajes",
+    "empty-hint": "Las cargas que aceptes aparecerán aquí, agrupadas en próximas, en curso y completadas.",
+    "find-loads": "Buscar fletes"
+  },
   "profile-required": {
     "title": "Primero elige un perfil",
     "shipper": "Esta página es para empresas. Ingresa como empresa para verla.",
@@ -332,6 +354,6 @@
   "footer": {
     "company": "CargoLink Labs",
     "rights": "Todos los derechos reservados."
-  },
+  }
 
 }
