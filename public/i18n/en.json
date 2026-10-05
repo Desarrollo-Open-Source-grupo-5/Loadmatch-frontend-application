@@ -49,6 +49,18 @@
     "COMPLETED": "Completed",
     "CANCELLED": "Cancelled"
   },
+  "trip-status-step": {
+    "ASSIGNED": "Assigned to the carrier",
+    "EN_ROUTE_TO_PICKUP": "On the way to the pickup point",
+    "AT_PICKUP_POINT": "At pickup point",
+    "CARGO_PICKED_UP": "Cargo picked up",
+    "IN_TRANSIT": "In transit",
+    "DELAYED": "Delayed",
+    "DELIVERED": "Delivered",
+    "DISPUTED": "Delivery disputed",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
   "load-request-form": {
     "back": "Back to My Loads",
     "new-title": "Publish a load request",
@@ -233,6 +245,29 @@
     "not-found-title": "Load request not found",
     "not-found": "This load request does not exist or does not belong to your company."
   },
+  "load-tracking": {
+    "back-to-detail": "Back to load details",
+    "back-to-list": "Back to My Loads",
+    "title": "Tracking {{code}}",
+    "delivered-title": "The carrier reported the delivery",
+    "delivered-message": "Delivered on {{date}}. Confirm the receipt to close the service.",
+    "confirm-receipt": "Confirm receipt",
+    "delayed-message": "The carrier reported a delay on {{date}}.",
+    "section-service": "Route and service",
+    "origin": "Origin",
+    "destination": "Destination",
+    "trip-distance": "Trip distance",
+    "distance-value": "{{distance}} km",
+    "pickup": "Pickup",
+    "cargo": "Cargo",
+    "carrier": "Carrier",
+    "vehicle": "Vehicle",
+    "section-progress": "Trip progress",
+    "pending": "Pending",
+    "current": "Current status",
+    "unavailable-title": "Tracking is not available yet for this load",
+    "unavailable-message": "Tracking starts when a carrier accepts the load request. It is only available for the load requests of your company."
+  },
   "about": {
     "logo-alt": "LoadMatch logo",
     "title": "About LoadMatch",
@@ -344,16 +379,13 @@
     "carrier": "This page is for carriers. Enter as a carrier to see it.",
     "action": "Choose a profile"
   },
-
   "page-not-found": {
     "title": "Page not found",
     "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
     "go-home": "Go Home"
   },
-
   "footer": {
     "company": "CargoLink Labs",
     "rights": "All rights reserved."
   }
-
 }

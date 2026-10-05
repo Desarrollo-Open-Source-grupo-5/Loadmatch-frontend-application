@@ -49,6 +49,18 @@
     "COMPLETED": "Completado",
     "CANCELLED": "Cancelado"
   },
+  "trip-status-step": {
+    "ASSIGNED": "Asignado al transportista",
+    "EN_ROUTE_TO_PICKUP": "En camino al punto de recojo",
+    "AT_PICKUP_POINT": "En el punto de recojo",
+    "CARGO_PICKED_UP": "Carga recogida",
+    "IN_TRANSIT": "En tránsito",
+    "DELAYED": "Con retraso",
+    "DELIVERED": "Entregado",
+    "DISPUTED": "Entrega observada",
+    "COMPLETED": "Completado",
+    "CANCELLED": "Cancelado"
+  },
   "load-request-form": {
     "back": "Volver a Mis Cargas",
     "new-title": "Publicar una solicitud de carga",
@@ -233,6 +245,29 @@
     "not-found-title": "Solicitud no encontrada",
     "not-found": "Esta solicitud no existe o no pertenece a tu empresa."
   },
+  "load-tracking": {
+    "back-to-detail": "Volver al detalle de la carga",
+    "back-to-list": "Volver a Mis Cargas",
+    "title": "Seguimiento de {{code}}",
+    "delivered-title": "El transportista reportó la entrega",
+    "delivered-message": "Entregada el {{date}}. Confirma la recepción para cerrar el servicio.",
+    "confirm-receipt": "Confirmar recepción",
+    "delayed-message": "El transportista reportó un retraso el {{date}}.",
+    "section-service": "Ruta y servicio",
+    "origin": "Origen",
+    "destination": "Destino",
+    "trip-distance": "Distancia del viaje",
+    "distance-value": "{{distance}} km",
+    "pickup": "Recojo",
+    "cargo": "Carga",
+    "carrier": "Transportista",
+    "vehicle": "Unidad",
+    "section-progress": "Avance del viaje",
+    "pending": "Pendiente",
+    "current": "Estado actual",
+    "unavailable-title": "El seguimiento aún no está disponible para esta carga",
+    "unavailable-message": "El seguimiento comienza cuando un transportista acepta la solicitud. Solo está disponible para las solicitudes de tu empresa."
+  },
   "about": {
     "logo-alt": "Logotipo de LoadMatch",
     "title": "Acerca de LoadMatch",
@@ -316,7 +351,6 @@
     "unavailable-title": "Este flete ya no está disponible",
     "unavailable-message": "Otro transportista ya lo tomó, por lo que se retiró de tus resultados de búsqueda."
   },
-
   "carrier-trips": {
     "title": "Mis viajes",
     "subtitle": "Tus viajes aceptados, agrupados para organizar tu jornada.",
@@ -350,10 +384,8 @@
     "content": "La ruta <strong>{{ invalid_path }}</strong> no es válida.",
     "go-home": "Ir al inicio"
   },
-
   "footer": {
     "company": "CargoLink Labs",
     "rights": "Todos los derechos reservados."
   }
-
 }
