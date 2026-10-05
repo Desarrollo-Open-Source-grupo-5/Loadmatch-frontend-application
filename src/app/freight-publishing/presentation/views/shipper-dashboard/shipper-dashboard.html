@@ -1,1 +1,142 @@
-<p>shipper-dashboard works!</p>
+@if (!isShipper()) {
+  <app-profile-required role="SHIPPER"/>
+} @else {
+  <section class="shipper-dashboard">
+    <header class="shipper-dashboard__header">
+      <div>
+        <h1>{{ 'shipper-dashboard.title' | translate }}</h1>
+        <p class="shipper-dashboard__subtitle">
+          {{ 'shipper-dashboard.subtitle' | translate: {name: activeProfile()?.displayName} }}
+        </p>
+      </div>
+      @if (store.loadRequestCount()) {
+        <a mat-flat-button routerLink="/shipper/load-requests/new">
+          <mat-icon>add</mat-icon>
+          {{ 'shipper-dashboard.publish' | translate }}
+        </a>
+      }
+
+    </header>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="shipper-dashboard__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    @if (store.loadRequestCount() === 0) {
+      @if (!store.loading() && !store.error()) {
+        <div class="shipper-dashboard__empty" role="status">
+          <mat-icon aria-hidden="true">inventory_2</mat-icon>
+          <h2>{{ 'shipper-dashboard.empty-title' | translate }}</h2>
+          <p>{{ 'shipper-dashboard.empty-hint' | translate }}</p>
+          <a mat-flat-button routerLink="/shipper/load-requests/new">
+            <mat-icon>add</mat-icon>
+            {{ 'shipper-dashboard.empty-action' | translate }}
+          </a>
+        </div>
+      }
+    } @else {
+      <ul class="shipper-dashboard__summary" [attr.aria-label]="'shipper-dashboard.summary' | translate">
+        <li class="shipper-dashboard__figure shipper-dashboard__figure--published">
+          <mat-icon aria-hidden="true">search</mat-icon>
+          <span class="shipper-dashboard__value">{{ store.countByStatus().PUBLISHED }}</span>
+          <span class="shipper-dashboard__label">{{ 'shipper-dashboard.published' | translate }}</span>
+          <span class="shipper-dashboard__hint">{{ 'shipper-dashboard.published-hint' | translate }}</span>
+        </li>
+        <li class="shipper-dashboard__figure shipper-dashboard__figure--in-transit">
+          <mat-icon aria-hidden="true">local_shipping</mat-icon>
+          <span class="shipper-dashboard__value">{{ store.countByStatus().IN_TRANSIT }}</span>
+          <span class="shipper-dashboard__label">{{ 'shipper-dashboard.in-transit' | translate }}</span>
+          <span class="shipper-dashboard__hint">
+            {{ (store.countByStatus().ASSIGNED === 1 ? 'shipper-dashboard.assigned-one' : 'shipper-dashboard.assigned-other') | translate: {count: store.countByStatus().ASSIGNED} }}
+          </span>
+        </li>
+        <li class="shipper-dashboard__figure shipper-dashboard__figure--completed">
+          <mat-icon aria-hidden="true">task_alt</mat-icon>
+          <span class="shipper-dashboard__value">{{ store.countByStatus().DELIVERED }}</span>
+          <span class="shipper-dashboard__label">{{ 'shipper-dashboard.completed' | translate }}</span>
+          <span class="shipper-dashboard__hint">{{ 'shipper-dashboard.completed-hint' | translate }}</span>
+        </li>
+      </ul>
+
+      <section class="shipper-dashboard__latest" aria-labelledby="shipper-dashboard-latest">
+        <div class="shipper-dashboard__latest-header">
+          <h2 id="shipper-dashboard-latest">{{ 'shipper-dashboard.latest-title' | translate }}</h2>
+          <a class="shipper-dashboard__view-all" routerLink="/shipper/load-requests">
+            {{ 'shipper-dashboard.view-all' | translate }}
+            <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+          </a>
+        </div>
+
+        @if (isHandset()) {
+          <ul class="shipper-dashboard__cards">
+            @for (loadRequest of latestLoadRequests(); track loadRequest.id) {
+              <li>
+                <mat-card appearance="outlined">
+                  <mat-card-content>
+                    <div class="shipper-dashboard__card-header">
+                      <strong>{{ loadRequest.code }}</strong>
+                      <app-load-request-status-chip [status]="loadRequest.status"/>
+                    </div>
+                    <p class="shipper-dashboard__route">
+                      {{ loadRequest.route.origin.district }} → {{ loadRequest.route.destination.district }}
+                    </p>
+                    <p class="shipper-dashboard__detail">
+                      {{ 'shipper-dashboard.column-pickup' | translate }}: {{ loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}
+                    </p>
+                    <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id]"
+                       [attr.aria-label]="'shipper-dashboard.view-details-aria' | translate: {code: loadRequest.code}">
+                      <mat-icon>visibility</mat-icon>
+                      {{ 'shipper-dashboard.view-details' | translate }}
+                    </a>
+                  </mat-card-content>
+                </mat-card>
+              </li>
+            }
+          </ul>
+        } @else {
+          <div class="shipper-dashboard__table-wrapper">
+            <table mat-table [dataSource]="latestLoadRequests()" class="shipper-dashboard__table">
+              <ng-container matColumnDef="code">
+                <th mat-header-cell *matHeaderCellDef>{{ 'shipper-dashboard.column-id' | translate }}</th>
+                <td mat-cell *matCellDef="let loadRequest"><strong>{{ loadRequest.code }}</strong></td>
+              </ng-container>
+              <ng-container matColumnDef="route">
+                <th mat-header-cell *matHeaderCellDef>{{ 'shipper-dashboard.column-route' | translate }}</th>
+                <td mat-cell *matCellDef="let loadRequest">
+                  <span class="shipper-dashboard__route">{{ loadRequest.route.origin.district }} → {{ loadRequest.route.destination.district }}</span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="pickupAt">
+                <th mat-header-cell *matHeaderCellDef>{{ 'shipper-dashboard.column-pickup' | translate }}</th>
+                <td mat-cell *matCellDef="let loadRequest">{{ loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>{{ 'shipper-dashboard.column-status' | translate }}</th>
+                <td mat-cell *matCellDef="let loadRequest"><app-load-request-status-chip [status]="loadRequest.status"/></td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="shipper-dashboard__actions-header">{{ 'shipper-dashboard.column-actions' | translate }}</th>
+                <td mat-cell *matCellDef="let loadRequest" class="shipper-dashboard__actions">
+                  <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id]"
+                     [attr.aria-label]="'shipper-dashboard.view-details-aria' | translate: {code: loadRequest.code}">
+                    <mat-icon>visibility</mat-icon>
+                    {{ 'shipper-dashboard.view-details' | translate }}
+                  </a>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        }
+      </section>
+    }
+  </section>
+}
+
