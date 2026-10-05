@@ -96,4 +96,5 @@ export class ShipperDashboard {
    * Columns of the desktop table.
    */
   protected readonly displayedColumns = ['code', 'route', 'pickupAt', 'status', 'actions'];
+
 }
