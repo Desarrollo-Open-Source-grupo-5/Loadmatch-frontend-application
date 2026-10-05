@@ -48,6 +48,7 @@ export class MatchingService {
    * @param loads - Loads to order.
    * @param sortBy - Ordering criterion.
    * @returns A new ordered array.
+   * ok
    */
   private sort(loads: AvailableLoad[], sortBy: SortCriteria): AvailableLoad[] {
     const byCriterion = (a: AvailableLoad, b: AvailableLoad): number => {

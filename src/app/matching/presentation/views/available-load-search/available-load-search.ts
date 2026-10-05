@@ -62,6 +62,7 @@ export class AvailableLoadSearch {
 
   /**
    * Matching store.
+   * ok
    */
   protected readonly store = inject(MatchingStore);
 

@@ -210,6 +210,7 @@ export class SearchCriteria {
    * Returns a copy that shows every published load again: clears the four advanced filters, widens the radius to any
    * distance and turns the compatibility filter off, keeping the carrier location and the ordering.
    * @returns New search criteria.
+   * ok
    */
   clearFilters(): SearchCriteria {
     return this.with({
