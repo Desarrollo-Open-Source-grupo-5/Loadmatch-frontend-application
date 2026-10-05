@@ -60,9 +60,65 @@
   color: var(--lm-status-cancelled-text);
 }
 
+.available-load-search__filters {
+  margin-bottom: 16px;
+  padding: 12px 16px 16px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+.available-load-search__filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.available-load-search__filters-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Blue Tint background requires Slate 600 text or darker. */
+.available-load-search__badge {
+  min-width: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background-color: var(--lm-color-blue-tint);
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.available-load-search__filters-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.available-load-search__filters-body[hidden] {
+  display: none;
+}
+
+.available-load-search__results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 8px 0 16px;
+}
+
 .available-load-search__count {
   min-height: 20px;
-  margin: 8px 0 16px;
+  margin: 0;
   color: var(--lm-color-slate-700);
   font-weight: 600;
 }

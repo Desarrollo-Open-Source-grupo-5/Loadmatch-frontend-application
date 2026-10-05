@@ -12,7 +12,7 @@ import {MatchingApi} from '../infrastructure/matching-api';
 
 /**
  * Holds the state of the available loads search: published loads, the active carrier's vehicle, the search criteria
- * and the resulting ordered list; and the detail of the load the carrier is consulting.
+ * with its advanced filters and the resulting ordered list; and the detail of the load the carrier is consulting.
  */
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,12 @@ export class MatchingStore {
    * Computed signal with the active vehicle of the carrier, or null when it has none.
    */
   readonly activeVehicle = computed(() => this.carrierVehicles().find(vehicle => vehicle.active) ?? null);
+
+  /**
+   * Computed signal that is true while the compatibility filter applies: the vehicle type is then fixed to the type
+   * of the carrier's vehicle and the vehicle type filter is not used.
+   */
+  readonly vehicleTypeFixed = computed(() => this.criteria().compatibleWithVehicleOnly && this.activeVehicle() !== null);
 
   /**
    * Computed signal with the loads that match the criteria, ordered.
@@ -151,6 +157,13 @@ export class MatchingStore {
    */
   updateCriteria = (changes: SearchCriteriaChanges): void => {
     this.criteriaSignal.update(criteria => criteria.with(changes));
+  };
+
+  /**
+   * Clears the filters so every published load is shown again, keeping the carrier location and the ordering.
+   */
+  clearFilters = (): void => {
+    this.criteriaSignal.update(criteria => criteria.clearFilters());
   };
 
   /**
