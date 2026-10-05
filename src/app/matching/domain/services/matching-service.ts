@@ -9,8 +9,8 @@ import {SortCriteria} from '../model/sort-criteria';
 export class MatchingService {
 
   /**
-   * Computes the distance to the carrier, keeps the loads inside the radius (and, when requested, compatible with the
-   * carrier's vehicle) and orders them by the selected criterion.
+   * Computes the distance to the carrier, keeps the loads inside the radius that meet every advanced filter and, when
+   * requested, are compatible with the carrier's vehicle, and orders them by the selected criterion.
    * @param loads - Published loads.
    * @param criteria - Search criteria.
    * @param vehicle - Active vehicle of the carrier, or null when the carrier has none.
@@ -18,11 +18,29 @@ export class MatchingService {
    */
   findNearbyLoads(loads: AvailableLoad[], criteria: SearchCriteria, vehicle: CarrierVehicle | null): AvailableLoad[] {
     const radiusKm = criteria.radiusKm;
+    const compatibleVehicle = criteria.compatibleWithVehicleOnly ? vehicle : null;
     const nearbyLoads = loads
       .map(load => load.withDistanceTo(criteria.origin))
       .filter(load => radiusKm === null || (load.distanceToCarrierKm ?? 0) <= radiusKm)
-      .filter(load => !criteria.compatibleWithVehicleOnly || !vehicle || vehicle.canTransport(load));
+      .filter(load => !compatibleVehicle || compatibleVehicle.canTransport(load))
+      .filter(load => this.meetsAdvancedFilters(load, criteria, compatibleVehicle !== null));
     return this.sort(nearbyLoads, criteria.sortBy);
+  }
+
+  /**
+   * Checks that a load meets every advanced filter that is set.
+   * @param load - Load to check.
+   * @param criteria - Search criteria.
+   * @param vehicleTypeFixed - True while the compatibility filter applies; the vehicle type is then the type of the
+   *   carrier's vehicle and the vehicle type filter is ignored.
+   * @returns True when the load meets the trip distance, vehicle type, weight and rate filters.
+   */
+  private meetsAdvancedFilters(load: AvailableLoad, criteria: SearchCriteria, vehicleTypeFixed: boolean): boolean {
+    const {maxTripDistanceKm, vehicleTypeId, minWeightKg, minRateAmount} = criteria;
+    return (maxTripDistanceKm === null || load.distanceKm <= maxTripDistanceKm)
+      && (vehicleTypeFixed || vehicleTypeId === null || load.vehicleTypeId === vehicleTypeId)
+      && (minWeightKg === null || load.weightKg >= minWeightKg)
+      && (minRateAmount === null || load.offeredRate.amount >= minRateAmount);
   }
 
   /**
