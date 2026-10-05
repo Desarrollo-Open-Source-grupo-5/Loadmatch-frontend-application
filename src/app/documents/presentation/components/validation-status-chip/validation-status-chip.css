@@ -1,0 +1,44 @@
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.status-chip mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+/* Same text/background pairs as the load request badges. */
+.status-chip--neutral {
+  background-color: var(--lm-status-draft-bg);
+  color: var(--lm-status-draft-text);
+}
+
+.status-chip--info {
+  background-color: var(--lm-status-in-transit-bg);
+  color: var(--lm-status-in-transit-text);
+}
+
+.status-chip--success {
+  background-color: var(--lm-status-delivered-bg);
+  color: var(--lm-status-delivered-text);
+}
+
+.status-chip--warning {
+  background-color: var(--lm-status-assigned-bg);
+  color: var(--lm-status-assigned-text);
+}
+
+.status-chip--error {
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}

@@ -121,6 +121,41 @@
     "view-list": "Ver en Mis Cargas",
     "stay": "Cerrar y publicar otra"
   },
+  "validation-status": {
+    "NOT_UPLOADED": "Pendiente de subir",
+    "PENDING": "Pendiente",
+    "IN_REVIEW": "En revisión",
+    "APPROVED": "Aprobado",
+    "REJECTED": "Rechazado",
+    "EXPIRED": "Vencido"
+  },
+  "document-type": {
+    "DRIVER_LICENSE": "Licencia de conducir",
+    "SOAT": "SOAT",
+    "VEHICLE_REGISTRATION": "Tarjeta de propiedad vehicular"
+  },
+  "document-rejection": {
+    "ILLEGIBLE_FILE": "El archivo no se puede leer. Sube una copia clara y completa.",
+    "EXPIRED_ON_UPLOAD": "El documento ya estaba vencido cuando se subió.",
+    "DATA_MISMATCH": "Los datos del documento no coinciden con tu perfil o con tu unidad."
+  },
+  "document-validation": {
+    "title": "Mis documentos",
+    "subtitle": "Estado de validación de los documentos que necesitas para aceptar viajes.",
+    "summary": "{{approved}} de {{total}} documentos aprobados",
+    "expiration-date": "Vence el",
+    "uploaded-at": "Subido el",
+    "expires-soon": "Vence el {{date}}: renuévalo pronto",
+    "rejection-reason": "Motivo del rechazo",
+    "next-step": {
+      "NOT_UPLOADED": "Qué hacer: sube este documento para completar tu validación.",
+      "PENDING": "No necesitas hacer nada: pronto será revisado.",
+      "IN_REVIEW": "No necesitas hacer nada: está en revisión.",
+      "REJECTED": "Qué hacer: sube un nuevo archivo.",
+      "EXPIRED": "Qué hacer: sube el documento renovado."
+    },
+    "upload": "Subir archivo"
+  },
   "home": {
     "title": "Bienvenido a LoadMatch",
     "content": "LoadMatch conecta a las empresas que necesitan trasladar carga con transportistas que tienen capacidad disponible en todo el Perú."
