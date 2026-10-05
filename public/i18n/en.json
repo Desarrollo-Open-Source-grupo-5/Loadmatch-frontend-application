@@ -8,9 +8,13 @@
     "open-menu": "Open navigation menu",
     "shipper-role": "Shipper",
     "carrier-role": "Carrier",
+    "dashboard": "Dashboard",
     "my-loads": "My Loads",
     "publish-load": "Publish Load",
     "find-loads": "Find Loads",
+    "my-trips": "My Trips",
+    "history": "History",
+    "documents": "Documents",
     "about": "About",
     "switch-profile": "Switch profile",
     "language": "Preferred language",
@@ -31,6 +35,18 @@
     "ASSIGNED": "Assigned",
     "IN_TRANSIT": "In transit",
     "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled"
+  },
+  "trip-status": {
+    "ASSIGNED": "Assigned",
+    "EN_ROUTE_TO_PICKUP": "On the way",
+    "AT_PICKUP_POINT": "On the way",
+    "CARGO_PICKED_UP": "On the way",
+    "IN_TRANSIT": "In transit",
+    "DELAYED": "Delayed",
+    "DELIVERED": "Delivered",
+    "DISPUTED": "Disputed",
+    "COMPLETED": "Completed",
     "CANCELLED": "Cancelled"
   },
   "load-request-form": {
@@ -138,6 +154,7 @@
     "cancel": "Cancel",
     "cancel-aria": "Cancel load request {{code}}",
     "view-tracking": "View tracking",
+    "view-tracking-aria": "View tracking of load request {{code}}",
     "cancelled": "Load request {{code}} was cancelled."
   },
   "cancel-load-request": {
@@ -178,6 +195,7 @@
     "carrier-unavailable": "The assigned carrier's data is not available yet.",
     "contact-hint": "To change this request, contact the assigned carrier.",
     "view-tracking": "View tracking",
+    "view-tracking-aria": "View tracking of load request {{code}}",
     "edit": "Edit",
     "edit-aria": "Edit load request {{code}}",
     "cancel": "Cancel request",
