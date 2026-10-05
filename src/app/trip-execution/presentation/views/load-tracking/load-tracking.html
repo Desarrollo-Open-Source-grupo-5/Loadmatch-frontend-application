@@ -1,1 +1,124 @@
-<p>load-tracking works!</p>
+@if (!isShipper()) {
+  <app-profile-required role="SHIPPER"/>
+} @else {
+  <section class="load-tracking">
+    <a class="load-tracking__back" [routerLink]="backLink()">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+      {{ (store.trackedLoadRequest() ? 'load-tracking.back-to-detail' : 'load-tracking.back-to-list') | translate }}
+    </a>
+
+    @if (store.trackedTrip(); as item) {
+      <header class="load-tracking__header">
+        <h1>{{ 'load-tracking.title' | translate: {code: item.loadRequest.code} }}</h1>
+        <app-trip-status-chip [status]="item.trip.status"/>
+      </header>
+      <p class="load-tracking__subtitle">
+        {{ item.loadRequest.originDistrict }} → {{ item.loadRequest.destinationDistrict }}
+      </p>
+
+      @if (item.trip.status === 'DELIVERED') {
+        <div class="load-tracking__banner load-tracking__banner--success" role="status">
+          <mat-icon aria-hidden="true">inventory</mat-icon>
+          <span>
+            <strong>{{ 'load-tracking.delivered-title' | translate }}</strong>
+            {{ 'load-tracking.delivered-message' | translate: {date: (item.trip.deliveredAt | localizedDate: 'd MMM y, HH:mm')} }}
+          </span>
+          <button mat-flat-button type="button" disabled>
+            <mat-icon>task_alt</mat-icon>
+            {{ 'load-tracking.confirm-receipt' | translate }}
+          </button>
+        </div>
+      } @else if (item.trip.status === 'DELAYED') {
+        <p class="load-tracking__banner load-tracking__banner--warning" role="status">
+          <mat-icon aria-hidden="true">schedule</mat-icon>
+          {{ 'load-tracking.delayed-message' | translate: {date: (item.trip.lastStatusChange()?.registeredAt | localizedDate: 'd MMM y, HH:mm')} }}
+        </p>
+      }
+
+      <div class="load-tracking__layout">
+        <section class="load-tracking__card" aria-labelledby="load-tracking-service">
+          <h2 id="load-tracking-service">{{ 'load-tracking.section-service' | translate }}</h2>
+          <ol class="load-tracking__route">
+            <li>
+              <span class="load-tracking__label">{{ 'load-tracking.origin' | translate }}</span>
+              <span class="load-tracking__place">{{ item.loadRequest.originDistrict }}</span>
+              <span class="load-tracking__address">{{ item.loadRequest.originAddress }}</span>
+            </li>
+            <li>
+              <span class="load-tracking__label">{{ 'load-tracking.destination' | translate }}</span>
+              <span class="load-tracking__place">{{ item.loadRequest.destinationDistrict }}</span>
+              <span class="load-tracking__address">{{ item.loadRequest.destinationAddress }}</span>
+            </li>
+          </ol>
+
+          <dl class="load-tracking__facts">
+            <div>
+              <dt>{{ 'load-tracking.trip-distance' | translate }}</dt>
+              <dd>{{ 'load-tracking.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-tracking.pickup' | translate }}</dt>
+              <dd>{{ item.trip.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-tracking.cargo' | translate }}</dt>
+              <dd>{{ item.loadRequest.cargoType }} · {{ item.loadRequest.weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-tracking.carrier' | translate }}</dt>
+              <dd>{{ item.carrierName }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-tracking.vehicle' | translate }}</dt>
+              <dd>
+                {{ item.licensePlate }}
+                @if (item.vehicleTypeName) {
+                  · {{ item.vehicleTypeName }}
+                }
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="load-tracking__card" aria-labelledby="load-tracking-progress">
+          <h2 id="load-tracking-progress">{{ 'load-tracking.section-progress' | translate }}</h2>
+          <ol class="load-tracking__timeline">
+            @for (step of timeline(); track $index) {
+              <li class="load-tracking__step" [class]="'load-tracking__step--' + step.state"
+                  [attr.aria-current]="step.state === 'current' ? 'step' : null">
+                <mat-icon aria-hidden="true">{{ stepIcon(step) }}</mat-icon>
+                <div>
+                  <span class="load-tracking__step-label">{{ 'trip-status-step.' + step.status | translate }}</span>
+                  @if (step.registeredAt) {
+                    <span class="load-tracking__step-date">{{ step.registeredAt | localizedDate: 'd MMM y, HH:mm' }}</span>
+                  } @else {
+                    <span class="load-tracking__step-date">{{ 'load-tracking.pending' | translate }}</span>
+                  }
+                  @if (step.state === 'current') {
+                    <span class="load-tracking__current">{{ 'load-tracking.current' | translate }}</span>
+                  }
+                </div>
+              </li>
+            }
+          </ol>
+        </section>
+      </div>
+    } @else if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    } @else if (store.error()) {
+      <p class="load-tracking__banner load-tracking__banner--error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    } @else {
+      <div class="load-tracking__unavailable" role="status">
+        <mat-icon aria-hidden="true">location_off</mat-icon>
+        <h1>{{ 'load-tracking.unavailable-title' | translate }}</h1>
+        <p>{{ 'load-tracking.unavailable-message' | translate }}</p>
+        <a mat-flat-button [routerLink]="backLink()">
+          {{ (store.trackedLoadRequest() ? 'load-tracking.back-to-detail' : 'load-tracking.back-to-list') | translate }}
+        </a>
+      </div>
+    }
+  </section>
+}
