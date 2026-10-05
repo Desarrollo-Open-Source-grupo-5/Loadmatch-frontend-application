@@ -1,1 +1,108 @@
-<p>service-history works!</p>
+@if (!isCarrier()) {
+  <app-profile-required role="CARRIER"/>
+} @else {
+  <section class="service-history">
+    <header class="service-history__header">
+      <div>
+        <h1>{{ 'service-history.title' | translate }}</h1>
+        <p class="service-history__subtitle">{{ 'service-history.subtitle' | translate }}</p>
+      </div>
+      @if (store.completedTrips().length) {
+        <p class="service-history__summary" role="note">
+          <mat-icon aria-hidden="true">task_alt</mat-icon>
+          {{ (store.completedTrips().length === 1 ? 'service-history.summary-one' : 'service-history.summary-other') | translate: {count: store.completedTrips().length, total: (store.completedTripsTotal() | money)} }}
+        </p>
+      }
+    </header>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="service-history__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    @if (store.completedTrips().length === 0) {
+      @if (!store.loading() && !store.error()) {
+        <div class="service-history__empty" role="status">
+          <mat-icon aria-hidden="true">history</mat-icon>
+          <h2>{{ 'service-history.empty-title' | translate }}</h2>
+          <p>{{ 'service-history.empty-hint' | translate }}</p>
+          <a mat-flat-button routerLink="/carrier/available-loads">
+            <mat-icon>travel_explore</mat-icon>
+            {{ 'service-history.find-loads' | translate }}
+          </a>
+        </div>
+      }
+    } @else if (isHandset()) {
+      <ul class="service-history__cards">
+        @for (item of store.completedTrips(); track item.id) {
+          <li>
+            <mat-card appearance="outlined">
+              <mat-card-content>
+                <div class="service-history__card-header">
+                  <span>{{ item.trip.completedAt | localizedDate: 'd MMM y' }}</span>
+                  <app-trip-status-chip [status]="item.trip.status"/>
+                </div>
+                <p class="service-history__route">
+                  {{ item.loadRequest.originDistrict }} → {{ item.loadRequest.destinationDistrict }}
+                </p>
+                <p class="service-history__detail">{{ item.trip.loadRequestCode }} · {{ item.shipperName }}</p>
+                <dl class="service-history__facts">
+                  <div>
+                    <dt>{{ 'service-history.column-distance' | translate }}</dt>
+                    <dd>{{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
+                  </div>
+                  <div>
+                    <dt>{{ 'service-history.column-rate' | translate }}</dt>
+                    <dd>{{ item.loadRequest.offeredRate | money }}</dd>
+                  </div>
+                </dl>
+              </mat-card-content>
+            </mat-card>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="service-history__table-wrapper">
+        <table mat-table [dataSource]="store.completedTrips()" class="service-history__table">
+          <ng-container matColumnDef="completedAt">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-date' | translate }}</th>
+            <td mat-cell *matCellDef="let item">{{ item.trip.completedAt | localizedDate: 'd MMM y' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="route">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-route' | translate }}</th>
+            <td mat-cell *matCellDef="let item">
+              <span class="service-history__route">{{ item.loadRequest.originDistrict }} → {{ item.loadRequest.destinationDistrict }}</span>
+              <span class="service-history__detail">{{ item.trip.loadRequestCode }} · {{ item.loadRequest.cargoType }}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="shipper">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-shipper' | translate }}</th>
+            <td mat-cell *matCellDef="let item">{{ item.shipperName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-distance' | translate }}</th>
+            <td mat-cell *matCellDef="let item">
+              {{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="rate">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-rate' | translate }}</th>
+            <td mat-cell *matCellDef="let item" class="service-history__rate">{{ item.loadRequest.offeredRate | money }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-status' | translate }}</th>
+            <td mat-cell *matCellDef="let item"><app-trip-status-chip [status]="item.trip.status"/></td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    }
+  </section>
+}
+

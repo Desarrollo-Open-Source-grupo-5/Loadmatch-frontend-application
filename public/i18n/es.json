@@ -379,6 +379,22 @@
     "carrier": "Esta página es para transportistas. Ingresa como transportista para verla.",
     "action": "Elegir un perfil"
   },
+  "service-history": {
+    "title": "Historial de servicios",
+    "subtitle": "Tus servicios completados, del más reciente al más antiguo.",
+    "summary-one": "{{count}} servicio · {{total}} en total",
+    "summary-other": "{{count}} servicios · {{total}} en total",
+    "column-date": "Completado el",
+    "column-route": "Ruta",
+    "column-shipper": "Empresa",
+    "column-distance": "Distancia",
+    "column-rate": "Tarifa",
+    "column-status": "Estado",
+    "distance-value": "{{distance}} km",
+    "empty-title": "Aún no tienes servicios completados",
+    "empty-hint": "Tus servicios aparecen aquí cuando la empresa confirma la entrega.",
+    "find-loads": "Buscar fletes"
+  },
   "page-not-found": {
     "title": "Página no encontrada",
     "content": "La ruta <strong>{{ invalid_path }}</strong> no es válida.",
