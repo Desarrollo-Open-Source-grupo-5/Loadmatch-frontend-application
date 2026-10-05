@@ -316,6 +316,7 @@
     "unavailable-title": "Este flete ya no está disponible",
     "unavailable-message": "Otro transportista ya lo tomó, por lo que se retiró de tus resultados de búsqueda."
   },
+
   "profile-required": {
     "title": "Primero elige un perfil",
     "shipper": "Esta página es para empresas. Ingresa como empresa para verla.",
@@ -327,6 +328,7 @@
     "content": "La ruta <strong>{{ invalid_path }}</strong> no es válida.",
     "go-home": "Ir al inicio"
   },
+
   "footer": {
     "company": "CargoLink Labs",
     "rights": "Todos los derechos reservados."

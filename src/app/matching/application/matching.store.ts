@@ -255,6 +255,7 @@ export class MatchingStore {
    * @param error - Source error.
    * @param fallback - Default message when details are unavailable.
    * @returns Normalized message.
+   * ok
    */
   private formatError = (error: unknown, fallback: string): string => {
     if (error instanceof Error) {

@@ -322,11 +322,13 @@
     "carrier": "This page is for carriers. Enter as a carrier to see it.",
     "action": "Choose a profile"
   },
+
   "page-not-found": {
     "title": "Page not found",
     "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
     "go-home": "Go Home"
   },
+
   "footer": {
     "company": "CargoLink Labs",
     "rights": "All rights reserved."
