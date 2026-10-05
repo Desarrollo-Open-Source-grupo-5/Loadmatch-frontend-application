@@ -35,10 +35,10 @@
 
       <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <mat-label>{{ 'available-loads.radius' | translate }}</mat-label>
-        <mat-select [value]="store.criteria().radiusKm ?? anyDistance" (selectionChange)="onRadiusChange($event.value)">
+        <mat-select [value]="store.criteria().radiusKm ?? anyOption" (selectionChange)="onRadiusChange($event.value)">
           @for (radius of radiusOptions; track radius) {
             <mat-option [value]="radius">
-              @if (radius === anyDistance) {
+              @if (radius === anyOption) {
                 {{ 'available-loads.radius-any' | translate }}
               } @else {
                 {{ 'available-loads.radius-km' | translate: {km: radius} }}
@@ -65,6 +65,86 @@
       </mat-slide-toggle>
     </section>
 
+    <!-- Advanced filters: inline on wide screens, collapsible on phones. -->
+    <section class="available-load-search__filters" aria-labelledby="available-load-search-filters-title">
+      <div class="available-load-search__filters-header">
+        <h2 id="available-load-search-filters-title" class="available-load-search__filters-title">
+          <mat-icon aria-hidden="true">tune</mat-icon>
+          {{ 'available-loads.advanced-filters' | translate }}
+          @if (advancedFilterCount()) {
+            <span class="available-load-search__badge"
+                  [attr.aria-label]="'available-loads.active-filters' | translate: {count: advancedFilterCount()}">
+              {{ advancedFilterCount() }}
+            </span>
+          }
+        </h2>
+        @if (isHandset()) {
+          <button mat-button type="button" (click)="filtersExpanded.set(!filtersExpanded())"
+                  [attr.aria-expanded]="filtersExpanded()" aria-controls="available-load-search-filters">
+            <mat-icon>{{ filtersExpanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+            {{ (filtersExpanded() ? 'available-loads.hide-filters' : 'available-loads.show-filters') | translate }}
+          </button>
+        }
+      </div>
+
+      <div id="available-load-search-filters" class="available-load-search__filters-body"
+           [hidden]="isHandset() && !filtersExpanded()">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>{{ 'available-loads.max-trip-distance' | translate }}</mat-label>
+          <mat-select [value]="store.criteria().maxTripDistanceKm ?? anyOption" (selectionChange)="onTripDistanceChange($event.value)">
+            @for (distance of tripDistanceOptions; track distance) {
+              <mat-option [value]="distance">
+                @if (distance === anyOption) {
+                  {{ 'available-loads.max-trip-distance-any' | translate }}
+                } @else {
+                  {{ 'available-loads.max-trip-distance-km' | translate: {km: (distance | localizedNumber: '1.0-0')} }}
+                }
+              </mat-option>
+            }
+          </mat-select>
+          <mat-icon matSuffix aria-hidden="true">route</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>{{ 'available-loads.vehicle-type' | translate }}</mat-label>
+          <mat-select [value]="selectedVehicleTypeId()" [disabled]="store.vehicleTypeFixed()"
+                      (selectionChange)="onVehicleTypeChange($event.value)">
+            <mat-option [value]="anyOption">{{ 'available-loads.vehicle-type-any' | translate }}</mat-option>
+            @for (vehicleType of store.vehicleTypes(); track vehicleType.id) {
+              <mat-option [value]="vehicleType.id">{{ vehicleType.name }}</mat-option>
+            }
+          </mat-select>
+          @if (store.vehicleTypeFixed()) {
+            <mat-hint>{{ 'available-loads.vehicle-type-fixed-hint' | translate }}</mat-hint>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>{{ 'available-loads.min-weight' | translate }}</mat-label>
+          <mat-select [value]="store.criteria().minWeightKg ?? anyOption" (selectionChange)="onMinWeightChange($event.value)">
+            @for (weight of minWeightOptions; track weight) {
+              <mat-option [value]="weight">
+                @if (weight === anyOption) {
+                  {{ 'available-loads.min-weight-any' | translate }}
+                } @else {
+                  {{ 'available-loads.min-weight-kg' | translate: {weight: (weight | localizedNumber: '1.0-0')} }}
+                }
+              </mat-option>
+            }
+          </mat-select>
+          <mat-icon matSuffix aria-hidden="true">scale</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>{{ 'available-loads.min-rate' | translate }}</mat-label>
+          <span matTextPrefix>{{ 'common.pen-symbol' | translate }}&nbsp;</span>
+          <input #minRate matInput type="number" min="0" step="100" inputmode="decimal"
+                 [value]="store.criteria().minRateAmount ?? ''" (input)="onMinRateChange(minRate.value)">
+          <mat-hint>{{ 'available-loads.min-rate-hint' | translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+    </section>
+
     @if (store.loading()) {
       <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
     }
@@ -75,11 +155,17 @@
       </p>
     }
 
-    <p class="available-load-search__count" aria-live="polite">
-      @if (!store.loading()) {
-        {{ (store.resultCount() === 1 ? 'available-loads.result-count-one' : 'available-loads.result-count-other') | translate: {count: store.resultCount()} }}
-      }
-    </p>
+    <div class="available-load-search__results-bar">
+      <p class="available-load-search__count" aria-live="polite">
+        @if (!store.loading()) {
+          {{ (store.resultCount() === 1 ? 'available-loads.result-count-one' : 'available-loads.result-count-other') | translate: {count: store.resultCount()} }}
+        }
+      </p>
+      <button mat-stroked-button type="button" [disabled]="store.criteria().showsAllLoads()" (click)="clearFilters()">
+        <mat-icon>filter_alt_off</mat-icon>
+        {{ 'available-loads.clear-filters' | translate }}
+      </button>
+    </div>
 
     @if (store.results().length) {
       <ul class="available-load-search__results">

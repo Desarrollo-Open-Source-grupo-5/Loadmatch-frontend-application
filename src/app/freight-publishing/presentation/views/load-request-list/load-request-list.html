@@ -129,7 +129,7 @@
   </section>
 }
 
-<!-- View details for every status plus the actions allowed by status. -->
+<!-- View details for every status, the actions allowed by status and View tracking once a carrier accepted the request. -->
 <ng-template #actions let-loadRequest>
   <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id]"
      [attr.aria-label]="'load-request-list.view-details-aria' | translate: {code: loadRequest.code}">
@@ -151,9 +151,10 @@
     </button>
   }
   @if (loadRequest.isTrackable()) {
-    <button mat-button type="button" disabled>
+    <a mat-button [routerLink]="['/shipper/tracking', loadRequest.id]"
+       [attr.aria-label]="'load-request-list.view-tracking-aria' | translate: {code: loadRequest.code}">
       <mat-icon>my_location</mat-icon>
       {{ 'load-request-list.view-tracking' | translate }}
-    </button>
+    </a>
   }
 </ng-template>
