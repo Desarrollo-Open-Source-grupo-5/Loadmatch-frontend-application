@@ -121,6 +121,41 @@
     "view-list": "View in My Loads",
     "stay": "Close and publish another"
   },
+  "validation-status": {
+    "NOT_UPLOADED": "Not uploaded",
+    "PENDING": "Pending",
+    "IN_REVIEW": "In review",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+    "EXPIRED": "Expired"
+  },
+  "document-type": {
+    "DRIVER_LICENSE": "Driver license",
+    "SOAT": "SOAT",
+    "VEHICLE_REGISTRATION": "Vehicle registration card"
+  },
+  "document-rejection": {
+    "ILLEGIBLE_FILE": "The file cannot be read. Upload a clear and complete copy.",
+    "EXPIRED_ON_UPLOAD": "The document had already expired when it was uploaded.",
+    "DATA_MISMATCH": "The data of the document does not match your profile or your vehicle."
+  },
+  "document-validation": {
+    "title": "My documents",
+    "subtitle": "Validation status of the documents you need to accept trips.",
+    "summary": "{{approved}} of {{total}} documents approved",
+    "expiration-date": "Expires on",
+    "uploaded-at": "Uploaded on",
+    "expires-soon": "Expires on {{date}} — renew it soon",
+    "rejection-reason": "Rejection reason",
+    "next-step": {
+      "NOT_UPLOADED": "What to do: upload this document to complete your validation.",
+      "PENDING": "No action needed: it will be reviewed soon.",
+      "IN_REVIEW": "No action needed: it is being reviewed.",
+      "REJECTED": "What to do: upload a new file.",
+      "EXPIRED": "What to do: upload the renewed document."
+    },
+    "upload": "Upload file"
+  },
   "home": {
     "title": "Welcome to LoadMatch",
     "content": "LoadMatch connects companies that need to move cargo with carriers that have available capacity across Peru."
