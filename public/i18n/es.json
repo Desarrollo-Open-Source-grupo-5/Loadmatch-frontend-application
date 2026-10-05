@@ -8,9 +8,13 @@
     "open-menu": "Abrir el menú de navegación",
     "shipper-role": "Empresa",
     "carrier-role": "Transportista",
+    "dashboard": "Dashboard",
     "my-loads": "Mis Cargas",
     "publish-load": "Publicar Carga",
     "find-loads": "Buscar Fletes",
+    "my-trips": "Mis Viajes",
+    "history": "Historial",
+    "documents": "Documentos",
     "about": "Acerca de",
     "switch-profile": "Cambiar perfil",
     "language": "Idioma preferido",
@@ -32,6 +36,18 @@
     "IN_TRANSIT": "En tránsito",
     "DELIVERED": "Entregada",
     "CANCELLED": "Cancelada"
+  },
+  "trip-status": {
+    "ASSIGNED": "Asignado",
+    "EN_ROUTE_TO_PICKUP": "En camino",
+    "AT_PICKUP_POINT": "En camino",
+    "CARGO_PICKED_UP": "En camino",
+    "IN_TRANSIT": "En tránsito",
+    "DELAYED": "Con retraso",
+    "DELIVERED": "Entregado",
+    "DISPUTED": "Observado",
+    "COMPLETED": "Completado",
+    "CANCELLED": "Cancelado"
   },
   "load-request-form": {
     "back": "Volver a Mis Cargas",
@@ -114,6 +130,31 @@
       "SUSPENDED": "Suspendido"
     }
   },
+  "shipper-dashboard": {
+    "title": "Resumen de operaciones",
+    "subtitle": "{{name}}, así van tus cargas.",
+    "publish": "Publicar carga",
+    "summary": "Resumen de tus cargas",
+    "published": "Publicadas",
+    "published-hint": "Buscando unidad",
+    "in-transit": "En tránsito",
+    "assigned-one": "{{count}} asignada, por recoger",
+    "assigned-other": "{{count}} asignadas, por recoger",
+    "completed": "Completadas",
+    "completed-hint": "Entregadas en destino",
+    "latest-title": "Últimas operaciones",
+    "view-all": "Ver todas",
+    "column-id": "ID",
+    "column-route": "Ruta",
+    "column-pickup": "Recojo",
+    "column-status": "Estado",
+    "column-actions": "Acciones",
+    "view-details": "Ver detalle",
+    "view-details-aria": "Ver el detalle de la solicitud {{code}}",
+    "empty-title": "Aún no tienes cargas",
+    "empty-hint": "Publica tu primera solicitud de carga y los transportistas con una unidad compatible la verán de inmediato.",
+    "empty-action": "Publica tu primera carga"
+  },
   "load-request-list": {
     "title": "Mis solicitudes de carga",
     "count-one": "{{count}} solicitud",
@@ -138,6 +179,7 @@
     "cancel": "Cancelar",
     "cancel-aria": "Cancelar la solicitud {{code}}",
     "view-tracking": "Ver seguimiento",
+    "view-tracking-aria": "Ver el seguimiento de la solicitud {{code}}",
     "cancelled": "La solicitud {{code}} fue cancelada."
   },
   "cancel-load-request": {
@@ -178,6 +220,7 @@
     "carrier-unavailable": "Los datos del transportista asignado aún no están disponibles.",
     "contact-hint": "Para modificar esta solicitud, comunícate con el transportista asignado.",
     "view-tracking": "Ver seguimiento",
+    "view-tracking-aria": "Ver el seguimiento de la solicitud {{code}}",
     "edit": "Editar",
     "edit-aria": "Editar la solicitud {{code}}",
     "cancel": "Cancelar solicitud",

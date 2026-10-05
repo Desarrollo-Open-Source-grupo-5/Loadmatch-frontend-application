@@ -5,6 +5,7 @@ import {AssignedCarrier} from '../domain/model/assigned-carrier';
 import {LoadRequest} from '../domain/model/load-request.entity';
 import {VehicleTypeOption} from '../domain/model/vehicle-type-option';
 import {FreightPublishingApi} from '../infrastructure/freight-publishing-api';
+import {countLoadRequestsByStatus} from './load-request-status-filter';
 
 /**
  * Holds Freight Publishing state: the active shipper's load requests, the vehicle type catalog and the carrier
@@ -28,6 +29,11 @@ export class FreightPublishingStore {
    * Computed signal for the count of load requests.
    */
   readonly loadRequestCount = computed(() => this.loadRequests().length);
+
+  /**
+   * Computed signal with the number of load requests per status (and `ALL`), used by the shipper dashboard.
+   */
+  readonly countByStatus = computed(() => countLoadRequestsByStatus(this.loadRequests()));
 
   private readonly vehicleTypesSignal = signal<VehicleTypeOption[]>([]);
 
@@ -101,6 +107,14 @@ export class FreightPublishingStore {
    */
   getLoadRequestById = (id: number): Signal<LoadRequest | undefined> =>
     computed(() => this.loadRequests().find(loadRequest => loadRequest.id === id));
+
+  /**
+   * Selects the most recently created load requests of the active shipper.
+   * @param count - Maximum number of load requests, e.g. 5.
+   * @returns Reactive selection with the latest load requests, newest first.
+   */
+  latestLoadRequests = (count: number): Signal<LoadRequest[]> =>
+    computed(() => this.loadRequests().slice(0, count));
 
   /**
    * Selects a vehicle type by identifier.
