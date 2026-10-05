@@ -1,0 +1,137 @@
+.carrier-trips__header {
+  margin-bottom: 16px;
+}
+
+.carrier-trips__subtitle {
+  margin: 0;
+  color: var(--lm-color-slate-600);
+}
+
+.carrier-trips__error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
+
+.carrier-trips__empty {
+  padding: 48px 24px;
+  border: 1px dashed var(--lm-color-slate-300);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-600);
+  text-align: center;
+}
+
+.carrier-trips__empty mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.carrier-trips__empty h2 {
+  color: var(--lm-color-slate-900);
+  font-size: 20px;
+}
+
+/* Blue Tint background requires Slate 600 text or darker. */
+.carrier-trips__count {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background-color: var(--lm-color-blue-tint);
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+.carrier-trips__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carrier-trips__card {
+  height: 100%;
+}
+
+.carrier-trips__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--lm-color-slate-900);
+}
+
+.carrier-trips__route {
+  margin: 0;
+  color: var(--lm-color-slate-900);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.carrier-trips__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin: 12px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--lm-color-background-light);
+}
+
+.carrier-trips__fact--wide {
+  grid-column: 1 / -1;
+}
+
+.carrier-trips__facts dt {
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+}
+
+.carrier-trips__facts dd {
+  margin: 0;
+  color: var(--lm-color-slate-900);
+  font-weight: 600;
+}
+
+.carrier-trips__group-empty {
+  grid-column: 1 / -1;
+  padding: 32px 24px;
+  border: 1px dashed var(--lm-color-slate-300);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-600);
+  text-align: center;
+}
+
+.carrier-trips__history-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  color: var(--lm-color-orange-pressed);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.carrier-trips__history-link:hover {
+  text-decoration: underline;
+}
+
+.carrier-trips__history-link mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
