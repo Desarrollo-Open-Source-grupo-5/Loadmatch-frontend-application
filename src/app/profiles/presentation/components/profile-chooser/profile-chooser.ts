@@ -40,12 +40,12 @@ export class ProfileChooser {
   protected readonly store = inject(ProfilesStore);
 
   /**
-   * Enters the application as a shipper and opens "My Loads".
+   * Enters the application as a shipper and opens the dashboard.
    * @param shipper - Chosen shipper.
    */
   protected enterAsShipper(shipper: Shipper): void {
     this.activeProfileStore.select({role: 'SHIPPER', profileId: shipper.id, displayName: shipper.businessName});
-    this.router.navigate(['/shipper/load-requests']).then();
+    this.router.navigate(['/shipper/dashboard']).then();
   }
 
   /**
