@@ -1,0 +1,1404 @@
+{
+  "shippers": [
+    {
+      "id": 1,
+      "ruc": "20512345671",
+      "businessName": "Distribuidora Andina S.A.C.",
+      "contactName": "Carla Mendoza Ríos",
+      "phoneNumber": "+51 987 654 321",
+      "reputationAverage": 4.6,
+      "reputationTotalRatings": 18
+    },
+    {
+      "id": 2,
+      "ruc": "20601234565",
+      "businessName": "Agroexportadora Costa Norte S.A.C.",
+      "contactName": "Luis Paredes Castillo",
+      "phoneNumber": "+51 956 112 233",
+      "reputationAverage": 4.3,
+      "reputationTotalRatings": 9
+    },
+    {
+      "id": 3,
+      "ruc": "20455678901",
+      "businessName": "Ferretería Industrial Sur E.I.R.L.",
+      "contactName": "Rosa Quispe Flores",
+      "phoneNumber": "+51 944 778 899",
+      "reputationAverage": 4.8,
+      "reputationTotalRatings": 31
+    },
+    {
+      "id": 4,
+      "ruc": "20609876540",
+      "businessName": "Textiles Andinos del Sur S.A.C.",
+      "contactName": "Miguel Huamán Torres",
+      "phoneNumber": "+51 965 432 108",
+      "reputationAverage": 0,
+      "reputationTotalRatings": 0
+    }
+  ],
+  "carriers": [
+    {
+      "id": 1,
+      "firstNames": "Jorge Luis",
+      "lastNames": "Ramírez Huamán",
+      "dni": "45678912",
+      "phoneNumber": "+51 912 345 678",
+      "enablementStatus": "ENABLED",
+      "reputationAverage": 4.8,
+      "reputationTotalRatings": 142
+    },
+    {
+      "id": 2,
+      "firstNames": "María Elena",
+      "lastNames": "Torres Vílchez",
+      "dni": "70123456",
+      "phoneNumber": "+51 923 456 789",
+      "enablementStatus": "ENABLED",
+      "reputationAverage": 4.5,
+      "reputationTotalRatings": 37
+    },
+    {
+      "id": 3,
+      "firstNames": "Pedro",
+      "lastNames": "Quispe Mamani",
+      "dni": "41234567",
+      "phoneNumber": "+51 934 567 890",
+      "enablementStatus": "PENDING",
+      "reputationAverage": 0,
+      "reputationTotalRatings": 0
+    }
+  ],
+  "vehicle-types": [
+    {
+      "id": 1,
+      "name": "Van",
+      "description": "Closed cargo van for small urban and regional deliveries.",
+      "maxWeightKg": 1500,
+      "dimMaxLengthM": 3,
+      "dimMaxWidthM": 1.8,
+      "dimMaxHeightM": 1.8,
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Light truck",
+      "description": "Two-axle truck for medium urban and interprovincial loads.",
+      "maxWeightKg": 5000,
+      "dimMaxLengthM": 4.5,
+      "dimMaxWidthM": 2.1,
+      "dimMaxHeightM": 2.2,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Medium truck",
+      "description": "Rigid truck for palletized interprovincial cargo.",
+      "maxWeightKg": 18000,
+      "dimMaxLengthM": 7.5,
+      "dimMaxWidthM": 2.5,
+      "dimMaxHeightM": 2.6,
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "Trailer",
+      "description": "Tractor-trailer for heavy and long-haul cargo.",
+      "maxWeightKg": 30000,
+      "dimMaxLengthM": 13.6,
+      "dimMaxWidthM": 2.5,
+      "dimMaxHeightM": 2.7,
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "Refrigerated van",
+      "description": "Temperature-controlled van for perishable goods.",
+      "maxWeightKg": 3500,
+      "dimMaxLengthM": 4.2,
+      "dimMaxWidthM": 2,
+      "dimMaxHeightM": 2,
+      "active": true
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 1,
+      "carrierId": 1,
+      "vehicleTypeId": 3,
+      "licensePlate": "ABC-123",
+      "brand": "Volvo",
+      "payloadKg": 18000,
+      "active": true
+    },
+    {
+      "id": 2,
+      "carrierId": 2,
+      "vehicleTypeId": 4,
+      "licensePlate": "B7K-482",
+      "brand": "Scania",
+      "payloadKg": 30000,
+      "active": true
+    },
+    {
+      "id": 3,
+      "carrierId": 3,
+      "vehicleTypeId": 5,
+      "licensePlate": "C3R-915",
+      "brand": "Hyundai",
+      "payloadKg": 3500,
+      "active": true
+    },
+    {
+      "id": 4,
+      "carrierId": 2,
+      "vehicleTypeId": 2,
+      "licensePlate": "B9M-207",
+      "brand": "Hino",
+      "payloadKg": 5000,
+      "active": true
+    },
+    {
+      "id": 5,
+      "carrierId": 1,
+      "vehicleTypeId": 5,
+      "licensePlate": "A5F-631",
+      "brand": "Isuzu",
+      "payloadKg": 3500,
+      "active": true
+    }
+  ],
+  "load-requests": [
+    {
+      "id": 1,
+      "shipperId": 1,
+      "vehicleTypeId": 2,
+      "originAddress": "Av. Argentina 3450, Cercado de Lima",
+      "originDistrict": "Lima",
+      "originLat": -12.0464,
+      "originLng": -77.0428,
+      "destinationAddress": "Av. Ferrocarril 1035, El Tambo",
+      "destinationDistrict": "Huancayo",
+      "destinationLat": -12.0651,
+      "destinationLng": -75.2049,
+      "distanceKm": 199.9,
+      "weightKg": 4200,
+      "dimLengthM": 4,
+      "dimWidthM": 2,
+      "dimHeightM": 2,
+      "cargoType": "Beverages",
+      "rateAmount": 1800,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-09-22T07:00:00-05:00",
+      "createdAt": "2026-09-18T09:20:00-05:00",
+      "publishedAt": "2026-09-18T09:22:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 2,
+      "shipperId": 3,
+      "vehicleTypeId": 2,
+      "originAddress": "Parque Industrial Río Seco, Calle 4",
+      "originDistrict": "Arequipa",
+      "originLat": -16.409,
+      "originLng": -71.5375,
+      "destinationAddress": "Av. La Cultura 2140, Wanchaq",
+      "destinationDistrict": "Cusco",
+      "destinationLat": -13.532,
+      "destinationLng": -71.9675,
+      "distanceKm": 323.2,
+      "weightKg": 4500,
+      "dimLengthM": 4.2,
+      "dimWidthM": 2,
+      "dimHeightM": 2,
+      "cargoType": "Hardware and tools",
+      "rateAmount": 2300,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-09-25T06:00:00-05:00",
+      "createdAt": "2026-09-20T16:05:00-05:00",
+      "publishedAt": "2026-09-20T16:07:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 3,
+      "shipperId": 1,
+      "vehicleTypeId": 4,
+      "originAddress": "Av. Nicolás Ayllón 4800, Ate",
+      "originDistrict": "Ate",
+      "originLat": -12.0262,
+      "originLng": -76.919,
+      "destinationAddress": "Av. Parra 380, Cercado de Arequipa",
+      "destinationDistrict": "Arequipa",
+      "destinationLat": -16.409,
+      "destinationLng": -71.5375,
+      "distanceKm": 757.5,
+      "weightKg": 24000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.6,
+      "cargoType": "Household appliances",
+      "rateAmount": 7200,
+      "rateCurrency": "PEN",
+      "status": "IN_TRANSIT",
+      "pickupAt": "2026-10-01T06:00:00-05:00",
+      "createdAt": "2026-09-24T11:40:00-05:00",
+      "publishedAt": "2026-09-24T11:42:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 4,
+      "shipperId": 1,
+      "vehicleTypeId": 3,
+      "originAddress": "Av. Argentina 2833, Callao",
+      "originDistrict": "Callao",
+      "originLat": -12.0566,
+      "originLng": -77.1181,
+      "destinationAddress": "Av. Enrique Meiggs 1250, Chimbote",
+      "destinationDistrict": "Chimbote",
+      "destinationLat": -9.0853,
+      "destinationLng": -78.5783,
+      "distanceKm": 366.9,
+      "weightKg": 9000,
+      "dimLengthM": 6,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.4,
+      "cargoType": "Packaged food",
+      "rateAmount": 2100,
+      "rateCurrency": "PEN",
+      "status": "CANCELLED",
+      "pickupAt": "2026-10-10T08:00:00-05:00",
+      "createdAt": "2026-09-25T10:00:00-05:00",
+      "publishedAt": "2026-09-25T10:02:00-05:00",
+      "urgent": false,
+      "cancellationReason": "The customer postponed the order until November."
+    },
+    {
+      "id": 5,
+      "shipperId": 1,
+      "vehicleTypeId": 4,
+      "originAddress": "Antigua Panamericana Sur Km 36, Almacén 3",
+      "originDistrict": "Lurín",
+      "originLat": -12.2747,
+      "originLng": -76.8706,
+      "destinationAddress": "Zona Industrial, Av. Sánchez Cerro 2100",
+      "destinationDistrict": "Piura",
+      "destinationLat": -5.1945,
+      "destinationLng": -80.6328,
+      "distanceKm": 889.1,
+      "weightKg": 22000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Construction materials",
+      "rateAmount": 6900,
+      "rateCurrency": "PEN",
+      "status": "ASSIGNED",
+      "pickupAt": "2026-10-05T09:00:00-05:00",
+      "createdAt": "2026-09-26T08:30:00-05:00",
+      "publishedAt": "2026-09-26T08:32:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 6,
+      "shipperId": 2,
+      "vehicleTypeId": 5,
+      "originAddress": "Packing Costa Norte, Carretera Sullana Km 4",
+      "originDistrict": "Piura",
+      "originLat": -5.1945,
+      "originLng": -80.6328,
+      "destinationAddress": "Terminal Frigorífico, Av. Néstor Gambetta 5200",
+      "destinationDistrict": "Callao",
+      "destinationLat": -12.0566,
+      "destinationLng": -77.1181,
+      "distanceKm": 855.2,
+      "weightKg": 3200,
+      "dimLengthM": 4,
+      "dimWidthM": 2,
+      "dimHeightM": 2,
+      "cargoType": "Fresh mangoes (refrigerated)",
+      "rateAmount": 4100,
+      "rateCurrency": "PEN",
+      "status": "IN_TRANSIT",
+      "pickupAt": "2026-10-01T22:00:00-05:00",
+      "createdAt": "2026-09-27T14:10:00-05:00",
+      "publishedAt": "2026-09-27T14:12:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 7,
+      "shipperId": 1,
+      "vehicleTypeId": 3,
+      "originAddress": "Av. Néstor Gambetta 1250, Terminal Logístico",
+      "originDistrict": "Callao",
+      "originLat": -12.0566,
+      "originLng": -77.1181,
+      "destinationAddress": "Parque Industrial La Esperanza, Mz. B Lt. 4",
+      "destinationDistrict": "Trujillo",
+      "destinationLat": -8.1116,
+      "destinationLng": -79.0288,
+      "distanceKm": 486,
+      "weightKg": 12000,
+      "dimLengthM": 6,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Packaged food",
+      "rateAmount": 3600,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-08T08:00:00-05:00",
+      "createdAt": "2026-09-28T10:15:00-05:00",
+      "publishedAt": "2026-09-28T10:17:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 8,
+      "shipperId": 3,
+      "vehicleTypeId": 3,
+      "originAddress": "Parque Industrial Río Seco, Calle 7",
+      "originDistrict": "Arequipa",
+      "originLat": -16.409,
+      "originLng": -71.5375,
+      "destinationAddress": "Parque Industrial de Tacna, Mz. C Lt. 2",
+      "destinationDistrict": "Tacna",
+      "destinationLat": -18.0066,
+      "destinationLng": -70.2463,
+      "distanceKm": 224.4,
+      "weightKg": 10000,
+      "dimLengthM": 6,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.2,
+      "cargoType": "Cement bags",
+      "rateAmount": 2600,
+      "rateCurrency": "PEN",
+      "status": "CANCELLED",
+      "pickupAt": "2026-10-20T07:00:00-05:00",
+      "createdAt": "2026-09-29T09:45:00-05:00",
+      "publishedAt": "2026-09-29T09:47:00-05:00",
+      "urgent": false,
+      "cancellationReason": "Shipment moved to rail transport."
+    },
+    {
+      "id": 9,
+      "shipperId": 2,
+      "vehicleTypeId": 3,
+      "originAddress": "Molino San Martín, Carretera a Lambayeque Km 2",
+      "originDistrict": "Chiclayo",
+      "originLat": -6.7714,
+      "originLng": -79.8409,
+      "destinationAddress": "Mercado Mayorista, Av. Nicolás Arriola 1200",
+      "destinationDistrict": "Lima",
+      "destinationLat": -12.0464,
+      "destinationLng": -77.0428,
+      "distanceKm": 662,
+      "weightKg": 14000,
+      "dimLengthM": 7,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Rice sacks",
+      "rateAmount": 4300,
+      "rateCurrency": "PEN",
+      "status": "ASSIGNED",
+      "pickupAt": "2026-10-06T05:00:00-05:00",
+      "createdAt": "2026-09-29T17:30:00-05:00",
+      "publishedAt": "2026-09-29T17:32:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 10,
+      "shipperId": 2,
+      "vehicleTypeId": 3,
+      "originAddress": "Av. Industrial Los Eucaliptos 450, Lurín",
+      "originDistrict": "Lurín",
+      "originLat": -12.2747,
+      "originLng": -76.8706,
+      "destinationAddress": "Fundo Santa Rosa, Carretera Panamericana Sur Km 300",
+      "destinationDistrict": "Ica",
+      "destinationLat": -14.0678,
+      "destinationLng": -75.7286,
+      "distanceKm": 234.6,
+      "weightKg": 15000,
+      "dimLengthM": 7,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.4,
+      "cargoType": "Fertilizers",
+      "rateAmount": 2400,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-09T07:00:00-05:00",
+      "createdAt": "2026-09-30T15:00:00-05:00",
+      "publishedAt": "2026-09-30T15:02:00-05:00",
+      "urgent": true,
+      "cancellationReason": null
+    },
+    {
+      "id": 11,
+      "shipperId": 1,
+      "vehicleTypeId": 4,
+      "originAddress": "Av. Elmer Faucett 3200, Almacén Central",
+      "originDistrict": "Callao",
+      "originLat": -12.0566,
+      "originLng": -77.1181,
+      "destinationAddress": "Parque Industrial Río Seco, Calle 2",
+      "destinationDistrict": "Arequipa",
+      "destinationLat": -16.409,
+      "destinationLng": -71.5375,
+      "distanceKm": 771.9,
+      "weightKg": 28000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Steel rebar",
+      "rateAmount": 8500,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-12T06:30:00-05:00",
+      "createdAt": "2026-09-30T18:20:00-05:00",
+      "publishedAt": "2026-09-30T18:22:00-05:00",
+      "urgent": true,
+      "cancellationReason": null
+    },
+    {
+      "id": 12,
+      "shipperId": 2,
+      "vehicleTypeId": 4,
+      "originAddress": "Terminal Portuario de Chancay, Puerta 2",
+      "originDistrict": "Chancay",
+      "originLat": -11.5653,
+      "originLng": -77.27,
+      "destinationAddress": "Zona Industrial, Av. Panamericana 1550",
+      "destinationDistrict": "Piura",
+      "destinationLat": -5.1945,
+      "destinationLng": -80.6328,
+      "distanceKm": 799.1,
+      "weightKg": 26000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.6,
+      "cargoType": "Containerized textiles",
+      "rateAmount": 7800,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-14T05:00:00-05:00",
+      "createdAt": "2026-10-01T09:00:00-05:00",
+      "publishedAt": "2026-10-01T09:02:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 13,
+      "shipperId": 3,
+      "vehicleTypeId": 3,
+      "originAddress": "Av. Alfonso Ugarte 600, Cercado de Arequipa",
+      "originDistrict": "Arequipa",
+      "originLat": -16.409,
+      "originLng": -71.5375,
+      "destinationAddress": "Av. Venezuela 2350, Cercado de Lima",
+      "destinationDistrict": "Lima",
+      "destinationLat": -12.0464,
+      "destinationLng": -77.0428,
+      "distanceKm": 766.3,
+      "weightKg": 16000,
+      "dimLengthM": 7,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Mining supplies",
+      "rateAmount": 5200,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-16T08:00:00-05:00",
+      "createdAt": "2026-10-01T11:00:00-05:00",
+      "publishedAt": "2026-10-01T11:02:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 14,
+      "shipperId": 1,
+      "vehicleTypeId": 1,
+      "originAddress": "Jr. Paruro 1150, Cercado de Lima",
+      "originDistrict": "Lima",
+      "originLat": -12.0464,
+      "originLng": -77.0428,
+      "destinationAddress": "Av. Augusto B. Leguía 1500, Chiclayo",
+      "destinationDistrict": "Chiclayo",
+      "destinationLat": -6.7714,
+      "destinationLng": -79.8409,
+      "distanceKm": 662,
+      "weightKg": 1200,
+      "dimLengthM": 2.5,
+      "dimWidthM": 1.6,
+      "dimHeightM": 1.5,
+      "cargoType": "Pharmaceutical supplies",
+      "rateAmount": 1500,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-15T10:00:00-05:00",
+      "createdAt": "2026-10-01T15:30:00-05:00",
+      "publishedAt": "2026-10-01T15:32:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 15,
+      "shipperId": 2,
+      "vehicleTypeId": 5,
+      "originAddress": "Carretera Panamericana Norte Km 148, Packing Huacho",
+      "originDistrict": "Huacho",
+      "originLat": -11.1067,
+      "originLng": -77.605,
+      "destinationAddress": "Mercado de Frutas, Av. Aviación 2400",
+      "destinationDistrict": "Lima",
+      "destinationLat": -12.0464,
+      "destinationLng": -77.0428,
+      "distanceKm": 121.1,
+      "weightKg": 2800,
+      "dimLengthM": 4,
+      "dimWidthM": 2,
+      "dimHeightM": 1.9,
+      "cargoType": "Fresh produce (refrigerated)",
+      "rateAmount": 950,
+      "rateCurrency": "PEN",
+      "status": "PUBLISHED",
+      "pickupAt": "2026-10-07T04:00:00-05:00",
+      "createdAt": "2026-10-01T18:00:00-05:00",
+      "publishedAt": "2026-10-01T18:02:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 16,
+      "shipperId": 1,
+      "vehicleTypeId": 3,
+      "originAddress": "Av. Elmer Faucett 2950, Almacén 4",
+      "originDistrict": "Callao",
+      "originLat": -12.0566,
+      "originLng": -77.1181,
+      "destinationAddress": "Av. Túpac Amaru 1550, Centro de Distribución Norte",
+      "destinationDistrict": "Trujillo",
+      "destinationLat": -8.1116,
+      "destinationLng": -79.0288,
+      "distanceKm": 486,
+      "weightKg": 11500,
+      "dimLengthM": 6,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Packaged food",
+      "rateAmount": 3500,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-08-11T06:00:00-05:00",
+      "createdAt": "2026-08-06T09:10:00-05:00",
+      "publishedAt": "2026-08-06T09:12:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 17,
+      "shipperId": 2,
+      "vehicleTypeId": 5,
+      "originAddress": "Fundo Los Paltos, Carretera Panamericana Norte Km 150",
+      "originDistrict": "Huacho",
+      "originLat": -11.1067,
+      "originLng": -77.605,
+      "destinationAddress": "Mercado de Frutas N.° 2, Av. Aviación 2380",
+      "destinationDistrict": "Lima",
+      "destinationLat": -12.0464,
+      "destinationLng": -77.0428,
+      "distanceKm": 121.1,
+      "weightKg": 3000,
+      "dimLengthM": 4,
+      "dimWidthM": 2,
+      "dimHeightM": 1.9,
+      "cargoType": "Fresh avocados (refrigerated)",
+      "rateAmount": 980,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-08-19T04:00:00-05:00",
+      "createdAt": "2026-08-15T11:30:00-05:00",
+      "publishedAt": "2026-08-15T11:32:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 18,
+      "shipperId": 3,
+      "vehicleTypeId": 4,
+      "originAddress": "Parque Industrial Río Seco, Calle 9",
+      "originDistrict": "Arequipa",
+      "originLat": -16.409,
+      "originLng": -71.5375,
+      "destinationAddress": "Av. Industrial 3150, Independencia",
+      "destinationDistrict": "Lima",
+      "destinationLat": -12.0464,
+      "destinationLng": -77.0428,
+      "distanceKm": 766.3,
+      "weightKg": 25000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.4,
+      "cargoType": "Steel pipes",
+      "rateAmount": 7400,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-08-25T05:30:00-05:00",
+      "createdAt": "2026-08-19T16:45:00-05:00",
+      "publishedAt": "2026-08-19T16:47:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 19,
+      "shipperId": 1,
+      "vehicleTypeId": 2,
+      "originAddress": "Av. Nicolás Ayllón 5200, Ate",
+      "originDistrict": "Ate",
+      "originLat": -12.0262,
+      "originLng": -76.919,
+      "destinationAddress": "Jr. Ancash 1240, Huancayo",
+      "destinationDistrict": "Huancayo",
+      "destinationLat": -12.0651,
+      "destinationLng": -75.2049,
+      "distanceKm": 186.5,
+      "weightKg": 4600,
+      "dimLengthM": 4.2,
+      "dimWidthM": 2,
+      "dimHeightM": 2,
+      "cargoType": "Beverages",
+      "rateAmount": 1650,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-09-02T06:00:00-05:00",
+      "createdAt": "2026-08-28T10:05:00-05:00",
+      "publishedAt": "2026-08-28T10:07:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 20,
+      "shipperId": 2,
+      "vehicleTypeId": 3,
+      "originAddress": "Molino El Cortijo, Carretera a Pimentel Km 3",
+      "originDistrict": "Chiclayo",
+      "originLat": -6.7714,
+      "originLng": -79.8409,
+      "destinationAddress": "Av. América Norte 2150, Trujillo",
+      "destinationDistrict": "Trujillo",
+      "destinationLat": -8.1116,
+      "destinationLng": -79.0288,
+      "distanceKm": 173.9,
+      "weightKg": 15000,
+      "dimLengthM": 7,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.5,
+      "cargoType": "Rice sacks",
+      "rateAmount": 1900,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-09-08T05:00:00-05:00",
+      "createdAt": "2026-09-03T14:20:00-05:00",
+      "publishedAt": "2026-09-03T14:22:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    },
+    {
+      "id": 21,
+      "shipperId": 3,
+      "vehicleTypeId": 4,
+      "originAddress": "Planta Yura, Carretera Arequipa-Yura Km 26",
+      "originDistrict": "Arequipa",
+      "originLat": -16.409,
+      "originLng": -71.5375,
+      "destinationAddress": "Av. Collpa 450, Parque Industrial de Tacna",
+      "destinationDistrict": "Tacna",
+      "destinationLat": -18.0066,
+      "destinationLng": -70.2463,
+      "distanceKm": 224.4,
+      "weightKg": 27000,
+      "dimLengthM": 12,
+      "dimWidthM": 2.4,
+      "dimHeightM": 2.2,
+      "cargoType": "Cement bags",
+      "rateAmount": 3300,
+      "rateCurrency": "PEN",
+      "status": "DELIVERED",
+      "pickupAt": "2026-09-14T06:30:00-05:00",
+      "createdAt": "2026-09-09T08:50:00-05:00",
+      "publishedAt": "2026-09-09T08:52:00-05:00",
+      "urgent": false,
+      "cancellationReason": null
+    }
+  ],
+  "trips": [
+    {
+      "id": 1,
+      "loadRequestId": 1,
+      "shipperId": 1,
+      "carrierId": 2,
+      "vehicleId": 4,
+      "status": "DELIVERED",
+      "assignedAt": "2026-09-18T15:40:00-05:00",
+      "pickupAt": "2026-09-22T07:00:00-05:00",
+      "deliveredAt": "2026-09-22T13:50:00-05:00",
+      "confirmedAt": null,
+      "completedAt": null,
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-18T15:40:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-09-22T06:10:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-09-22T06:50:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-09-22T07:25:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-09-22T07:35:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-09-22T13:50:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "loadRequestId": 2,
+      "shipperId": 3,
+      "carrierId": 2,
+      "vehicleId": 4,
+      "status": "COMPLETED",
+      "assignedAt": "2026-09-21T10:15:00-05:00",
+      "pickupAt": "2026-09-25T06:00:00-05:00",
+      "deliveredAt": "2026-09-25T14:10:00-05:00",
+      "confirmedAt": "2026-09-25T19:30:00-05:00",
+      "completedAt": "2026-09-25T19:30:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-21T10:15:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-09-25T05:20:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-09-25T05:55:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-09-25T06:35:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-09-25T06:45:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-09-25T14:10:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-09-25T19:30:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "loadRequestId": 3,
+      "shipperId": 1,
+      "carrierId": 2,
+      "vehicleId": 2,
+      "status": "IN_TRANSIT",
+      "assignedAt": "2026-09-25T09:30:00-05:00",
+      "pickupAt": "2026-10-01T06:00:00-05:00",
+      "deliveredAt": null,
+      "confirmedAt": null,
+      "completedAt": null,
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-25T09:30:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-10-01T05:05:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-10-01T05:45:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-10-01T06:50:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-10-01T07:05:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "loadRequestId": 5,
+      "shipperId": 1,
+      "carrierId": 2,
+      "vehicleId": 2,
+      "status": "ASSIGNED",
+      "assignedAt": "2026-09-27T11:05:00-05:00",
+      "pickupAt": "2026-10-05T09:00:00-05:00",
+      "deliveredAt": null,
+      "confirmedAt": null,
+      "completedAt": null,
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-27T11:05:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "loadRequestId": 6,
+      "shipperId": 2,
+      "carrierId": 1,
+      "vehicleId": 5,
+      "status": "DELAYED",
+      "assignedAt": "2026-09-28T08:50:00-05:00",
+      "pickupAt": "2026-10-01T22:00:00-05:00",
+      "deliveredAt": null,
+      "confirmedAt": null,
+      "completedAt": null,
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-28T08:50:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-10-01T20:40:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-10-01T21:30:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-10-01T22:20:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-10-01T22:35:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELAYED",
+          "registeredAt": "2026-10-02T15:20:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "loadRequestId": 9,
+      "shipperId": 2,
+      "carrierId": 1,
+      "vehicleId": 1,
+      "status": "ASSIGNED",
+      "assignedAt": "2026-09-30T12:20:00-05:00",
+      "pickupAt": "2026-10-06T05:00:00-05:00",
+      "deliveredAt": null,
+      "confirmedAt": null,
+      "completedAt": null,
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-30T12:20:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "loadRequestId": 16,
+      "shipperId": 1,
+      "carrierId": 1,
+      "vehicleId": 1,
+      "status": "COMPLETED",
+      "assignedAt": "2026-08-07T10:30:00-05:00",
+      "pickupAt": "2026-08-11T06:00:00-05:00",
+      "deliveredAt": "2026-08-11T17:20:00-05:00",
+      "confirmedAt": "2026-08-12T09:05:00-05:00",
+      "completedAt": "2026-08-12T09:05:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-08-07T10:30:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-08-11T05:10:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-08-11T05:50:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-08-11T06:40:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-08-11T06:55:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-08-11T17:20:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-08-12T09:05:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "loadRequestId": 17,
+      "shipperId": 2,
+      "carrierId": 1,
+      "vehicleId": 5,
+      "status": "COMPLETED",
+      "assignedAt": "2026-08-16T08:45:00-05:00",
+      "pickupAt": "2026-08-19T04:00:00-05:00",
+      "deliveredAt": "2026-08-19T07:15:00-05:00",
+      "confirmedAt": "2026-08-19T10:40:00-05:00",
+      "completedAt": "2026-08-19T10:40:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-08-16T08:45:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-08-19T02:50:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-08-19T03:45:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-08-19T04:20:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-08-19T04:30:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-08-19T07:15:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-08-19T10:40:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "loadRequestId": 18,
+      "shipperId": 3,
+      "carrierId": 2,
+      "vehicleId": 2,
+      "status": "COMPLETED",
+      "assignedAt": "2026-08-20T14:10:00-05:00",
+      "pickupAt": "2026-08-25T05:30:00-05:00",
+      "deliveredAt": "2026-08-26T09:50:00-05:00",
+      "confirmedAt": "2026-08-26T16:20:00-05:00",
+      "completedAt": "2026-08-26T16:20:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-08-20T14:10:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-08-25T04:45:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-08-25T05:20:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-08-25T06:15:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-08-25T06:30:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-08-26T09:50:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-08-26T16:20:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "loadRequestId": 19,
+      "shipperId": 1,
+      "carrierId": 2,
+      "vehicleId": 4,
+      "status": "COMPLETED",
+      "assignedAt": "2026-08-29T11:25:00-05:00",
+      "pickupAt": "2026-09-02T06:00:00-05:00",
+      "deliveredAt": "2026-09-02T13:05:00-05:00",
+      "confirmedAt": "2026-09-02T18:30:00-05:00",
+      "completedAt": "2026-09-02T18:30:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-08-29T11:25:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-09-02T05:15:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-09-02T05:50:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-09-02T06:30:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-09-02T06:40:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-09-02T13:05:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-09-02T18:30:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "loadRequestId": 20,
+      "shipperId": 2,
+      "carrierId": 1,
+      "vehicleId": 1,
+      "status": "COMPLETED",
+      "assignedAt": "2026-09-04T16:00:00-05:00",
+      "pickupAt": "2026-09-08T05:00:00-05:00",
+      "deliveredAt": "2026-09-08T09:40:00-05:00",
+      "confirmedAt": "2026-09-08T15:10:00-05:00",
+      "completedAt": "2026-09-08T15:10:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-04T16:00:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-09-08T04:20:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-09-08T04:55:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-09-08T05:35:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-09-08T05:45:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-09-08T09:40:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-09-08T15:10:00-05:00"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "loadRequestId": 21,
+      "shipperId": 3,
+      "carrierId": 2,
+      "vehicleId": 2,
+      "status": "COMPLETED",
+      "assignedAt": "2026-09-10T09:40:00-05:00",
+      "pickupAt": "2026-09-14T06:30:00-05:00",
+      "deliveredAt": "2026-09-14T12:15:00-05:00",
+      "confirmedAt": "2026-09-15T08:30:00-05:00",
+      "completedAt": "2026-09-15T08:30:00-05:00",
+      "history": [
+        {
+          "previousStatus": null,
+          "newStatus": "ASSIGNED",
+          "registeredAt": "2026-09-10T09:40:00-05:00"
+        },
+        {
+          "previousStatus": "ASSIGNED",
+          "newStatus": "EN_ROUTE_TO_PICKUP",
+          "registeredAt": "2026-09-14T05:45:00-05:00"
+        },
+        {
+          "previousStatus": "EN_ROUTE_TO_PICKUP",
+          "newStatus": "AT_PICKUP_POINT",
+          "registeredAt": "2026-09-14T06:20:00-05:00"
+        },
+        {
+          "previousStatus": "AT_PICKUP_POINT",
+          "newStatus": "CARGO_PICKED_UP",
+          "registeredAt": "2026-09-14T07:10:00-05:00"
+        },
+        {
+          "previousStatus": "CARGO_PICKED_UP",
+          "newStatus": "IN_TRANSIT",
+          "registeredAt": "2026-09-14T07:20:00-05:00"
+        },
+        {
+          "previousStatus": "IN_TRANSIT",
+          "newStatus": "DELIVERED",
+          "registeredAt": "2026-09-14T12:15:00-05:00"
+        },
+        {
+          "previousStatus": "DELIVERED",
+          "newStatus": "COMPLETED",
+          "registeredAt": "2026-09-15T08:30:00-05:00"
+        }
+      ]
+    }
+  ],
+  "document-types": [
+    {
+      "id": 1,
+      "code": "DRIVER_LICENSE",
+      "name": "Driver license",
+      "mandatory": true,
+      "requiresExpiration": true
+    },
+    {
+      "id": 2,
+      "code": "SOAT",
+      "name": "SOAT",
+      "mandatory": true,
+      "requiresExpiration": true
+    },
+    {
+      "id": 3,
+      "code": "VEHICLE_REGISTRATION",
+      "name": "Vehicle registration card",
+      "mandatory": true,
+      "requiresExpiration": false
+    }
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "carrierId": 1,
+      "documentTypeId": 2,
+      "fileName": "soat-abc123.pdf",
+      "validationStatus": "APPROVED",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2025-10-14",
+      "expirationDate": "2026-10-14",
+      "uploadedAt": "2026-08-02T10:15:00-05:00",
+      "validatedAt": "2026-08-03T09:00:00-05:00"
+    },
+    {
+      "id": 2,
+      "carrierId": 1,
+      "documentTypeId": 1,
+      "fileName": "driver-license-45678912.pdf",
+      "validationStatus": "APPROVED",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2023-05-20",
+      "expirationDate": "2028-05-20",
+      "uploadedAt": "2026-08-02T10:10:00-05:00",
+      "validatedAt": "2026-08-03T09:00:00-05:00"
+    },
+    {
+      "id": 3,
+      "carrierId": 1,
+      "documentTypeId": 3,
+      "fileName": "vehicle-registration-abc123.pdf",
+      "validationStatus": "APPROVED",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2021-03-11",
+      "expirationDate": null,
+      "uploadedAt": "2026-08-02T10:20:00-05:00",
+      "validatedAt": "2026-08-03T09:05:00-05:00"
+    },
+    {
+      "id": 4,
+      "carrierId": 2,
+      "documentTypeId": 1,
+      "fileName": "driver-license-70123456.pdf",
+      "validationStatus": "APPROVED",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2021-10-01",
+      "expirationDate": "2026-10-01",
+      "uploadedAt": "2025-03-12T16:40:00-05:00",
+      "validatedAt": "2025-03-13T10:30:00-05:00"
+    },
+    {
+      "id": 5,
+      "carrierId": 2,
+      "documentTypeId": 2,
+      "fileName": "soat-b7k482.pdf",
+      "validationStatus": "EXPIRED",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2025-09-30",
+      "expirationDate": "2026-09-30",
+      "uploadedAt": "2025-10-01T09:15:00-05:00",
+      "validatedAt": "2025-10-01T15:45:00-05:00"
+    },
+    {
+      "id": 6,
+      "carrierId": 2,
+      "documentTypeId": 1,
+      "fileName": "driver-license-70123456-renewed.pdf",
+      "validationStatus": "IN_REVIEW",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2026-09-30",
+      "expirationDate": "2031-09-30",
+      "uploadedAt": "2026-10-02T08:25:00-05:00",
+      "validatedAt": null
+    },
+    {
+      "id": 7,
+      "carrierId": 2,
+      "documentTypeId": 3,
+      "fileName": "vehicle-registration-b7k482.jpg",
+      "validationStatus": "REJECTED",
+      "rejectionReasonCode": "ILLEGIBLE_FILE",
+      "rejectionReasonDescription": "The photo of the card is blurred and the plate number cannot be read.",
+      "issueDate": "2020-07-08",
+      "expirationDate": null,
+      "uploadedAt": "2026-09-29T18:05:00-05:00",
+      "validatedAt": "2026-09-30T10:20:00-05:00"
+    },
+    {
+      "id": 8,
+      "carrierId": 3,
+      "documentTypeId": 1,
+      "fileName": "driver-license-41234567.pdf",
+      "validationStatus": "IN_REVIEW",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2024-02-15",
+      "expirationDate": "2029-02-15",
+      "uploadedAt": "2026-10-01T17:30:00-05:00",
+      "validatedAt": null
+    },
+    {
+      "id": 9,
+      "carrierId": 3,
+      "documentTypeId": 2,
+      "fileName": "soat-c3r915.pdf",
+      "validationStatus": "PENDING",
+      "rejectionReasonCode": null,
+      "rejectionReasonDescription": null,
+      "issueDate": "2026-06-20",
+      "expirationDate": "2027-06-20",
+      "uploadedAt": "2026-10-02T19:10:00-05:00",
+      "validatedAt": null
+    }
+  ]
+}

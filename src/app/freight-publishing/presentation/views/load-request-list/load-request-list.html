@@ -1,0 +1,160 @@
+@if (!isShipper()) {
+  <app-profile-required role="SHIPPER"/>
+} @else {
+  <section class="load-request-list">
+    <header class="load-request-list__header">
+      <div>
+        <h1>
+          {{ 'load-request-list.title' | translate }}
+          <span class="load-request-list__count">
+            {{ (store.loadRequestCount() === 1 ? 'load-request-list.count-one' : 'load-request-list.count-other') | translate: {count: store.loadRequestCount()} }}
+          </span>
+        </h1>
+        <p class="load-request-list__subtitle">{{ 'load-request-list.subtitle' | translate }}</p>
+      </div>
+      <a mat-flat-button routerLink="/shipper/load-requests/new">
+        <mat-icon>add</mat-icon>
+        {{ 'load-request-list.publish' | translate }}
+      </a>
+    </header>
+
+    <mat-chip-listbox class="load-request-list__filters" [attr.aria-label]="'load-request-list.filter-label' | translate">
+      @for (filter of filters; track filter) {
+        <mat-chip-option [selected]="statusFilter() === filter"
+                         [selectable]="statusFilter() !== filter"
+                         (selectionChange)="onFilterSelectionChange(filter, $event)">
+          {{ (filter === 'ALL' ? 'load-request-list.filter-all' : 'load-request-status.' + filter) | translate }}
+          ({{ counts()[filter] }})
+        </mat-chip-option>
+      }
+    </mat-chip-listbox>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="load-request-list__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    @if (filteredLoadRequests().length === 0) {
+      @if (!store.loading()) {
+        <div class="load-request-list__empty" role="status">
+          <mat-icon aria-hidden="true">inventory_2</mat-icon>
+          @if (statusFilter() === 'ALL') {
+            <p>{{ 'load-request-list.empty-all' | translate }}</p>
+            <a mat-flat-button routerLink="/shipper/load-requests/new">{{ 'load-request-list.empty-action' | translate }}</a>
+          } @else {
+            <p>{{ 'load-request-list.empty-filtered' | translate: {status: ('load-request-status.' + statusFilter() | translate)} }}</p>
+          }
+        </div>
+      }
+    } @else if (isHandset()) {
+      <ul class="load-request-list__cards">
+        @for (loadRequest of filteredLoadRequests(); track loadRequest.id) {
+          <li>
+            <mat-card appearance="outlined">
+              <mat-card-content>
+                <div class="load-request-list__card-header">
+                  <strong>{{ loadRequest.code }}</strong>
+                  <app-load-request-status-chip [status]="loadRequest.status"/>
+                </div>
+                <p class="load-request-list__route">
+                  {{ loadRequest.route.origin.district }} → {{ loadRequest.route.destination.district }}
+                </p>
+                <p class="load-request-list__detail">
+                  {{ loadRequest.cargoType }} · {{ loadRequest.weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}
+                </p>
+                <dl class="load-request-list__facts">
+                  <div>
+                    <dt>{{ 'load-request-list.column-pickup' | translate }}</dt>
+                    <dd>{{ loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+                  </div>
+                  <div>
+                    <dt>{{ 'load-request-list.column-rate' | translate }}</dt>
+                    <dd>{{ loadRequest.offeredRate | money }}</dd>
+                  </div>
+                </dl>
+              </mat-card-content>
+              <mat-card-actions class="load-request-list__actions">
+                <ng-container [ngTemplateOutlet]="actions" [ngTemplateOutletContext]="{$implicit: loadRequest}"/>
+              </mat-card-actions>
+            </mat-card>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="load-request-list__table-wrapper">
+        <table mat-table [dataSource]="filteredLoadRequests()" class="load-request-list__table">
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>{{ 'load-request-list.column-id' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest"><strong>{{ loadRequest.code }}</strong></td>
+          </ng-container>
+          <ng-container matColumnDef="route">
+            <th mat-header-cell *matHeaderCellDef>{{ 'load-request-list.column-route' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest">
+              <span class="load-request-list__route">{{ loadRequest.route.origin.district }} → {{ loadRequest.route.destination.district }}</span>
+              <span class="load-request-list__detail">
+                {{ loadRequest.cargoType }} · {{ loadRequest.weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="pickupAt">
+            <th mat-header-cell *matHeaderCellDef>{{ 'load-request-list.column-pickup' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest">{{ loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="offeredRate">
+            <th mat-header-cell *matHeaderCellDef>{{ 'load-request-list.column-rate' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest" class="load-request-list__rate">{{ loadRequest.offeredRate | money }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>{{ 'load-request-list.column-status' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest"><app-load-request-status-chip [status]="loadRequest.status"/></td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="load-request-list__actions-header">{{ 'load-request-list.column-actions' | translate }}</th>
+            <td mat-cell *matCellDef="let loadRequest">
+              <div class="load-request-list__actions">
+                <ng-container [ngTemplateOutlet]="actions" [ngTemplateOutletContext]="{$implicit: loadRequest}"/>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    }
+  </section>
+}
+
+<!-- View details for every status, the actions allowed by status and View tracking once a carrier accepted the request. -->
+<ng-template #actions let-loadRequest>
+  <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id]"
+     [attr.aria-label]="'load-request-list.view-details-aria' | translate: {code: loadRequest.code}">
+    <mat-icon>visibility</mat-icon>
+    {{ 'load-request-list.view-details' | translate }}
+  </a>
+  @if (loadRequest.isEditable()) {
+    <a mat-button [routerLink]="['/shipper/load-requests', loadRequest.id, 'edit']"
+       [attr.aria-label]="'load-request-list.edit-aria' | translate: {code: loadRequest.code}">
+      <mat-icon>edit</mat-icon>
+      {{ 'load-request-list.edit' | translate }}
+    </a>
+  }
+  @if (loadRequest.isCancellable()) {
+    <button mat-button type="button" class="load-request-list__danger" (click)="openCancelDialog(loadRequest)"
+            [attr.aria-label]="'load-request-list.cancel-aria' | translate: {code: loadRequest.code}">
+      <mat-icon>cancel</mat-icon>
+      {{ 'load-request-list.cancel' | translate }}
+    </button>
+  }
+  @if (loadRequest.isTrackable()) {
+    <a mat-button [routerLink]="['/shipper/tracking', loadRequest.id]"
+       [attr.aria-label]="'load-request-list.view-tracking-aria' | translate: {code: loadRequest.code}">
+      <mat-icon>my_location</mat-icon>
+      {{ 'load-request-list.view-tracking' | translate }}
+    </a>
+  }
+</ng-template>

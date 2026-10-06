@@ -1,0 +1,67 @@
+<mat-card appearance="outlined" class="available-load-card">
+  <mat-card-content>
+    <div class="available-load-card__header">
+      <strong>{{ load().code }}</strong>
+      @if (load().urgent) {
+        <span class="available-load-card__urgent">
+          <mat-icon aria-hidden="true">bolt</mat-icon>
+          {{ 'available-loads.urgent' | translate }}
+        </span>
+      }
+    </div>
+
+    <ol class="available-load-card__route">
+      <li>
+        <span class="available-load-card__label">{{ 'available-loads.origin' | translate }}</span>
+        <span class="available-load-card__place">{{ load().originDistrict }}</span>
+        <span class="available-load-card__address">{{ load().originAddress }}</span>
+      </li>
+      <li>
+        <span class="available-load-card__label">{{ 'available-loads.destination' | translate }}</span>
+        <span class="available-load-card__place">{{ load().destinationDistrict }}</span>
+        <span class="available-load-card__address">{{ load().destinationAddress }}</span>
+      </li>
+    </ol>
+
+    <div class="available-load-card__distances">
+      <span>
+        <mat-icon aria-hidden="true">near_me</mat-icon>
+        {{ 'available-loads.distance-to-you' | translate: {distance: (load().distanceToCarrierKm | localizedNumber: '1.0-1')} }}
+      </span>
+      <span>
+        <mat-icon aria-hidden="true">route</mat-icon>
+        {{ 'available-loads.trip-distance' | translate: {distance: (load().distanceKm | localizedNumber: '1.0-0')} }}
+      </span>
+    </div>
+
+    <dl class="available-load-card__facts">
+      <div>
+        <dt>{{ 'available-loads.weight' | translate }}</dt>
+        <dd>{{ load().weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'available-loads.cargo' | translate }}</dt>
+        <dd>{{ load().cargoType }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'available-loads.vehicle' | translate }}</dt>
+        <dd>{{ vehicleTypeName() }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'available-loads.pickup' | translate }}</dt>
+        <dd>{{ load().pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+      </div>
+    </dl>
+  </mat-card-content>
+
+  <mat-card-actions class="available-load-card__footer">
+    <div>
+      <span class="available-load-card__label">{{ 'available-loads.offered-rate' | translate }}</span>
+      <span class="available-load-card__rate">{{ load().offeredRate | money }}</span>
+    </div>
+    <a mat-stroked-button [routerLink]="['/carrier/available-loads', load().id]"
+       [attr.aria-label]="'available-loads.view-details-aria' | translate: {code: load().code}">
+      {{ 'available-loads.view-details' | translate }}
+    </a>
+  </mat-card-actions>
+</mat-card>

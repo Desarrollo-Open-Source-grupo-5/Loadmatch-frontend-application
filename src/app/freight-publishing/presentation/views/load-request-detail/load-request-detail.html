@@ -1,0 +1,199 @@
+@if (!isShipper()) {
+  <app-profile-required role="SHIPPER"/>
+} @else {
+  <section class="load-request-detail">
+    <a class="load-request-detail__back" routerLink="/shipper/load-requests">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+      {{ 'load-request-detail.back' | translate }}
+    </a>
+
+    @if (loadRequest(); as loadRequest) {
+      <header class="load-request-detail__header">
+        <h1>{{ 'load-request-detail.title' | translate: {code: loadRequest.code} }}</h1>
+        <app-load-request-status-chip [status]="loadRequest.status"/>
+      </header>
+      <p class="load-request-detail__subtitle">
+        {{ loadRequest.route.origin.district }} → {{ loadRequest.route.destination.district }}
+      </p>
+
+      @if (store.error()) {
+        <p class="load-request-detail__banner load-request-detail__banner--error" role="alert">
+          <mat-icon aria-hidden="true">cloud_off</mat-icon>
+          {{ 'common.api-error' | translate }}
+        </p>
+      }
+
+      <div class="load-request-detail__layout">
+        <section class="load-request-detail__card" aria-labelledby="load-request-detail-trip">
+          <h2 id="load-request-detail-trip">{{ 'load-request-detail.section-trip' | translate }}</h2>
+          <ol class="load-request-detail__route">
+            <li>
+              <span class="load-request-detail__label">{{ 'load-request-detail.origin' | translate }}</span>
+              <span class="load-request-detail__place">{{ loadRequest.route.origin.district }}</span>
+              <span class="load-request-detail__address">{{ loadRequest.route.origin.address }}</span>
+            </li>
+            <li>
+              <span class="load-request-detail__label">{{ 'load-request-detail.destination' | translate }}</span>
+              <span class="load-request-detail__place">{{ loadRequest.route.destination.district }}</span>
+              <span class="load-request-detail__address">{{ loadRequest.route.destination.address }}</span>
+            </li>
+          </ol>
+
+          <dl class="load-request-detail__facts">
+            <div>
+              <dt>{{ 'load-request-detail.trip-distance' | translate }}</dt>
+              <dd>{{ 'load-request-detail.distance-value' | translate: {distance: (loadRequest.route.distanceKm | localizedNumber: '1.0-1')} }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-request-detail.pickup' | translate }}</dt>
+              <dd>{{ loadRequest.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-request-detail.vehicle-type' | translate }}</dt>
+              <dd>{{ vehicleTypeName() }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-request-detail.cargo-type' | translate }}</dt>
+              <dd>{{ loadRequest.cargoType }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-request-detail.weight' | translate }}</dt>
+              <dd>{{ loadRequest.weightKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'load-request-detail.dimensions' | translate }}</dt>
+              <dd>
+                {{ 'load-request-detail.dimensions-value' | translate: {
+                  length: (loadRequest.dimensions.lengthM | localizedNumber: '1.0-2'),
+                  width: (loadRequest.dimensions.widthM | localizedNumber: '1.0-2'),
+                  height: (loadRequest.dimensions.heightM | localizedNumber: '1.0-2')
+                } }}
+              </dd>
+            </div>
+          </dl>
+
+          <div class="load-request-detail__rate">
+            <span class="load-request-detail__label">{{ 'load-request-detail.offered-rate' | translate }}</span>
+            <span class="load-request-detail__rate-value">{{ loadRequest.offeredRate | money }}</span>
+          </div>
+        </section>
+
+        @if (loadRequest.status === 'CANCELLED') {
+          <section class="load-request-detail__card" aria-labelledby="load-request-detail-cancellation">
+            <h2 id="load-request-detail-cancellation">{{ 'load-request-detail.cancellation-title' | translate }}</h2>
+            <p class="load-request-detail__banner load-request-detail__banner--cancelled" role="status">
+              <mat-icon aria-hidden="true">cancel</mat-icon>
+              {{ 'load-request-detail.cancelled-message' | translate }}
+            </p>
+            <span class="load-request-detail__label">{{ 'load-request-detail.cancellation-reason' | translate }}</span>
+            <p class="load-request-detail__reason">{{ loadRequest.cancellationReason || ('load-request-detail.no-reason' | translate) }}</p>
+          </section>
+        } @else {
+          <section class="load-request-detail__card" aria-labelledby="load-request-detail-carrier">
+            <h2 id="load-request-detail-carrier">{{ 'load-request-detail.assigned-carrier' | translate }}</h2>
+
+            @if (loadRequest.hasAssignedCarrier()) {
+              @if (store.assignedCarrierLoading()) {
+                <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+              } @else if (store.assignedCarrier(); as carrier) {
+                <div class="load-request-detail__carrier">
+                  <mat-icon class="load-request-detail__avatar" aria-hidden="true">person</mat-icon>
+                  <div>
+                    <span class="load-request-detail__place">{{ carrier.carrierFullName }}</span>
+                    <span class="load-request-detail__rating">
+                      <mat-icon aria-hidden="true" class="load-request-detail__star">star</mat-icon>
+                      @if (carrier.hasRatings()) {
+                        {{ 'load-request-detail.rating' | translate: {average: (carrier.reputationAverage | localizedNumber: '1.1-1'), total: carrier.reputationTotalRatings} }}
+                      } @else {
+                        {{ 'load-request-detail.no-ratings' | translate }}
+                      }
+                    </span>
+                  </div>
+                </div>
+
+                <dl class="load-request-detail__facts">
+                  <div class="load-request-detail__fact--wide">
+                    <dt>{{ 'load-request-detail.phone' | translate }}</dt>
+                    <dd>
+                      <a class="load-request-detail__phone" [href]="'tel:' + carrier.dialablePhoneNumber()"
+                         [attr.aria-label]="'load-request-detail.call-aria' | translate: {name: carrier.carrierFullName, phone: carrier.phoneNumber}">
+                        <mat-icon aria-hidden="true">call</mat-icon>
+                        {{ carrier.phoneNumber }}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{{ 'load-request-detail.license-plate' | translate }}</dt>
+                    <dd>{{ carrier.licensePlate }}</dd>
+                  </div>
+                  <div>
+                    <dt>{{ 'load-request-detail.assigned-vehicle-type' | translate }}</dt>
+                    <dd>{{ carrier.vehicleTypeName }}</dd>
+                  </div>
+                  <div>
+                    <dt>{{ 'load-request-detail.payload' | translate }}</dt>
+                    <dd>{{ carrier.payloadKg | localizedNumber: '1.0-0' }} {{ 'common.kg' | translate }}</dd>
+                  </div>
+                </dl>
+              } @else if (!store.error()) {
+                <p class="load-request-detail__banner load-request-detail__banner--info" role="status">
+                  <mat-icon aria-hidden="true">info</mat-icon>
+                  {{ 'load-request-detail.carrier-unavailable' | translate }}
+                </p>
+              }
+
+              <p class="load-request-detail__hint">
+                <mat-icon aria-hidden="true">lock</mat-icon>
+                {{ 'load-request-detail.contact-hint' | translate }}
+              </p>
+
+              @if (loadRequest.isTrackable()) {
+                <div class="load-request-detail__actions">
+                  <a mat-stroked-button [routerLink]="['/shipper/tracking', loadRequest.id]"
+                     [attr.aria-label]="'load-request-detail.view-tracking-aria' | translate: {code: loadRequest.code}">
+                    <mat-icon>my_location</mat-icon>
+                    {{ 'load-request-detail.view-tracking' | translate }}
+                  </a>
+                </div>
+              }
+            } @else {
+              <p class="load-request-detail__banner load-request-detail__banner--info" role="status">
+                <mat-icon aria-hidden="true">hourglass_empty</mat-icon>
+                <span>
+                  <strong>{{ 'load-request-detail.no-carrier' | translate }}</strong>
+                  {{ 'load-request-detail.no-carrier-hint' | translate }}
+                </span>
+              </p>
+              <div class="load-request-detail__actions">
+                @if (loadRequest.isEditable()) {
+                  <a mat-stroked-button [routerLink]="['/shipper/load-requests', loadRequest.id, 'edit']"
+                     [attr.aria-label]="'load-request-detail.edit-aria' | translate: {code: loadRequest.code}">
+                    <mat-icon>edit</mat-icon>
+                    {{ 'load-request-detail.edit' | translate }}
+                  </a>
+                }
+                @if (loadRequest.isCancellable()) {
+                  <button mat-stroked-button type="button" class="load-request-detail__danger"
+                          [disabled]="store.loading()" (click)="openCancelDialog(loadRequest)"
+                          [attr.aria-label]="'load-request-detail.cancel-aria' | translate: {code: loadRequest.code}">
+                    <mat-icon>cancel</mat-icon>
+                    {{ 'load-request-detail.cancel' | translate }}
+                  </button>
+                }
+              </div>
+            }
+          </section>
+        }
+      </div>
+    } @else if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    } @else if (isNotFound()) {
+      <div class="load-request-detail__not-found" role="alert">
+        <mat-icon aria-hidden="true">search_off</mat-icon>
+        <h1>{{ 'load-request-detail.not-found-title' | translate }}</h1>
+        <p>{{ 'load-request-detail.not-found' | translate }}</p>
+        <a mat-flat-button routerLink="/shipper/load-requests">{{ 'load-request-detail.back' | translate }}</a>
+      </div>
+    }
+  </section>
+}

@@ -1,0 +1,6 @@
+<section class="profile-required" role="status">
+  <mat-icon aria-hidden="true">badge</mat-icon>
+  <h1>{{ 'profile-required.title' | translate }}</h1>
+  <p>{{ (role() === 'SHIPPER' ? 'profile-required.shipper' : 'profile-required.carrier') | translate }}</p>
+  <a mat-flat-button routerLink="/home">{{ 'profile-required.action' | translate }}</a>
+</section>

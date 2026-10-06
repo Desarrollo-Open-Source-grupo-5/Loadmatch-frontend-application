@@ -1,0 +1,95 @@
+@if (!isCarrier()) {
+  <app-profile-required role="CARRIER"/>
+} @else {
+  <section class="document-validation">
+    <header class="document-validation__header">
+      <div>
+        <h1>{{ 'document-validation.title' | translate }}</h1>
+        <p class="document-validation__subtitle">{{ 'document-validation.subtitle' | translate }}</p>
+      </div>
+      @if (store.requiredDocuments().length) {
+        <div class="document-validation__summary" role="note">
+          <mat-icon aria-hidden="true">{{ approvedCount() === store.requiredDocuments().length ? 'verified_user' : 'pending_actions' }}</mat-icon>
+          <div>
+            <strong>{{ 'document-validation.summary' | translate: {approved: approvedCount(), total: store.requiredDocuments().length} }}</strong>
+            <mat-progress-bar mode="determinate" aria-hidden="true"
+                              [value]="approvedCount() / store.requiredDocuments().length * 100"/>
+          </div>
+        </div>
+      }
+    </header>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="document-validation__banner document-validation__banner--error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    <ul class="document-validation__list">
+      @for (item of store.requiredDocuments(); track item.documentType.id) {
+        <li>
+          <mat-card appearance="outlined" class="document-validation__card">
+            <mat-card-content>
+              <div class="document-validation__card-header">
+                <h2>{{ 'document-type.' + item.documentType.code | catalogLabel: item.documentType.name }}</h2>
+                <app-validation-status-chip [status]="item.displayStatus(today)"/>
+              </div>
+
+              @if (item.document; as document) {
+                <p class="document-validation__file">
+                  <mat-icon aria-hidden="true">description</mat-icon>
+                  {{ document.fileName }}
+                </p>
+                <dl class="document-validation__facts">
+                  @if (item.documentType.requiresExpiration) {
+                    <div>
+                      <dt>{{ 'document-validation.expiration-date' | translate }}</dt>
+                      <dd>{{ document.expirationDate | localizedDate: 'dd/MM/yyyy' }}</dd>
+                    </div>
+                  }
+                  <div>
+                    <dt>{{ 'document-validation.uploaded-at' | translate }}</dt>
+                    <dd>{{ document.uploadedAt | localizedDate: 'dd/MM/yyyy' }}</dd>
+                  </div>
+                </dl>
+
+                @if (document.expiresSoon(today)) {
+                  <p class="document-validation__banner document-validation__banner--warning" role="status">
+                    <mat-icon aria-hidden="true">warning</mat-icon>
+                    {{ 'document-validation.expires-soon' | translate: {date: (document.expirationDate | localizedDate: 'dd/MM/yyyy')} }}
+                  </p>
+                }
+                @if (document.rejectionReason; as reason) {
+                  <p class="document-validation__banner document-validation__banner--error">
+                    <mat-icon aria-hidden="true">error</mat-icon>
+                    <span>
+                      <strong>{{ 'document-validation.rejection-reason' | translate }}</strong>
+                      {{ 'document-rejection.' + reason.code | catalogLabel: reason.description }}
+                    </span>
+                  </p>
+                }
+              }
+
+              @if (item.displayStatus(today) !== 'APPROVED') {
+                <p class="document-validation__next-step">
+                  <mat-icon aria-hidden="true">info</mat-icon>
+                  {{ 'document-validation.next-step.' + item.displayStatus(today) | translate }}
+                </p>
+              }
+              @if (item.requiresNewFile(today)) {
+                <button mat-stroked-button type="button" disabled>
+                  <mat-icon>upload_file</mat-icon>
+                  {{ 'document-validation.upload' | translate }}
+                </button>
+              }
+            </mat-card-content>
+          </mat-card>
+        </li>
+      }
+    </ul>
+  </section>
+}

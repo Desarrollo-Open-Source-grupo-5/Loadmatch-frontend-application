@@ -1,0 +1,205 @@
+.shipper-dashboard__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.shipper-dashboard__subtitle {
+  margin: 0;
+  color: var(--lm-color-slate-600);
+}
+
+.shipper-dashboard__error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
+
+.shipper-dashboard__empty {
+  padding: 48px 24px;
+  border: 1px dashed var(--lm-color-slate-300);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-600);
+  text-align: center;
+}
+
+.shipper-dashboard__empty mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.shipper-dashboard__empty h2 {
+  color: var(--lm-color-slate-900);
+  font-size: 20px;
+}
+
+.shipper-dashboard__summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.shipper-dashboard__figure {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 16px 20px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+/* Icon badge with the semantic color of the status (same pairs as the status chips). */
+.shipper-dashboard__figure mat-icon {
+  grid-row: span 3;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 24px;
+  box-sizing: border-box;
+}
+
+.shipper-dashboard__figure--published mat-icon {
+  background-color: var(--lm-status-published-bg);
+  color: var(--lm-status-published-text);
+}
+
+.shipper-dashboard__figure--in-transit mat-icon {
+  background-color: var(--lm-status-in-transit-bg);
+  color: var(--lm-status-in-transit-text);
+}
+
+.shipper-dashboard__figure--completed mat-icon {
+  background-color: var(--lm-status-delivered-bg);
+  color: var(--lm-status-delivered-text);
+}
+
+.shipper-dashboard__value {
+  color: var(--lm-color-slate-900);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.shipper-dashboard__label {
+  color: var(--lm-color-slate-900);
+  font-weight: 600;
+}
+
+.shipper-dashboard__hint {
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+}
+
+.shipper-dashboard__latest-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.shipper-dashboard__latest-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.shipper-dashboard__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--lm-color-orange-pressed);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.shipper-dashboard__view-all:hover {
+  text-decoration: underline;
+}
+
+.shipper-dashboard__view-all mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.shipper-dashboard__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+.shipper-dashboard__table {
+  width: 100%;
+  --mat-table-background-color: var(--lm-color-white);
+  --mat-table-header-headline-color: var(--lm-color-slate-600);
+  --mat-table-row-item-label-text-color: var(--lm-color-slate-700);
+}
+
+.shipper-dashboard__table th {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.shipper-dashboard__table th,
+.shipper-dashboard__table td {
+  padding: 8px 12px;
+}
+
+.shipper-dashboard__table .mat-column-pickupAt {
+  white-space: nowrap;
+}
+
+.shipper-dashboard__route {
+  display: block;
+  margin: 0;
+  color: var(--lm-color-slate-900);
+  font-weight: 600;
+}
+
+.shipper-dashboard__detail {
+  margin: 4px 0;
+  color: var(--lm-color-slate-600);
+  font-size: 12px;
+}
+
+.shipper-dashboard__actions-header,
+.shipper-dashboard__actions {
+  text-align: right;
+}
+
+.shipper-dashboard__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shipper-dashboard__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+
+}

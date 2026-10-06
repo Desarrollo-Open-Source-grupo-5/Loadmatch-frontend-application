@@ -1,0 +1,96 @@
+@if (!isCarrier()) {
+  <app-profile-required role="CARRIER"/>
+} @else {
+  <section class="carrier-trips">
+    <header class="carrier-trips__header">
+      <div>
+        <h1>{{ 'carrier-trips.title' | translate }}</h1>
+        <p class="carrier-trips__subtitle">{{ 'carrier-trips.subtitle' | translate }}</p>
+      </div>
+    </header>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+    @if (store.error()) {
+      <p class="carrier-trips__error" role="alert">
+        <mat-icon aria-hidden="true">cloud_off</mat-icon>
+        {{ 'common.api-error' | translate }}
+      </p>
+    }
+
+    @if (store.listedTripCount() === 0) {
+      @if (!store.loading() && !store.error()) {
+        <div class="carrier-trips__empty" role="status">
+          <mat-icon aria-hidden="true">route</mat-icon>
+          <h2>{{ 'carrier-trips.empty-title' | translate }}</h2>
+          <p>{{ 'carrier-trips.empty-hint' | translate }}</p>
+          <a mat-flat-button routerLink="/carrier/available-loads">
+            <mat-icon>travel_explore</mat-icon>
+            {{ 'carrier-trips.find-loads' | translate }}
+          </a>
+        </div>
+      }
+    } @else {
+      <mat-tab-group class="carrier-trips__tabs" mat-stretch-tabs="false" mat-align-tabs="start"
+                     [selectedIndex]="selectedTab()" (selectedIndexChange)="selectedTab.set($event)">
+        @for (group of groups; track group) {
+          <mat-tab>
+            <ng-template mat-tab-label>
+              {{ 'carrier-trips.group.' + group | translate }}
+              <span class="carrier-trips__count">{{ store.tripsByGroup()[group].length }}</span>
+            </ng-template>
+
+            <ul class="carrier-trips__list">
+              @for (item of store.tripsByGroup()[group]; track item.id) {
+                <li>
+                  <mat-card appearance="outlined" class="carrier-trips__card">
+                    <mat-card-content>
+                      <div class="carrier-trips__card-header">
+                        <strong>{{ item.trip.loadRequestCode }}</strong>
+                        <app-trip-status-chip [status]="item.trip.status"/>
+                      </div>
+                      <p class="carrier-trips__route">
+                        {{ item.loadRequest.originDistrict }} → {{ item.loadRequest.destinationDistrict }}
+                      </p>
+                      <dl class="carrier-trips__facts">
+                        <div>
+                          @if (group === 'COMPLETED') {
+                            <dt>{{ 'carrier-trips.completed-on' | translate }}</dt>
+                            <dd>{{ item.trip.completedAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+                          } @else {
+                            <dt>{{ 'carrier-trips.pickup' | translate }}</dt>
+                            <dd>{{ item.trip.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+                          }
+                        </div>
+                        <div>
+                          <dt>{{ 'carrier-trips.vehicle' | translate }}</dt>
+                          <dd>{{ item.licensePlate }}</dd>
+                        </div>
+                        <div class="carrier-trips__fact--wide">
+                          <dt>{{ 'carrier-trips.shipper' | translate }}</dt>
+                          <dd>{{ item.shipperName }}</dd>
+                        </div>
+                      </dl>
+                    </mat-card-content>
+                  </mat-card>
+                </li>
+              } @empty {
+                <li class="carrier-trips__group-empty" role="status">
+                  {{ 'carrier-trips.group-empty.' + group | translate }}
+                </li>
+              }
+            </ul>
+
+            @if (group === 'COMPLETED' && store.completedTrips().length) {
+              <a class="carrier-trips__history-link" routerLink="/carrier/trips/history">
+                {{ 'carrier-trips.view-history' | translate }}
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </a>
+            }
+          </mat-tab>
+        }
+      </mat-tab-group>
+    }
+  </section>
+}

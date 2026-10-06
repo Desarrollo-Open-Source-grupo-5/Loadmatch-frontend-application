@@ -1,0 +1,254 @@
+@if (!isShipper()) {
+  <app-profile-required role="SHIPPER"/>
+} @else {
+  <section class="load-request-form">
+    <a class="load-request-form__back" routerLink="/shipper/load-requests">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+      {{ 'load-request-form.back' | translate }}
+    </a>
+    <header>
+      <h1>
+        @if (isEditMode()) {
+          {{ 'load-request-form.edit-title' | translate: {code: editedLoadRequest()?.code ?? ''} }}
+        } @else {
+          {{ 'load-request-form.new-title' | translate }}
+        }
+      </h1>
+      @if (!isEditBlocked()) {
+        <p class="load-request-form__subtitle">{{ 'load-request-form.subtitle' | translate }}</p>
+      }
+    </header>
+
+    @if (store.loading()) {
+      <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+    }
+
+    @if (isEditedNotFound()) {
+      <p class="load-request-form__banner load-request-form__banner--error" role="alert">
+        <mat-icon aria-hidden="true">error</mat-icon>
+        {{ 'load-request-form.not-found' | translate }}
+      </p>
+    } @else if (editBlockedLoadRequest(); as blocked) {
+      <!-- A request already accepted by a carrier, or no longer published, is not editable. -->
+      <div class="load-request-form__blocked" role="status">
+        <mat-icon aria-hidden="true">lock</mat-icon>
+        <div>
+          <h2>{{ 'load-request-form.not-editable-title' | translate }}</h2>
+          <p>
+            {{ (blocked.hasAssignedCarrier() ? 'load-request-form.not-editable-assigned' : 'load-request-form.not-editable-unpublished') | translate: {code: blocked.code, status: ('load-request-status.' + blocked.status | translate)} }}
+          </p>
+          <div class="load-request-form__actions load-request-form__actions--start">
+            <a mat-flat-button [routerLink]="['/shipper/load-requests', blocked.id]">
+              <mat-icon>visibility</mat-icon>
+              {{ (blocked.hasAssignedCarrier() ? 'load-request-form.view-carrier' : 'load-request-form.view-detail') | translate }}
+            </a>
+            <a mat-stroked-button routerLink="/shipper/load-requests">{{ 'load-request-form.back' | translate }}</a>
+          </div>
+        </div>
+      </div>
+    } @else {
+      @if (submitAttempted() && form.invalid) {
+        <div class="load-request-form__banner load-request-form__banner--error" role="alert">
+          <mat-icon aria-hidden="true">error</mat-icon>
+          <div>
+            <p>{{ 'load-request-form.summary' | translate }}</p>
+            <ul>
+              @for (label of invalidFieldLabels(); track label) {
+                <li>{{ label | translate }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+
+      @if (store.error() || domainRuleRejected()) {
+        <p class="load-request-form__banner load-request-form__banner--error" role="alert">
+          <mat-icon aria-hidden="true">cloud_off</mat-icon>
+          {{ 'load-request-form.save-error' | translate }}
+        </p>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <fieldset class="load-request-form__section">
+          <legend><h2>{{ 'load-request-form.section-route' | translate }}</h2></legend>
+          <div class="load-request-form__grid">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.origin-location' | translate }}</mat-label>
+              <mat-select formControlName="originLocationCode">
+                @for (location of locations; track location.code) {
+                  <mat-option [value]="location.code">{{ location.label }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matSuffix aria-hidden="true">trip_origin</mat-icon>
+              <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.origin-address' | translate }}</mat-label>
+              <input matInput formControlName="originAddress" maxlength="120" autocomplete="street-address"/>
+              @if (form.controls.originAddress.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.destination-location' | translate }}</mat-label>
+              <mat-select formControlName="destinationLocationCode" [errorStateMatcher]="sameLocationMatcher">
+                @for (location of locations; track location.code) {
+                  <mat-option [value]="location.code">{{ location.label }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matSuffix aria-hidden="true">location_on</mat-icon>
+              @if (form.controls.destinationLocationCode.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else if (form.hasError('sameLocation')) {
+                <mat-error>{{ 'load-request-form.error.same-location' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.destination-address' | translate }}</mat-label>
+              <input matInput formControlName="destinationAddress" maxlength="120" autocomplete="street-address"/>
+              @if (form.controls.destinationAddress.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          @if (estimatedDistanceKm() !== null) {
+            <p class="load-request-form__distance">
+              <mat-icon aria-hidden="true">route</mat-icon>
+              {{ 'load-request-form.estimated-distance' | translate: {distance: (estimatedDistanceKm() | localizedNumber: '1.0-0')} }}
+            </p>
+          }
+        </fieldset>
+
+        <fieldset class="load-request-form__section">
+          <legend><h2>{{ 'load-request-form.section-cargo' | translate }}</h2></legend>
+          <div class="load-request-form__grid">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.vehicle-type' | translate }}</mat-label>
+              <mat-select formControlName="vehicleTypeId">
+                @for (vehicleType of store.activeVehicleTypes(); track vehicleType.id) {
+                  <mat-option [value]="vehicleType.id">
+                    {{ 'load-request-form.vehicle-type-option' | translate: {name: vehicleType.name, maxWeight: (vehicleType.maxWeightKg | localizedNumber: '1.0-0')} }}
+                  </mat-option>
+                }
+              </mat-select>
+              <mat-icon matSuffix aria-hidden="true">local_shipping</mat-icon>
+              <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.cargo-type' | translate }}</mat-label>
+              <input matInput formControlName="cargoType" maxlength="60"
+                     [placeholder]="'load-request-form.cargo-type-placeholder' | translate"/>
+              @if (form.controls.cargoType.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.weight' | translate }}</mat-label>
+              <input matInput type="number" min="0" step="1" inputmode="decimal" formControlName="weightKg"
+                     [errorStateMatcher]="weightMatcher"/>
+              <span matTextSuffix>{{ 'common.kg' | translate }}</span>
+              @if (selectedVehicleType(); as vehicleType) {
+                <mat-hint>{{ 'load-request-form.max-weight-hint' | translate: {name: vehicleType.name, maxWeight: (vehicleType.maxWeightKg | localizedNumber: '1.0-0')} }}</mat-hint>
+              }
+              @if (form.controls.weightKg.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else if (form.controls.weightKg.hasError('positive')) {
+                <mat-error>{{ 'load-request-form.error.positive' | translate }}</mat-error>
+              } @else if (form.hasError('weightExceedsCapacity')) {
+                <mat-error>{{ 'load-request-form.error.weight-exceeds-capacity' | translate: {maxWeight: (form.getError('weightExceedsCapacity').maxWeightKg | localizedNumber: '1.0-0')} }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="load-request-form__dimensions" role="group" [attr.aria-label]="'load-request-form.dimensions' | translate">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.length' | translate }}</mat-label>
+              <input matInput type="number" min="0" step="0.1" inputmode="decimal" formControlName="lengthM"/>
+              <span matTextSuffix>{{ 'common.m' | translate }}</span>
+              @if (form.controls.lengthM.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else {
+                <mat-error>{{ 'load-request-form.error.positive' | translate }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.width' | translate }}</mat-label>
+              <input matInput type="number" min="0" step="0.1" inputmode="decimal" formControlName="widthM"/>
+              <span matTextSuffix>{{ 'common.m' | translate }}</span>
+              @if (form.controls.widthM.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else {
+                <mat-error>{{ 'load-request-form.error.positive' | translate }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.height' | translate }}</mat-label>
+              <input matInput type="number" min="0" step="0.1" inputmode="decimal" formControlName="heightM"/>
+              <span matTextSuffix>{{ 'common.m' | translate }}</span>
+              @if (form.controls.heightM.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else {
+                <mat-error>{{ 'load-request-form.error.positive' | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </fieldset>
+
+        <fieldset class="load-request-form__section">
+          <legend><h2>{{ 'load-request-form.section-schedule' | translate }}</h2></legend>
+          <div class="load-request-form__grid">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.rate' | translate }}</mat-label>
+              <span matTextPrefix>{{ 'common.pen-symbol' | translate }}&nbsp;</span>
+              <input matInput type="number" min="0" step="10" inputmode="decimal" formControlName="rateAmount"/>
+              <mat-hint>{{ 'load-request-form.rate-hint' | translate }}</mat-hint>
+              @if (form.controls.rateAmount.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else {
+                <mat-error>{{ 'load-request-form.error.positive' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.pickup-date' | translate }}</mat-label>
+              <input matInput [matDatepicker]="pickupPicker" [min]="today" formControlName="pickupDate"
+                     [errorStateMatcher]="pickupMatcher"/>
+              <mat-datepicker-toggle matIconSuffix [for]="pickupPicker"/>
+              <mat-datepicker #pickupPicker/>
+              @if (form.controls.pickupDate.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else if (form.hasError('pickupInPast')) {
+                <mat-error>{{ 'load-request-form.error.pickup-in-past' | translate }}</mat-error>
+              } @else {
+                <mat-error>{{ 'load-request-form.error.invalid-date' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>{{ 'load-request-form.pickup-time' | translate }}</mat-label>
+              <input matInput type="time" formControlName="pickupTime" [errorStateMatcher]="pickupMatcher"/>
+              @if (form.controls.pickupTime.hasError('required')) {
+                <mat-error>{{ 'load-request-form.error.required' | translate }}</mat-error>
+              } @else if (form.hasError('pickupInPast')) {
+                <mat-error>{{ 'load-request-form.error.pickup-in-past' | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </fieldset>
+
+        <div class="load-request-form__actions">
+          <a mat-stroked-button routerLink="/shipper/load-requests">{{ 'load-request-form.cancel' | translate }}</a>
+          <button mat-flat-button type="submit" [disabled]="store.loading()">
+            <mat-icon>{{ isEditMode() ? 'save' : 'publish' }}</mat-icon>
+            {{ (isEditMode() ? 'load-request-form.submit-update' : 'load-request-form.submit-create') | translate }}
+          </button>
+        </div>
+      </form>
+    }
+  </section>
+}

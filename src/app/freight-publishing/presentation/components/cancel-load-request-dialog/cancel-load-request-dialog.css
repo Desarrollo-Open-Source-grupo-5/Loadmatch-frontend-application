@@ -1,0 +1,46 @@
+.cancel-dialog__icon {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.cancel-dialog__icon mat-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+  color: var(--lm-color-error);
+}
+
+h2[mat-dialog-title] {
+  text-align: center;
+}
+
+.cancel-dialog__summary {
+  width: fit-content;
+  margin: 0 auto 12px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background-color: var(--lm-color-blue-tint);
+  color: var(--lm-color-slate-900);
+  font-weight: 600;
+}
+
+.cancel-dialog__message {
+  color: var(--lm-color-slate-700);
+  text-align: center;
+}
+
+.cancel-dialog__reason {
+  width: 100%;
+}
+
+.cancel-dialog__actions {
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Destructive action: Error Red background with white text (4.83:1). */
+.cancel-dialog__confirm {
+  --mat-button-filled-container-color: var(--lm-color-error);
+  --mat-button-filled-label-text-color: var(--lm-color-white);
+}

@@ -1,0 +1,96 @@
+.profile-chooser {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.profile-chooser__card {
+  padding: 8px;
+}
+
+.profile-chooser__card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.profile-chooser__avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background-color: var(--lm-color-dark-navy);
+  color: var(--lm-color-primary-orange);
+}
+
+.profile-chooser__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-chooser__option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 16px 48px 16px 16px;
+  border: 1px solid var(--lm-color-slate-300);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+  color: var(--lm-color-slate-700);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.profile-chooser__option:hover {
+  border-color: var(--lm-color-primary-orange);
+  background-color: var(--lm-color-background-light);
+}
+
+.profile-chooser__name {
+  color: var(--lm-color-slate-900);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profile-chooser__detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--lm-color-slate-600);
+  font-size: 13px;
+}
+
+.profile-chooser__detail mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+/* Decorative icon: Warning Yellow is allowed for non-text graphics next to the rating text. */
+.profile-chooser__star {
+  color: var(--lm-color-warning);
+}
+
+.profile-chooser__arrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--lm-color-slate-600);
+}
+
+.profile-chooser__error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+}
