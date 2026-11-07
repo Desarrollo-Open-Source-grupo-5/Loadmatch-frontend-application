@@ -6,9 +6,9 @@ import {LoadRequestStatus} from '../domain/model/load-request-status';
  * Load request resource exchanged with the `/load-requests` endpoint (flat JSON, camelCase).
  */
 export interface LoadRequestResource extends BaseResource {
-  id: number;
-  shipperId: number;
-  vehicleTypeId: number;
+  id: string;
+  shipperId: string;
+  vehicleTypeId: string;
   originAddress: string;
   originDistrict: string;
   originLat: number;

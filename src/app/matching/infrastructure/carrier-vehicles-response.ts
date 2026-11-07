@@ -4,9 +4,9 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/vehicles` resource read by Matching.
  */
 export interface CarrierVehicleResource extends BaseResource {
-  id: number;
-  carrierId: number;
-  vehicleTypeId: number;
+  id: string;
+  carrierId: string;
+  vehicleTypeId: string;
   licensePlate: string;
   payloadKg: number;
   active: boolean;

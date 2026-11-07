@@ -43,7 +43,7 @@ export class TripExecutionStore {
   readonly completedTrips = computed(() =>
     this.trips()
       .filter(item => item.trip.isCompleted())
-      .sort((a, b) => (b.trip.completedAt?.getTime() ?? 0) - (a.trip.completedAt?.getTime() ?? 0) || b.id - a.id)
+      .sort((a, b) => (b.trip.completedAt?.getTime() ?? 0) - (a.trip.completedAt?.getTime() ?? 0) || b.id.localeCompare(a.id))
   );
 
   /**
@@ -102,18 +102,18 @@ export class TripExecutionStore {
   /**
    * Carrier whose trips were last requested, used to ignore late responses.
    */
-  private carrierId: number | null = null;
+  private carrierId: string | null = null;
 
   /**
    * Load request whose tracking was last requested, used to ignore late responses.
    */
-  private trackingRequestId: number | null = null;
+  private trackingRequestId: string | null = null;
 
   /**
    * Loads the trips of a carrier.
    * @param carrierId - Carrier identifier.
    */
-  loadCarrierTrips = (carrierId: number): void => {
+  loadCarrierTrips = (carrierId: string): void => {
     if (this.carrierId !== carrierId) {
       this.tripsSignal.set([]);
     }
@@ -142,7 +142,7 @@ export class TripExecutionStore {
    * @param loadRequestId - Load request identifier.
    * @param shipperId - Active shipper, who must own the load request.
    */
-  loadTrackingByLoadRequest = (loadRequestId: number, shipperId: number): void => {
+  loadTrackingByLoadRequest = (loadRequestId: string, shipperId: string): void => {
     this.trackingRequestId = loadRequestId;
     this.trackedTripSignal.set(null);
     this.trackedLoadRequestSignal.set(null);
@@ -182,7 +182,7 @@ export class TripExecutionStore {
    * @returns A new ordered array.
    */
   private sortByPickup = (trips: TripOverview[]): TripOverview[] =>
-    [...trips].sort((a, b) => a.trip.pickupAt.getTime() - b.trip.pickupAt.getTime() || a.id - b.id);
+    [...trips].sort((a, b) => a.trip.pickupAt.getTime() - b.trip.pickupAt.getTime() || a.id.localeCompare(b.id));
 
   /**
    * Normalizes unknown errors into a display-friendly message.

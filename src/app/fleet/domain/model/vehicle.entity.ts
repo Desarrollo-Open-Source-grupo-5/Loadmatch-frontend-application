@@ -4,9 +4,9 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Vehicle registered by a carrier (aggregate root `Vehicle` of the Fleet context).
  */
 export class Vehicle implements BaseEntity {
-  #id: number;
-  #carrierId: number;
-  #vehicleTypeId: number;
+  #id: string;
+  #carrierId: string;
+  #vehicleTypeId: string;
   #licensePlate: string;
   #brand: string;
   #payloadKg: number;
@@ -17,9 +17,9 @@ export class Vehicle implements BaseEntity {
    * @param vehicle - Vehicle attributes.
    */
   constructor(vehicle: {
-    id: number;
-    carrierId: number;
-    vehicleTypeId: number;
+    id: string;
+    carrierId: string;
+    vehicleTypeId: string;
     licensePlate: string;
     brand: string;
     payloadKg: number;
@@ -37,33 +37,33 @@ export class Vehicle implements BaseEntity {
   /**
    * Vehicle identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 
   /**
    * Identifier of the carrier that owns the vehicle (reference by id).
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 
-  set carrierId(value: number) {
+  set carrierId(value: string) {
     this.#carrierId = value;
   }
 
   /**
    * Identifier of the vehicle type (reference by id).
    */
-  get vehicleTypeId(): number {
+  get vehicleTypeId(): string {
     return this.#vehicleTypeId;
   }
 
-  set vehicleTypeId(value: number) {
+  set vehicleTypeId(value: string) {
     this.#vehicleTypeId = value;
   }
 

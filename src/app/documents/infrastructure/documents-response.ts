@@ -5,9 +5,9 @@ import {ValidationStatus} from '../domain/model/validation-status';
  * Document resource exchanged with the `/documents` endpoint (flat JSON, camelCase).
  */
 export interface DocumentResource extends BaseResource {
-  id: number;
-  carrierId: number;
-  documentTypeId: number;
+  id: string;
+  carrierId: string;
+  documentTypeId: string;
   fileName: string;
   validationStatus: ValidationStatus;
   rejectionReasonCode: string | null;

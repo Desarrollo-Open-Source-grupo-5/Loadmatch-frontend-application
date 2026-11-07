@@ -62,7 +62,7 @@ export class TripOverview {
   /**
    * Identifier of the trip.
    */
-  get id(): number {
+  get id(): string {
     return this.#trip.id;
   }
 

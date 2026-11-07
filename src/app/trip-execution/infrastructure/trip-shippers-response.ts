@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/shippers` resource (owned by Profiles) read by Trip Execution.
  */
 export interface TripShipperResource extends BaseResource {
-  id: number;
+  id: string;
   businessName: string;
 }
 

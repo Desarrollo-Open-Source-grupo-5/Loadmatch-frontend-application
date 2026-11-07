@@ -25,7 +25,7 @@ export class TripAssignmentsApiEndpoint extends BaseApiEndpoint<TripAssignment, 
    * @param loadRequestId - Load request identifier.
    * @returns Stream with the matching trip assignments.
    */
-  getByLoadRequestId(loadRequestId: number): Observable<TripAssignment[]> {
+  getByLoadRequestId(loadRequestId: string): Observable<TripAssignment[]> {
     return this.getAll({loadRequestId});
   }
 }

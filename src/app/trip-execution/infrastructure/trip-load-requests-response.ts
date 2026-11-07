@@ -5,8 +5,8 @@ import {CurrencyCode} from '../../shared/domain/model/money';
  * Subset of the `/load-requests` resource (owned by Freight Publishing) read by Trip Execution.
  */
 export interface TripLoadRequestResource extends BaseResource {
-  id: number;
-  shipperId: number;
+  id: string;
+  shipperId: string;
   originAddress: string;
   originDistrict: string;
   destinationAddress: string;

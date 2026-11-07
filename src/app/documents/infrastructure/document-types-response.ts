@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Document type resource exchanged with the `/document-types` endpoint.
  */
 export interface DocumentTypeResource extends BaseResource {
-  id: number;
+  id: string;
   code: string;
   name: string;
   mandatory: boolean;

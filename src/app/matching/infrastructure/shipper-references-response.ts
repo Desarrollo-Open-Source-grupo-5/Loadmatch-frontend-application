@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/shippers` resource (owned by Profiles) read by Matching.
  */
 export interface ShipperReferenceResource extends BaseResource {
-  id: number;
+  id: string;
   businessName: string;
   reputationAverage: number;
   reputationTotalRatings: number;

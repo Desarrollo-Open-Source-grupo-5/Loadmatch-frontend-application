@@ -5,9 +5,9 @@ import {CurrencyCode} from '../../shared/domain/model/money';
  * Subset of the `/load-requests` resource read by Matching to build available loads.
  */
 export interface AvailableLoadResource extends BaseResource {
-  id: number;
-  shipperId: number;
-  vehicleTypeId: number;
+  id: string;
+  shipperId: string;
+  vehicleTypeId: string;
   originAddress: string;
   originDistrict: string;
   originLat: number;

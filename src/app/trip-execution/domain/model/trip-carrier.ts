@@ -4,7 +4,7 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Read-only projection of a Profiles carrier with the name a shipper sees when tracking its load.
  */
 export class TripCarrier implements BaseEntity {
-  readonly #id: number;
+  readonly #id: string;
   readonly #firstNames: string;
   readonly #lastNames: string;
 
@@ -12,7 +12,7 @@ export class TripCarrier implements BaseEntity {
    * Creates a trip carrier projection.
    * @param carrier - Identifier and names.
    */
-  constructor(carrier: { id: number; firstNames: string; lastNames: string }) {
+  constructor(carrier: { id: string; firstNames: string; lastNames: string }) {
     this.#id = carrier.id;
     this.#firstNames = carrier.firstNames;
     this.#lastNames = carrier.lastNames;
@@ -21,7 +21,7 @@ export class TripCarrier implements BaseEntity {
   /**
    * Carrier identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 

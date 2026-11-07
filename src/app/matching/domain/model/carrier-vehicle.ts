@@ -5,9 +5,9 @@ import {AvailableLoad} from './available-load';
  * Read-only projection of a Fleet vehicle that Matching uses to check load compatibility.
  */
 export class CarrierVehicle implements BaseEntity {
-  readonly #id: number;
-  readonly #carrierId: number;
-  readonly #vehicleTypeId: number;
+  readonly #id: string;
+  readonly #carrierId: string;
+  readonly #vehicleTypeId: string;
   readonly #licensePlate: string;
   readonly #payloadKg: number;
   readonly #active: boolean;
@@ -17,9 +17,9 @@ export class CarrierVehicle implements BaseEntity {
    * @param vehicle - Vehicle attributes needed for matching.
    */
   constructor(vehicle: {
-    id: number;
-    carrierId: number;
-    vehicleTypeId: number;
+    id: string;
+    carrierId: string;
+    vehicleTypeId: string;
     licensePlate: string;
     payloadKg: number;
     active: boolean;
@@ -35,21 +35,21 @@ export class CarrierVehicle implements BaseEntity {
   /**
    * Vehicle identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
   /**
    * Identifier of the carrier that owns the vehicle.
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 
   /**
    * Identifier of the vehicle type.
    */
-  get vehicleTypeId(): number {
+  get vehicleTypeId(): string {
     return this.#vehicleTypeId;
   }
 

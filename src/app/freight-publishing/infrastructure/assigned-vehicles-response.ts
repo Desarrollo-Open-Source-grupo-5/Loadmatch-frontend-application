@@ -4,8 +4,8 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/vehicles` resource (owned by Fleet) read by Freight Publishing.
  */
 export interface AssignedVehicleResource extends BaseResource {
-  id: number;
-  vehicleTypeId: number;
+  id: string;
+  vehicleTypeId: string;
   licensePlate: string;
   payloadKg: number;
 }

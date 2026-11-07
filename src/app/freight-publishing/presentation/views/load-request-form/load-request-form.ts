@@ -91,7 +91,7 @@ export class LoadRequestForm {
   /**
    * Identifier of the edited load request, or null when publishing a new one.
    */
-  protected readonly editedId: number | null = this.parseId(this.route.snapshot.paramMap.get('id'));
+  protected readonly editedId: string | null = this.parseId(this.route.snapshot.paramMap.get('id'));
 
   /**
    * Load request being edited, once the store has loaded it.
@@ -133,7 +133,7 @@ export class LoadRequestForm {
     originAddress: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.maxLength(120)]}),
     destinationLocationCode: new FormControl('', {nonNullable: true, validators: Validators.required}),
     destinationAddress: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.maxLength(120)]}),
-    vehicleTypeId: new FormControl<number | null>(null, Validators.required),
+    vehicleTypeId: new FormControl<string | null>(null, Validators.required),
     cargoType: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.maxLength(60)]}),
     weightKg: new FormControl<number | null>(null, [Validators.required, LoadRequestValidators.positive()]),
     lengthM: new FormControl<number | null>(null, [Validators.required, LoadRequestValidators.positive()]),
@@ -279,7 +279,7 @@ export class LoadRequestForm {
         edited.edit(this.buildDetails());
         this.store.updateLoadRequest(edited, updated => this.onUpdated(updated));
       } else {
-        const loadRequest = new LoadRequest({...this.buildDetails(), id: 0, shipperId});
+        const loadRequest = new LoadRequest({...this.buildDetails(), id: '', shipperId});
         loadRequest.publish();
         this.store.publishLoadRequest(loadRequest, created => this.onPublished(created));
       }
@@ -324,7 +324,7 @@ export class LoadRequestForm {
     const origin = findLocationByCode(value.originLocationCode) ?? PERU_LOCATIONS[0];
     const destination = findLocationByCode(value.destinationLocationCode) ?? PERU_LOCATIONS[0];
     return {
-      vehicleTypeId: Number(value.vehicleTypeId),
+      vehicleTypeId: String(value.vehicleTypeId),
       route: Route.between(
         new Location({address: value.originAddress.trim(), district: origin.district, coordinates: origin.coordinates}),
         new Location({address: value.destinationAddress.trim(), district: destination.district, coordinates: destination.coordinates})
@@ -377,8 +377,7 @@ export class LoadRequestForm {
    * @param id - Raw route parameter.
    * @returns The numeric identifier, or null when absent or invalid.
    */
-  private parseId(id: string | null): number | null {
-    const parsed = Number(id);
-    return id !== null && Number.isInteger(parsed) && parsed > 0 ? parsed : null;
+  private parseId(id: string | null): string | null {
+    return id !== null && id.trim().length > 0 ? id : null;
   }
 }

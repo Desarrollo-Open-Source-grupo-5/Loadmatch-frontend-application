@@ -11,7 +11,7 @@ export interface LoadRequestDetails {
   /**
    * Identifier of the required vehicle type (reference by id to Fleet).
    */
-  vehicleTypeId: number;
+  vehicleTypeId: string;
   /**
    * Origin, destination and distance.
    */
@@ -43,9 +43,9 @@ export interface LoadRequestDetails {
  * context).
  */
 export class LoadRequest implements BaseEntity {
-  #id: number;
-  #shipperId: number;
-  #vehicleTypeId: number;
+  #id: string;
+  #shipperId: string;
+  #vehicleTypeId: string;
   #route: Route;
   #weightKg: number;
   #dimensions: Dimensions;
@@ -63,8 +63,8 @@ export class LoadRequest implements BaseEntity {
    * @param loadRequest - Load request attributes.
    */
   constructor(loadRequest: LoadRequestDetails & {
-    id: number;
-    shipperId: number;
+    id: string;
+    shipperId: string;
     status?: LoadRequestStatus;
     createdAt?: Date | null;
     publishedAt?: Date | null;
@@ -90,11 +90,11 @@ export class LoadRequest implements BaseEntity {
   /**
    * Load request identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 
@@ -108,22 +108,22 @@ export class LoadRequest implements BaseEntity {
   /**
    * Identifier of the shipper that owns the request (reference by id to Profiles).
    */
-  get shipperId(): number {
+  get shipperId(): string {
     return this.#shipperId;
   }
 
-  set shipperId(value: number) {
+  set shipperId(value: string) {
     this.#shipperId = value;
   }
 
   /**
    * Identifier of the required vehicle type (reference by id to Fleet).
    */
-  get vehicleTypeId(): number {
+  get vehicleTypeId(): string {
     return this.#vehicleTypeId;
   }
 
-  set vehicleTypeId(value: number) {
+  set vehicleTypeId(value: string) {
     this.#vehicleTypeId = value;
   }
 

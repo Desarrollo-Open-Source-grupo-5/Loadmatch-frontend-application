@@ -6,8 +6,8 @@ import {Money} from '../../../shared/domain/model/money';
  * views show.
  */
 export class TripLoadRequest implements BaseEntity {
-  readonly #id: number;
-  readonly #shipperId: number;
+  readonly #id: string;
+  readonly #shipperId: string;
   readonly #originDistrict: string;
   readonly #originAddress: string;
   readonly #destinationDistrict: string;
@@ -23,8 +23,8 @@ export class TripLoadRequest implements BaseEntity {
    * @param loadRequest - Identifier, shipper, route, cargo, rate and pickup date.
    */
   constructor(loadRequest: {
-    id: number;
-    shipperId: number;
+    id: string;
+    shipperId: string;
     originDistrict: string;
     originAddress: string;
     destinationDistrict: string;
@@ -51,7 +51,7 @@ export class TripLoadRequest implements BaseEntity {
   /**
    * Load request identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
@@ -65,7 +65,7 @@ export class TripLoadRequest implements BaseEntity {
   /**
    * Identifier of the shipper that owns the load request.
    */
-  get shipperId(): number {
+  get shipperId(): string {
     return this.#shipperId;
   }
 

@@ -7,11 +7,11 @@ import {TripStatusChange} from './trip-status-change';
  * Execution context, simplified for the Web Application).
  */
 export class Trip implements BaseEntity {
-  readonly #id: number;
-  readonly #loadRequestId: number;
-  readonly #shipperId: number;
-  readonly #carrierId: number;
-  readonly #vehicleId: number;
+  readonly #id: string;
+  readonly #loadRequestId: string;
+  readonly #shipperId: string;
+  readonly #carrierId: string;
+  readonly #vehicleId: string;
   readonly #status: TripStatus;
   readonly #assignedAt: Date;
   readonly #pickupAt: Date;
@@ -25,11 +25,11 @@ export class Trip implements BaseEntity {
    * @param trip - Trip attributes.
    */
   constructor(trip: {
-    id: number;
-    loadRequestId: number;
-    shipperId: number;
-    carrierId: number;
-    vehicleId: number;
+    id: string;
+    loadRequestId: string;
+    shipperId: string;
+    carrierId: string;
+    vehicleId: string;
     status: TripStatus;
     assignedAt: Date;
     pickupAt: Date;
@@ -55,14 +55,14 @@ export class Trip implements BaseEntity {
   /**
    * Trip identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
   /**
    * Identifier of the load request the trip originates from (reference by id to Freight Publishing).
    */
-  get loadRequestId(): number {
+  get loadRequestId(): string {
     return this.#loadRequestId;
   }
 
@@ -76,21 +76,21 @@ export class Trip implements BaseEntity {
   /**
    * Identifier of the shipper that owns the load (reference by id to Profiles).
    */
-  get shipperId(): number {
+  get shipperId(): string {
     return this.#shipperId;
   }
 
   /**
    * Identifier of the carrier that accepted the load (reference by id to Profiles).
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 
   /**
    * Identifier of the vehicle assigned to the trip (reference by id to Fleet).
    */
-  get vehicleId(): number {
+  get vehicleId(): string {
     return this.#vehicleId;
   }
 

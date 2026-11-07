@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/carriers` resource (owned by Profiles) read by Trip Execution.
  */
 export interface TripCarrierResource extends BaseResource {
-  id: number;
+  id: string;
   firstNames: string;
   lastNames: string;
 }

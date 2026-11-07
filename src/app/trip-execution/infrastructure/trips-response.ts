@@ -14,11 +14,11 @@ export interface TripStatusChangeResource {
  * Trip resource exchanged with the `/trips` endpoint (flat JSON, camelCase, history oldest first).
  */
 export interface TripResource extends BaseResource {
-  id: number;
-  loadRequestId: number;
-  shipperId: number;
-  carrierId: number;
-  vehicleId: number;
+  id: string;
+  loadRequestId: string;
+  shipperId: string;
+  carrierId: string;
+  vehicleId: string;
   status: TripStatus;
   assignedAt: string;
   pickupAt: string;

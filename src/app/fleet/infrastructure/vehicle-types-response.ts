@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Vehicle type resource exchanged with the `/vehicle-types` endpoint.
  */
 export interface VehicleTypeResource extends BaseResource {
-  id: number;
+  id: string;
   name: string;
   description: string;
   maxWeightKg: number;

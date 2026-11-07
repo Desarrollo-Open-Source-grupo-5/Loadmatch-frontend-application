@@ -4,17 +4,17 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Read-only projection of a Trip Execution trip: which carrier and vehicle took a load request.
  */
 export class TripAssignment implements BaseEntity {
-  #id: number;
-  #loadRequestId: number;
-  #carrierId: number;
-  #vehicleId: number;
+  #id: string;
+  #loadRequestId: string;
+  #carrierId: string;
+  #vehicleId: string;
   #assignedAt: Date;
 
   /**
    * Creates a trip assignment.
    * @param assignment - Trip identifier, load request, carrier and vehicle references and assignment date.
    */
-  constructor(assignment: { id: number; loadRequestId: number; carrierId: number; vehicleId: number; assignedAt: Date }) {
+  constructor(assignment: { id: string; loadRequestId: string; carrierId: string; vehicleId: string; assignedAt: Date }) {
     this.#id = assignment.id;
     this.#loadRequestId = assignment.loadRequestId;
     this.#carrierId = assignment.carrierId;
@@ -25,44 +25,44 @@ export class TripAssignment implements BaseEntity {
   /**
    * Trip identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 
   /**
    * Identifier of the load request the trip originates from.
    */
-  get loadRequestId(): number {
+  get loadRequestId(): string {
     return this.#loadRequestId;
   }
 
-  set loadRequestId(value: number) {
+  set loadRequestId(value: string) {
     this.#loadRequestId = value;
   }
 
   /**
    * Identifier of the carrier that accepted the load request (reference by id to Profiles).
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 
-  set carrierId(value: number) {
+  set carrierId(value: string) {
     this.#carrierId = value;
   }
 
   /**
    * Identifier of the vehicle assigned to the trip (reference by id to Fleet).
    */
-  get vehicleId(): number {
+  get vehicleId(): string {
     return this.#vehicleId;
   }
 
-  set vehicleId(value: number) {
+  set vehicleId(value: string) {
     this.#vehicleId = value;
   }
 

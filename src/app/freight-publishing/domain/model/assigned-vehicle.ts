@@ -4,8 +4,8 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Read-only projection of a Fleet vehicle with the data a shipper checks before handing over the cargo.
  */
 export class AssignedVehicle implements BaseEntity {
-  #id: number;
-  #vehicleTypeId: number;
+  #id: string;
+  #vehicleTypeId: string;
   #licensePlate: string;
   #payloadKg: number;
 
@@ -13,7 +13,7 @@ export class AssignedVehicle implements BaseEntity {
    * Creates an assigned vehicle.
    * @param vehicle - Identifier, vehicle type, license plate and payload capacity.
    */
-  constructor(vehicle: { id: number; vehicleTypeId: number; licensePlate: string; payloadKg: number }) {
+  constructor(vehicle: { id: string; vehicleTypeId: string; licensePlate: string; payloadKg: number }) {
     this.#id = vehicle.id;
     this.#vehicleTypeId = vehicle.vehicleTypeId;
     this.#licensePlate = vehicle.licensePlate;
@@ -23,22 +23,22 @@ export class AssignedVehicle implements BaseEntity {
   /**
    * Vehicle identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 
   /**
    * Identifier of the vehicle type.
    */
-  get vehicleTypeId(): number {
+  get vehicleTypeId(): string {
     return this.#vehicleTypeId;
   }
 
-  set vehicleTypeId(value: number) {
+  set vehicleTypeId(value: string) {
     this.#vehicleTypeId = value;
   }
 

@@ -44,7 +44,7 @@ export class LoadRequestValidators {
   static weightWithinVehicleCapacity(
     weightControlName: string,
     vehicleTypeControlName: string,
-    maxWeightFor: (vehicleTypeId: number) => number | undefined
+    maxWeightFor: (vehicleTypeId: string) => number | undefined
   ): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
       const weight = group.get(weightControlName)?.value;
@@ -52,7 +52,7 @@ export class LoadRequestValidators {
       if (weight === null || weight === undefined || weight === '' || vehicleTypeId === null || vehicleTypeId === undefined) {
         return null;
       }
-      const maxWeightKg = maxWeightFor(Number(vehicleTypeId));
+      const maxWeightKg = maxWeightFor(String(vehicleTypeId));
       return maxWeightKg !== undefined && Number(weight) > maxWeightKg ? {weightExceedsCapacity: {maxWeightKg}} : null;
     };
   }

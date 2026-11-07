@@ -29,7 +29,7 @@ export class FreightPublishingApi extends BaseApi {
    * @param shipperId - Shipper identifier.
    * @returns Stream with the shipper's load requests.
    */
-  getLoadRequestsByShipper = (shipperId: number): Observable<LoadRequest[]> =>
+  getLoadRequestsByShipper = (shipperId: string): Observable<LoadRequest[]> =>
     this.loadRequestsEndpoint.getAll({shipperId});
 
   /**
@@ -60,7 +60,7 @@ export class FreightPublishingApi extends BaseApi {
    * @param loadRequestId - Load request identifier.
    * @returns Stream with the assigned carrier, or null when no trip exists for the request.
    */
-  getAssignedCarrier = (loadRequestId: number): Observable<AssignedCarrier | null> =>
+  getAssignedCarrier = (loadRequestId: string): Observable<AssignedCarrier | null> =>
     this.tripAssignmentsEndpoint.getByLoadRequestId(loadRequestId).pipe(
       switchMap(trips => {
         const trip = trips.find(candidate => candidate.loadRequestId === loadRequestId);

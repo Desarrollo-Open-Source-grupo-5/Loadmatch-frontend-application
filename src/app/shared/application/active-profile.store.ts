@@ -16,7 +16,7 @@ export interface ActiveProfile {
   /**
    * Identifier of the Shipper or Carrier resource in the API.
    */
-  profileId: number;
+  profileId: string;
   /**
    * Name shown in the toolbar (business name or carrier full name).
    */

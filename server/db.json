@@ -1,7 +1,7 @@
 {
   "shippers": [
     {
-      "id": 1,
+      "id": "1",
       "ruc": "20512345671",
       "businessName": "Distribuidora Andina S.A.C.",
       "contactName": "Carla Mendoza Ríos",
@@ -10,7 +10,7 @@
       "reputationTotalRatings": 18
     },
     {
-      "id": 2,
+      "id": "2",
       "ruc": "20601234565",
       "businessName": "Agroexportadora Costa Norte S.A.C.",
       "contactName": "Luis Paredes Castillo",
@@ -19,7 +19,7 @@
       "reputationTotalRatings": 9
     },
     {
-      "id": 3,
+      "id": "3",
       "ruc": "20455678901",
       "businessName": "Ferretería Industrial Sur E.I.R.L.",
       "contactName": "Rosa Quispe Flores",
@@ -28,7 +28,7 @@
       "reputationTotalRatings": 31
     },
     {
-      "id": 4,
+      "id": "4",
       "ruc": "20609876540",
       "businessName": "Textiles Andinos del Sur S.A.C.",
       "contactName": "Miguel Huamán Torres",
@@ -39,7 +39,7 @@
   ],
   "carriers": [
     {
-      "id": 1,
+      "id": "1",
       "firstNames": "Jorge Luis",
       "lastNames": "Ramírez Huamán",
       "dni": "45678912",
@@ -49,7 +49,7 @@
       "reputationTotalRatings": 142
     },
     {
-      "id": 2,
+      "id": "2",
       "firstNames": "María Elena",
       "lastNames": "Torres Vílchez",
       "dni": "70123456",
@@ -59,7 +59,7 @@
       "reputationTotalRatings": 37
     },
     {
-      "id": 3,
+      "id": "3",
       "firstNames": "Pedro",
       "lastNames": "Quispe Mamani",
       "dni": "41234567",
@@ -71,7 +71,7 @@
   ],
   "vehicle-types": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Van",
       "description": "Closed cargo van for small urban and regional deliveries.",
       "maxWeightKg": 1500,
@@ -81,7 +81,7 @@
       "active": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Light truck",
       "description": "Two-axle truck for medium urban and interprovincial loads.",
       "maxWeightKg": 5000,
@@ -91,7 +91,7 @@
       "active": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Medium truck",
       "description": "Rigid truck for palletized interprovincial cargo.",
       "maxWeightKg": 18000,
@@ -101,7 +101,7 @@
       "active": true
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Trailer",
       "description": "Tractor-trailer for heavy and long-haul cargo.",
       "maxWeightKg": 30000,
@@ -111,7 +111,7 @@
       "active": true
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Refrigerated van",
       "description": "Temperature-controlled van for perishable goods.",
       "maxWeightKg": 3500,
@@ -123,45 +123,45 @@
   ],
   "vehicles": [
     {
-      "id": 1,
-      "carrierId": 1,
-      "vehicleTypeId": 3,
+      "id": "1",
+      "carrierId": "1",
+      "vehicleTypeId": "3",
       "licensePlate": "ABC-123",
       "brand": "Volvo",
       "payloadKg": 18000,
       "active": true
     },
     {
-      "id": 2,
-      "carrierId": 2,
-      "vehicleTypeId": 4,
+      "id": "2",
+      "carrierId": "2",
+      "vehicleTypeId": "4",
       "licensePlate": "B7K-482",
       "brand": "Scania",
       "payloadKg": 30000,
       "active": true
     },
     {
-      "id": 3,
-      "carrierId": 3,
-      "vehicleTypeId": 5,
+      "id": "3",
+      "carrierId": "3",
+      "vehicleTypeId": "5",
       "licensePlate": "C3R-915",
       "brand": "Hyundai",
       "payloadKg": 3500,
       "active": true
     },
     {
-      "id": 4,
-      "carrierId": 2,
-      "vehicleTypeId": 2,
+      "id": "4",
+      "carrierId": "2",
+      "vehicleTypeId": "2",
       "licensePlate": "B9M-207",
       "brand": "Hino",
       "payloadKg": 5000,
       "active": true
     },
     {
-      "id": 5,
-      "carrierId": 1,
-      "vehicleTypeId": 5,
+      "id": "5",
+      "carrierId": "1",
+      "vehicleTypeId": "5",
       "licensePlate": "A5F-631",
       "brand": "Isuzu",
       "payloadKg": 3500,
@@ -170,9 +170,9 @@
   ],
   "load-requests": [
     {
-      "id": 1,
-      "shipperId": 1,
-      "vehicleTypeId": 2,
+      "id": "1",
+      "shipperId": "1",
+      "vehicleTypeId": "2",
       "originAddress": "Av. Argentina 3450, Cercado de Lima",
       "originDistrict": "Lima",
       "originLat": -12.0464,
@@ -197,9 +197,9 @@
       "cancellationReason": null
     },
     {
-      "id": 2,
-      "shipperId": 3,
-      "vehicleTypeId": 2,
+      "id": "2",
+      "shipperId": "3",
+      "vehicleTypeId": "2",
       "originAddress": "Parque Industrial Río Seco, Calle 4",
       "originDistrict": "Arequipa",
       "originLat": -16.409,
@@ -224,9 +224,9 @@
       "cancellationReason": null
     },
     {
-      "id": 3,
-      "shipperId": 1,
-      "vehicleTypeId": 4,
+      "id": "3",
+      "shipperId": "1",
+      "vehicleTypeId": "4",
       "originAddress": "Av. Nicolás Ayllón 4800, Ate",
       "originDistrict": "Ate",
       "originLat": -12.0262,
@@ -251,9 +251,9 @@
       "cancellationReason": null
     },
     {
-      "id": 4,
-      "shipperId": 1,
-      "vehicleTypeId": 3,
+      "id": "4",
+      "shipperId": "1",
+      "vehicleTypeId": "3",
       "originAddress": "Av. Argentina 2833, Callao",
       "originDistrict": "Callao",
       "originLat": -12.0566,
@@ -278,9 +278,9 @@
       "cancellationReason": "The customer postponed the order until November."
     },
     {
-      "id": 5,
-      "shipperId": 1,
-      "vehicleTypeId": 4,
+      "id": "5",
+      "shipperId": "1",
+      "vehicleTypeId": "4",
       "originAddress": "Antigua Panamericana Sur Km 36, Almacén 3",
       "originDistrict": "Lurín",
       "originLat": -12.2747,
@@ -305,9 +305,9 @@
       "cancellationReason": null
     },
     {
-      "id": 6,
-      "shipperId": 2,
-      "vehicleTypeId": 5,
+      "id": "6",
+      "shipperId": "2",
+      "vehicleTypeId": "5",
       "originAddress": "Packing Costa Norte, Carretera Sullana Km 4",
       "originDistrict": "Piura",
       "originLat": -5.1945,
@@ -332,9 +332,9 @@
       "cancellationReason": null
     },
     {
-      "id": 7,
-      "shipperId": 1,
-      "vehicleTypeId": 3,
+      "id": "7",
+      "shipperId": "1",
+      "vehicleTypeId": "3",
       "originAddress": "Av. Néstor Gambetta 1250, Terminal Logístico",
       "originDistrict": "Callao",
       "originLat": -12.0566,
@@ -359,9 +359,9 @@
       "cancellationReason": null
     },
     {
-      "id": 8,
-      "shipperId": 3,
-      "vehicleTypeId": 3,
+      "id": "8",
+      "shipperId": "3",
+      "vehicleTypeId": "3",
       "originAddress": "Parque Industrial Río Seco, Calle 7",
       "originDistrict": "Arequipa",
       "originLat": -16.409,
@@ -386,9 +386,9 @@
       "cancellationReason": "Shipment moved to rail transport."
     },
     {
-      "id": 9,
-      "shipperId": 2,
-      "vehicleTypeId": 3,
+      "id": "9",
+      "shipperId": "2",
+      "vehicleTypeId": "3",
       "originAddress": "Molino San Martín, Carretera a Lambayeque Km 2",
       "originDistrict": "Chiclayo",
       "originLat": -6.7714,
@@ -413,9 +413,9 @@
       "cancellationReason": null
     },
     {
-      "id": 10,
-      "shipperId": 2,
-      "vehicleTypeId": 3,
+      "id": "10",
+      "shipperId": "2",
+      "vehicleTypeId": "3",
       "originAddress": "Av. Industrial Los Eucaliptos 450, Lurín",
       "originDistrict": "Lurín",
       "originLat": -12.2747,
@@ -440,9 +440,9 @@
       "cancellationReason": null
     },
     {
-      "id": 11,
-      "shipperId": 1,
-      "vehicleTypeId": 4,
+      "id": "11",
+      "shipperId": "1",
+      "vehicleTypeId": "4",
       "originAddress": "Av. Elmer Faucett 3200, Almacén Central",
       "originDistrict": "Callao",
       "originLat": -12.0566,
@@ -467,9 +467,9 @@
       "cancellationReason": null
     },
     {
-      "id": 12,
-      "shipperId": 2,
-      "vehicleTypeId": 4,
+      "id": "12",
+      "shipperId": "2",
+      "vehicleTypeId": "4",
       "originAddress": "Terminal Portuario de Chancay, Puerta 2",
       "originDistrict": "Chancay",
       "originLat": -11.5653,
@@ -494,9 +494,9 @@
       "cancellationReason": null
     },
     {
-      "id": 13,
-      "shipperId": 3,
-      "vehicleTypeId": 3,
+      "id": "13",
+      "shipperId": "3",
+      "vehicleTypeId": "3",
       "originAddress": "Av. Alfonso Ugarte 600, Cercado de Arequipa",
       "originDistrict": "Arequipa",
       "originLat": -16.409,
@@ -521,9 +521,9 @@
       "cancellationReason": null
     },
     {
-      "id": 14,
-      "shipperId": 1,
-      "vehicleTypeId": 1,
+      "id": "14",
+      "shipperId": "1",
+      "vehicleTypeId": "1",
       "originAddress": "Jr. Paruro 1150, Cercado de Lima",
       "originDistrict": "Lima",
       "originLat": -12.0464,
@@ -548,9 +548,9 @@
       "cancellationReason": null
     },
     {
-      "id": 15,
-      "shipperId": 2,
-      "vehicleTypeId": 5,
+      "id": "15",
+      "shipperId": "2",
+      "vehicleTypeId": "5",
       "originAddress": "Carretera Panamericana Norte Km 148, Packing Huacho",
       "originDistrict": "Huacho",
       "originLat": -11.1067,
@@ -575,9 +575,9 @@
       "cancellationReason": null
     },
     {
-      "id": 16,
-      "shipperId": 1,
-      "vehicleTypeId": 3,
+      "id": "16",
+      "shipperId": "1",
+      "vehicleTypeId": "3",
       "originAddress": "Av. Elmer Faucett 2950, Almacén 4",
       "originDistrict": "Callao",
       "originLat": -12.0566,
@@ -602,9 +602,9 @@
       "cancellationReason": null
     },
     {
-      "id": 17,
-      "shipperId": 2,
-      "vehicleTypeId": 5,
+      "id": "17",
+      "shipperId": "2",
+      "vehicleTypeId": "5",
       "originAddress": "Fundo Los Paltos, Carretera Panamericana Norte Km 150",
       "originDistrict": "Huacho",
       "originLat": -11.1067,
@@ -629,9 +629,9 @@
       "cancellationReason": null
     },
     {
-      "id": 18,
-      "shipperId": 3,
-      "vehicleTypeId": 4,
+      "id": "18",
+      "shipperId": "3",
+      "vehicleTypeId": "4",
       "originAddress": "Parque Industrial Río Seco, Calle 9",
       "originDistrict": "Arequipa",
       "originLat": -16.409,
@@ -656,9 +656,9 @@
       "cancellationReason": null
     },
     {
-      "id": 19,
-      "shipperId": 1,
-      "vehicleTypeId": 2,
+      "id": "19",
+      "shipperId": "1",
+      "vehicleTypeId": "2",
       "originAddress": "Av. Nicolás Ayllón 5200, Ate",
       "originDistrict": "Ate",
       "originLat": -12.0262,
@@ -683,9 +683,9 @@
       "cancellationReason": null
     },
     {
-      "id": 20,
-      "shipperId": 2,
-      "vehicleTypeId": 3,
+      "id": "20",
+      "shipperId": "2",
+      "vehicleTypeId": "3",
       "originAddress": "Molino El Cortijo, Carretera a Pimentel Km 3",
       "originDistrict": "Chiclayo",
       "originLat": -6.7714,
@@ -710,9 +710,9 @@
       "cancellationReason": null
     },
     {
-      "id": 21,
-      "shipperId": 3,
-      "vehicleTypeId": 4,
+      "id": "21",
+      "shipperId": "3",
+      "vehicleTypeId": "4",
       "originAddress": "Planta Yura, Carretera Arequipa-Yura Km 26",
       "originDistrict": "Arequipa",
       "originLat": -16.409,
@@ -739,11 +739,11 @@
   ],
   "trips": [
     {
-      "id": 1,
-      "loadRequestId": 1,
-      "shipperId": 1,
-      "carrierId": 2,
-      "vehicleId": 4,
+      "id": "1",
+      "loadRequestId": "1",
+      "shipperId": "1",
+      "carrierId": "2",
+      "vehicleId": "4",
       "status": "DELIVERED",
       "assignedAt": "2026-09-18T15:40:00-05:00",
       "pickupAt": "2026-09-22T07:00:00-05:00",
@@ -784,11 +784,11 @@
       ]
     },
     {
-      "id": 2,
-      "loadRequestId": 2,
-      "shipperId": 3,
-      "carrierId": 2,
-      "vehicleId": 4,
+      "id": "2",
+      "loadRequestId": "2",
+      "shipperId": "3",
+      "carrierId": "2",
+      "vehicleId": "4",
       "status": "COMPLETED",
       "assignedAt": "2026-09-21T10:15:00-05:00",
       "pickupAt": "2026-09-25T06:00:00-05:00",
@@ -834,11 +834,11 @@
       ]
     },
     {
-      "id": 3,
-      "loadRequestId": 3,
-      "shipperId": 1,
-      "carrierId": 2,
-      "vehicleId": 2,
+      "id": "3",
+      "loadRequestId": "3",
+      "shipperId": "1",
+      "carrierId": "2",
+      "vehicleId": "2",
       "status": "IN_TRANSIT",
       "assignedAt": "2026-09-25T09:30:00-05:00",
       "pickupAt": "2026-10-01T06:00:00-05:00",
@@ -874,11 +874,11 @@
       ]
     },
     {
-      "id": 4,
-      "loadRequestId": 5,
-      "shipperId": 1,
-      "carrierId": 2,
-      "vehicleId": 2,
+      "id": "4",
+      "loadRequestId": "5",
+      "shipperId": "1",
+      "carrierId": "2",
+      "vehicleId": "2",
       "status": "ASSIGNED",
       "assignedAt": "2026-09-27T11:05:00-05:00",
       "pickupAt": "2026-10-05T09:00:00-05:00",
@@ -894,11 +894,11 @@
       ]
     },
     {
-      "id": 5,
-      "loadRequestId": 6,
-      "shipperId": 2,
-      "carrierId": 1,
-      "vehicleId": 5,
+      "id": "5",
+      "loadRequestId": "6",
+      "shipperId": "2",
+      "carrierId": "1",
+      "vehicleId": "5",
       "status": "DELAYED",
       "assignedAt": "2026-09-28T08:50:00-05:00",
       "pickupAt": "2026-10-01T22:00:00-05:00",
@@ -939,11 +939,11 @@
       ]
     },
     {
-      "id": 6,
-      "loadRequestId": 9,
-      "shipperId": 2,
-      "carrierId": 1,
-      "vehicleId": 1,
+      "id": "6",
+      "loadRequestId": "9",
+      "shipperId": "2",
+      "carrierId": "1",
+      "vehicleId": "1",
       "status": "ASSIGNED",
       "assignedAt": "2026-09-30T12:20:00-05:00",
       "pickupAt": "2026-10-06T05:00:00-05:00",
@@ -959,11 +959,11 @@
       ]
     },
     {
-      "id": 7,
-      "loadRequestId": 16,
-      "shipperId": 1,
-      "carrierId": 1,
-      "vehicleId": 1,
+      "id": "7",
+      "loadRequestId": "16",
+      "shipperId": "1",
+      "carrierId": "1",
+      "vehicleId": "1",
       "status": "COMPLETED",
       "assignedAt": "2026-08-07T10:30:00-05:00",
       "pickupAt": "2026-08-11T06:00:00-05:00",
@@ -1009,11 +1009,11 @@
       ]
     },
     {
-      "id": 8,
-      "loadRequestId": 17,
-      "shipperId": 2,
-      "carrierId": 1,
-      "vehicleId": 5,
+      "id": "8",
+      "loadRequestId": "17",
+      "shipperId": "2",
+      "carrierId": "1",
+      "vehicleId": "5",
       "status": "COMPLETED",
       "assignedAt": "2026-08-16T08:45:00-05:00",
       "pickupAt": "2026-08-19T04:00:00-05:00",
@@ -1059,11 +1059,11 @@
       ]
     },
     {
-      "id": 9,
-      "loadRequestId": 18,
-      "shipperId": 3,
-      "carrierId": 2,
-      "vehicleId": 2,
+      "id": "9",
+      "loadRequestId": "18",
+      "shipperId": "3",
+      "carrierId": "2",
+      "vehicleId": "2",
       "status": "COMPLETED",
       "assignedAt": "2026-08-20T14:10:00-05:00",
       "pickupAt": "2026-08-25T05:30:00-05:00",
@@ -1109,11 +1109,11 @@
       ]
     },
     {
-      "id": 10,
-      "loadRequestId": 19,
-      "shipperId": 1,
-      "carrierId": 2,
-      "vehicleId": 4,
+      "id": "10",
+      "loadRequestId": "19",
+      "shipperId": "1",
+      "carrierId": "2",
+      "vehicleId": "4",
       "status": "COMPLETED",
       "assignedAt": "2026-08-29T11:25:00-05:00",
       "pickupAt": "2026-09-02T06:00:00-05:00",
@@ -1159,11 +1159,11 @@
       ]
     },
     {
-      "id": 11,
-      "loadRequestId": 20,
-      "shipperId": 2,
-      "carrierId": 1,
-      "vehicleId": 1,
+      "id": "11",
+      "loadRequestId": "20",
+      "shipperId": "2",
+      "carrierId": "1",
+      "vehicleId": "1",
       "status": "COMPLETED",
       "assignedAt": "2026-09-04T16:00:00-05:00",
       "pickupAt": "2026-09-08T05:00:00-05:00",
@@ -1209,11 +1209,11 @@
       ]
     },
     {
-      "id": 12,
-      "loadRequestId": 21,
-      "shipperId": 3,
-      "carrierId": 2,
-      "vehicleId": 2,
+      "id": "12",
+      "loadRequestId": "21",
+      "shipperId": "3",
+      "carrierId": "2",
+      "vehicleId": "2",
       "status": "COMPLETED",
       "assignedAt": "2026-09-10T09:40:00-05:00",
       "pickupAt": "2026-09-14T06:30:00-05:00",
@@ -1261,21 +1261,21 @@
   ],
   "document-types": [
     {
-      "id": 1,
+      "id": "1",
       "code": "DRIVER_LICENSE",
       "name": "Driver license",
       "mandatory": true,
       "requiresExpiration": true
     },
     {
-      "id": 2,
+      "id": "2",
       "code": "SOAT",
       "name": "SOAT",
       "mandatory": true,
       "requiresExpiration": true
     },
     {
-      "id": 3,
+      "id": "3",
       "code": "VEHICLE_REGISTRATION",
       "name": "Vehicle registration card",
       "mandatory": true,
@@ -1284,9 +1284,9 @@
   ],
   "documents": [
     {
-      "id": 1,
-      "carrierId": 1,
-      "documentTypeId": 2,
+      "id": "1",
+      "carrierId": "1",
+      "documentTypeId": "2",
       "fileName": "soat-abc123.pdf",
       "validationStatus": "APPROVED",
       "rejectionReasonCode": null,
@@ -1297,9 +1297,9 @@
       "validatedAt": "2026-08-03T09:00:00-05:00"
     },
     {
-      "id": 2,
-      "carrierId": 1,
-      "documentTypeId": 1,
+      "id": "2",
+      "carrierId": "1",
+      "documentTypeId": "1",
       "fileName": "driver-license-45678912.pdf",
       "validationStatus": "APPROVED",
       "rejectionReasonCode": null,
@@ -1310,9 +1310,9 @@
       "validatedAt": "2026-08-03T09:00:00-05:00"
     },
     {
-      "id": 3,
-      "carrierId": 1,
-      "documentTypeId": 3,
+      "id": "3",
+      "carrierId": "1",
+      "documentTypeId": "3",
       "fileName": "vehicle-registration-abc123.pdf",
       "validationStatus": "APPROVED",
       "rejectionReasonCode": null,
@@ -1323,9 +1323,9 @@
       "validatedAt": "2026-08-03T09:05:00-05:00"
     },
     {
-      "id": 4,
-      "carrierId": 2,
-      "documentTypeId": 1,
+      "id": "4",
+      "carrierId": "2",
+      "documentTypeId": "1",
       "fileName": "driver-license-70123456.pdf",
       "validationStatus": "APPROVED",
       "rejectionReasonCode": null,
@@ -1336,9 +1336,9 @@
       "validatedAt": "2025-03-13T10:30:00-05:00"
     },
     {
-      "id": 5,
-      "carrierId": 2,
-      "documentTypeId": 2,
+      "id": "5",
+      "carrierId": "2",
+      "documentTypeId": "2",
       "fileName": "soat-b7k482.pdf",
       "validationStatus": "EXPIRED",
       "rejectionReasonCode": null,
@@ -1349,9 +1349,9 @@
       "validatedAt": "2025-10-01T15:45:00-05:00"
     },
     {
-      "id": 6,
-      "carrierId": 2,
-      "documentTypeId": 1,
+      "id": "6",
+      "carrierId": "2",
+      "documentTypeId": "1",
       "fileName": "driver-license-70123456-renewed.pdf",
       "validationStatus": "IN_REVIEW",
       "rejectionReasonCode": null,
@@ -1362,9 +1362,9 @@
       "validatedAt": null
     },
     {
-      "id": 7,
-      "carrierId": 2,
-      "documentTypeId": 3,
+      "id": "7",
+      "carrierId": "2",
+      "documentTypeId": "3",
       "fileName": "vehicle-registration-b7k482.jpg",
       "validationStatus": "REJECTED",
       "rejectionReasonCode": "ILLEGIBLE_FILE",
@@ -1375,9 +1375,9 @@
       "validatedAt": "2026-09-30T10:20:00-05:00"
     },
     {
-      "id": 8,
-      "carrierId": 3,
-      "documentTypeId": 1,
+      "id": "8",
+      "carrierId": "3",
+      "documentTypeId": "1",
       "fileName": "driver-license-41234567.pdf",
       "validationStatus": "IN_REVIEW",
       "rejectionReasonCode": null,
@@ -1388,9 +1388,9 @@
       "validatedAt": null
     },
     {
-      "id": 9,
-      "carrierId": 3,
-      "documentTypeId": 2,
+      "id": "9",
+      "carrierId": "3",
+      "documentTypeId": "2",
       "fileName": "soat-c3r915.pdf",
       "validationStatus": "PENDING",
       "rejectionReasonCode": null,

@@ -5,7 +5,7 @@ import {EnablementStatus} from '../domain/model/enablement-status';
  * Carrier resource exchanged with the `/carriers` endpoint.
  */
 export interface CarrierResource extends BaseResource {
-  id: number;
+  id: string;
   firstNames: string;
   lastNames: string;
   dni: string;

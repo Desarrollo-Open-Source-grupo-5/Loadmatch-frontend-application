@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Shipper resource exchanged with the `/shippers` endpoint.
  */
 export interface ShipperResource extends BaseResource {
-  id: number;
+  id: string;
   ruc: string;
   businessName: string;
   contactName: string;

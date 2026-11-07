@@ -5,7 +5,7 @@ import {CarrierContact} from './carrier-contact';
  * Carrier and vehicle that accepted a load request, as shown to its shipper.
  */
 export class AssignedCarrier {
-  readonly #carrierId: number;
+  readonly #carrierId: string;
   readonly #carrierFullName: string;
   readonly #phoneNumber: string;
   readonly #reputationAverage: number;
@@ -19,7 +19,7 @@ export class AssignedCarrier {
    * @param assignedCarrier - Carrier contact data and assigned vehicle data.
    */
   constructor(assignedCarrier: {
-    carrierId: number;
+    carrierId: string;
     carrierFullName: string;
     phoneNumber: string;
     reputationAverage: number;
@@ -61,7 +61,7 @@ export class AssignedCarrier {
   /**
    * Identifier of the carrier.
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 

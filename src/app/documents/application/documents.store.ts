@@ -51,14 +51,14 @@ export class DocumentsStore {
   /**
    * Carrier whose documents were last requested, used to ignore late responses.
    */
-  private carrierId: number | null = null;
+  private carrierId: string | null = null;
 
   /**
    * Loads the document type catalog and the documents of a carrier together, so the checklist is complete when it
    * appears.
    * @param carrierId - Carrier identifier.
    */
-  loadCarrierDocuments = (carrierId: number): void => {
+  loadCarrierDocuments = (carrierId: string): void => {
     if (this.carrierId !== carrierId) {
       this.documentsSignal.set([]);
     }

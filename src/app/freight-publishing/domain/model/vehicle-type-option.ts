@@ -5,7 +5,7 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * validate the maximum load weight.
  */
 export class VehicleTypeOption implements BaseEntity {
-  #id: number;
+  #id: string;
   #name: string;
   #maxWeightKg: number;
   #active: boolean;
@@ -14,7 +14,7 @@ export class VehicleTypeOption implements BaseEntity {
    * Creates a vehicle type option.
    * @param option - Identifier, name, maximum weight and availability.
    */
-  constructor(option: { id: number; name: string; maxWeightKg: number; active: boolean }) {
+  constructor(option: { id: string; name: string; maxWeightKg: number; active: boolean }) {
     this.#id = option.id;
     this.#name = option.name;
     this.#maxWeightKg = option.maxWeightKg;
@@ -24,11 +24,11 @@ export class VehicleTypeOption implements BaseEntity {
   /**
    * Vehicle type identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 

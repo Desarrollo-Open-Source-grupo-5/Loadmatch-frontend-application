@@ -5,7 +5,7 @@ import {Reputation} from './reputation';
  * Company that publishes load requests (aggregate root `Shipper` of the Profiles context).
  */
 export class Shipper implements BaseEntity {
-  #id: number;
+  #id: string;
   #ruc: string;
   #businessName: string;
   #contactName: string;
@@ -17,7 +17,7 @@ export class Shipper implements BaseEntity {
    * @param shipper - Shipper attributes.
    */
   constructor(shipper: {
-    id: number;
+    id: string;
     ruc: string;
     businessName: string;
     contactName: string;
@@ -35,11 +35,11 @@ export class Shipper implements BaseEntity {
   /**
    * Shipper identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 

@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/carriers` resource (owned by Profiles) read by Freight Publishing.
  */
 export interface CarrierContactResource extends BaseResource {
-  id: number;
+  id: string;
   firstNames: string;
   lastNames: string;
   phoneNumber: string;

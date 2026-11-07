@@ -17,9 +17,9 @@ export class Document implements BaseEntity {
    */
   static readonly EXPIRATION_WARNING_DAYS = 15;
 
-  readonly #id: number;
-  readonly #carrierId: number;
-  readonly #documentTypeId: number;
+  readonly #id: string;
+  readonly #carrierId: string;
+  readonly #documentTypeId: string;
   readonly #fileName: string;
   readonly #validationStatus: ValidationStatus;
   readonly #rejectionReason: RejectionReason | null;
@@ -33,9 +33,9 @@ export class Document implements BaseEntity {
    * @param document - Document attributes.
    */
   constructor(document: {
-    id: number;
-    carrierId: number;
-    documentTypeId: number;
+    id: string;
+    carrierId: string;
+    documentTypeId: string;
     fileName: string;
     validationStatus: ValidationStatus;
     rejectionReason?: RejectionReason | null;
@@ -59,21 +59,21 @@ export class Document implements BaseEntity {
   /**
    * Document identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
   /**
    * Identifier of the carrier that uploaded the document (reference by id to Profiles).
    */
-  get carrierId(): number {
+  get carrierId(): string {
     return this.#carrierId;
   }
 
   /**
    * Identifier of the document type.
    */
-  get documentTypeId(): number {
+  get documentTypeId(): string {
     return this.#documentTypeId;
   }
 

@@ -8,7 +8,7 @@ import {ShipperReference} from './shipper-reference';
  * Complete data of a load as seen by a carrier before accepting it, including the shipper's reputation.
  */
 export class LoadDetail {
-  readonly #loadRequestId: number;
+  readonly #loadRequestId: string;
   readonly #status: string;
   readonly #originDistrict: string;
   readonly #originAddress: string;
@@ -34,7 +34,7 @@ export class LoadDetail {
    * @param detail - Read model attributes.
    */
   constructor(detail: {
-    loadRequestId: number;
+    loadRequestId: string;
     status: string;
     originDistrict: string;
     originAddress: string;
@@ -114,7 +114,7 @@ export class LoadDetail {
   /**
    * Identifier of the load request.
    */
-  get loadRequestId(): number {
+  get loadRequestId(): string {
     return this.#loadRequestId;
   }
 

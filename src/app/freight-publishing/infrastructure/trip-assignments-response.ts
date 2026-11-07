@@ -4,10 +4,10 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/trips` resource (owned by Trip Execution) read by Freight Publishing.
  */
 export interface TripAssignmentResource extends BaseResource {
-  id: number;
-  loadRequestId: number;
-  carrierId: number;
-  vehicleId: number;
+  id: string;
+  loadRequestId: string;
+  carrierId: string;
+  vehicleId: string;
   assignedAt: string;
 }
 

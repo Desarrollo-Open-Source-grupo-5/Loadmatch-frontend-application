@@ -5,7 +5,7 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * the Document Validation context).
  */
 export class DocumentType implements BaseEntity {
-  readonly #id: number;
+  readonly #id: string;
   readonly #code: string;
   readonly #name: string;
   readonly #mandatory: boolean;
@@ -15,7 +15,7 @@ export class DocumentType implements BaseEntity {
    * Creates a document type.
    * @param documentType - Identifier, code, name and whether it is mandatory and expires.
    */
-  constructor(documentType: { id: number; code: string; name: string; mandatory: boolean; requiresExpiration: boolean }) {
+  constructor(documentType: { id: string; code: string; name: string; mandatory: boolean; requiresExpiration: boolean }) {
     this.#id = documentType.id;
     this.#code = documentType.code;
     this.#name = documentType.name;
@@ -26,7 +26,7 @@ export class DocumentType implements BaseEntity {
   /**
    * Document type identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 

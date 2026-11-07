@@ -61,6 +61,6 @@ export class MatchingService {
           return (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0);
       }
     };
-    return [...loads].sort((a, b) => byCriterion(a, b) || a.id - b.id);
+    return [...loads].sort((a, b) => byCriterion(a, b) || a.id.localeCompare(b.id));
   }
 }
