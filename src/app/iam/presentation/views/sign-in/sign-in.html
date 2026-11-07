@@ -1,0 +1,49 @@
+<section class="sign-in">
+  <header class="sign-in__header">
+    <img src="loadmatch-logo.png" alt="" width="48" height="48"/>
+    <h1>{{ 'sign-in.title' | translate }}</h1>
+    <p class="sign-in__subtitle">{{ 'sign-in.subtitle' | translate }}</p>
+  </header>
+
+  @if (store.signingIn()) {
+    <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+  }
+
+  @if (store.signInError(); as error) {
+    <p class="sign-in__banner" role="alert">
+      <mat-icon aria-hidden="true">{{ error === 'INVALID_CREDENTIALS' ? 'error' : 'cloud_off' }}</mat-icon>
+      {{ (error === 'INVALID_CREDENTIALS' ? 'sign-in.error.invalid-credentials' : 'sign-in.error.unavailable') | translate }}
+    </p>
+  }
+
+  <form class="sign-in__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'sign-in.email' | translate }}</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="email" maxlength="120"/>
+      <mat-icon matSuffix aria-hidden="true">mail</mat-icon>
+      @if (form.controls.email.hasError('required')) {
+        <mat-error>{{ 'sign-in.error.required' | translate }}</mat-error>
+      } @else if (form.controls.email.hasError('email')) {
+        <mat-error>{{ 'sign-in.error.email' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'sign-in.password' | translate }}</mat-label>
+      <input matInput [type]="passwordVisible() ? 'text' : 'password'" formControlName="password"
+             autocomplete="current-password"/>
+      <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+              [attr.aria-label]="(passwordVisible() ? 'sign-in.hide-password' : 'sign-in.show-password') | translate">
+        <mat-icon>{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (form.controls.password.hasError('required')) {
+        <mat-error>{{ 'sign-in.error.required' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <button mat-flat-button type="submit" class="sign-in__submit" [disabled]="store.signingIn()">
+      <mat-icon>login</mat-icon>
+      {{ 'sign-in.submit' | translate }}
+    </button>
+  </form>
+</section>
