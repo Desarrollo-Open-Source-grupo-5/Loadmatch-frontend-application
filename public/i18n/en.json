@@ -17,6 +17,7 @@
     "documents": "Documents",
     "about": "About",
     "switch-profile": "Switch profile",
+    "sign-in": "Sign in",
     "language": "Preferred language",
     "language-en": "English",
     "language-es": "Spanish"
@@ -159,6 +160,21 @@
   "home": {
     "title": "Welcome to LoadMatch",
     "content": "LoadMatch connects companies that need to move cargo with carriers that have available capacity across Peru."
+  },
+  "sign-in": {
+    "title": "Sign in to LoadMatch",
+    "subtitle": "Enter with the email and password of your shipper or carrier account.",
+    "email": "Email",
+    "password": "Password",
+    "show-password": "Show password",
+    "hide-password": "Hide password",
+    "submit": "Sign in",
+    "error": {
+      "required": "This field is required",
+      "email": "Enter a valid email address",
+      "invalid-credentials": "The email or password is incorrect.",
+      "unavailable": "The LoadMatch Platform is not available. Check that the backend is running and try again."
+    }
   },
   "profiles": {
     "enter-as-shipper": "Enter as Shipper",
