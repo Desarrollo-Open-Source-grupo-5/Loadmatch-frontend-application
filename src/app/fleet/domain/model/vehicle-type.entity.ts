@@ -5,7 +5,7 @@ import {Dimensions} from '../../../shared/domain/model/dimensions';
  * Catalog category of vehicle with its load limits (aggregate root `VehicleType` of the Fleet context).
  */
 export class VehicleType implements BaseEntity {
-  #id: number;
+  #id: string;
   #name: string;
   #description: string;
   #maxWeightKg: number;
@@ -17,7 +17,7 @@ export class VehicleType implements BaseEntity {
    * @param vehicleType - Vehicle type attributes.
    */
   constructor(vehicleType: {
-    id: number;
+    id: string;
     name: string;
     description: string;
     maxWeightKg: number;
@@ -35,11 +35,11 @@ export class VehicleType implements BaseEntity {
   /**
    * Vehicle type identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 

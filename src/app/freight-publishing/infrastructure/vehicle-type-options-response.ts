@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/vehicle-types` resource read by Freight Publishing.
  */
 export interface VehicleTypeOptionResource extends BaseResource {
-  id: number;
+  id: string;
   name: string;
   maxWeightKg: number;
   active: boolean;

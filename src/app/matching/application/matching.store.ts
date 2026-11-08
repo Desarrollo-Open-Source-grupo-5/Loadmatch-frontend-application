@@ -113,7 +113,7 @@ export class MatchingStore {
   /**
    * Identifier of the load whose detail was last requested, used to ignore late responses.
    */
-  private detailRequestId: number | null = null;
+  private detailRequestId: string | null = null;
 
   /**
    * Creates an instance of MatchingStore, loads the vehicle type catalog and reloads the carrier's vehicles every
@@ -170,7 +170,7 @@ export class MatchingStore {
    * Opens the detail of a load.
    * @param id - Load request identifier.
    */
-  openLoadDetail = (id: number): void => {
+  openLoadDetail = (id: string): void => {
     this.detailRequestId = id;
     this.loadDetailSignal.set(null);
     this.detailUnavailableSignal.set(false);
@@ -212,14 +212,14 @@ export class MatchingStore {
    * @param id - Vehicle type identifier.
    * @returns The vehicle type name, or an empty string while the catalog is loading.
    */
-  vehicleTypeName = (id: number): string =>
+  vehicleTypeName = (id: string): string =>
     this.vehicleTypes().find(vehicleType => vehicleType.id === id)?.name ?? '';
 
   /**
    * Reports the consulted load as no longer available and removes it from the available loads.
    * @param id - Load request identifier.
    */
-  private markDetailUnavailable = (id: number): void => {
+  private markDetailUnavailable = (id: string): void => {
     this.detailUnavailableSignal.set(true);
     this.availableLoadsSignal.update(availableLoads => availableLoads.filter(load => load.id !== id));
   };
@@ -228,7 +228,7 @@ export class MatchingStore {
    * Loads the vehicles of a carrier from the API.
    * @param carrierId - Carrier identifier.
    */
-  private loadCarrierVehicles = (carrierId: number): void => {
+  private loadCarrierVehicles = (carrierId: string): void => {
     this.matchingApi.getCarrierVehicles(carrierId).subscribe({
       next: vehicles => {
         // Ignore late responses that belong to a previously active carrier.

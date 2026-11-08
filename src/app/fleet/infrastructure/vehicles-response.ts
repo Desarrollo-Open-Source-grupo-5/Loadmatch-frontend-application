@@ -4,9 +4,9 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Vehicle resource exchanged with the `/vehicles` endpoint.
  */
 export interface VehicleResource extends BaseResource {
-  id: number;
-  carrierId: number;
-  vehicleTypeId: number;
+  id: string;
+  carrierId: string;
+  vehicleTypeId: string;
   licensePlate: string;
   brand: string;
   payloadKg: number;

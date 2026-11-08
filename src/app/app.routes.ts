@@ -13,6 +13,8 @@ const tripExecutionShipperRoutes = () =>
   import('./trip-execution/presentation/trip-execution.routes').then(m => m.tripExecutionShipperRoutes);
 const tripExecutionCarrierRoutes = () =>
   import('./trip-execution/presentation/trip-execution.routes').then(m => m.tripExecutionCarrierRoutes);
+const iamRoutes = () =>
+  import('./iam/presentation/iam.routes').then(m => m.iamRoutes);
 const documentsRoutes = () =>
   import('./documents/presentation/documents.routes').then(m => m.documentsRoutes);
 
@@ -24,6 +26,7 @@ const baseTitle = 'LoadMatch';
 export const routes: Routes = [
   { path: 'home',     component: Home, title: `${baseTitle} - Home` },
   { path: 'about',    loadComponent: about, title: `${baseTitle} - About` },
+  { path: '',         loadChildren: iamRoutes },
   { path: 'shipper',  children: [
     { path: '', loadChildren: freightPublishingRoutes },
     { path: '', loadChildren: tripExecutionShipperRoutes },

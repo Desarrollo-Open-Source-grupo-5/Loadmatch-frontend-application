@@ -8,8 +8,8 @@ import {Money} from '../../../shared/domain/model/money';
  * context).
  */
 export class AvailableLoad implements BaseEntity {
-  readonly #id: number;
-  readonly #shipperId: number;
+  readonly #id: string;
+  readonly #shipperId: string;
   readonly #status: string;
   readonly #originDistrict: string;
   readonly #originAddress: string;
@@ -21,7 +21,7 @@ export class AvailableLoad implements BaseEntity {
   readonly #weightKg: number;
   readonly #dimensions: Dimensions;
   readonly #cargoType: string;
-  readonly #vehicleTypeId: number;
+  readonly #vehicleTypeId: string;
   readonly #offeredRate: Money;
   readonly #pickupAt: Date;
   readonly #publishedAt: Date | null;
@@ -33,8 +33,8 @@ export class AvailableLoad implements BaseEntity {
    * @param load - Read model attributes.
    */
   constructor(load: {
-    id: number;
-    shipperId: number;
+    id: string;
+    shipperId: string;
     status: string;
     originDistrict: string;
     originAddress: string;
@@ -46,7 +46,7 @@ export class AvailableLoad implements BaseEntity {
     weightKg: number;
     dimensions: Dimensions;
     cargoType: string;
-    vehicleTypeId: number;
+    vehicleTypeId: string;
     offeredRate: Money;
     pickupAt: Date;
     publishedAt: Date | null;
@@ -77,7 +77,7 @@ export class AvailableLoad implements BaseEntity {
   /**
    * Identifier of the underlying load request.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
@@ -91,7 +91,7 @@ export class AvailableLoad implements BaseEntity {
   /**
    * Identifier of the shipper that published the load (reference by id to Profiles).
    */
-  get shipperId(): number {
+  get shipperId(): string {
     return this.#shipperId;
   }
 
@@ -175,7 +175,7 @@ export class AvailableLoad implements BaseEntity {
   /**
    * Identifier of the vehicle type required by the shipper.
    */
-  get vehicleTypeId(): number {
+  get vehicleTypeId(): string {
     return this.#vehicleTypeId;
   }
 

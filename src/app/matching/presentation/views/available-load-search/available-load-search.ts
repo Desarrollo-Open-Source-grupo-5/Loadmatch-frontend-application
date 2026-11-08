@@ -189,8 +189,8 @@ export class AvailableLoadSearch {
    * Changes the required vehicle type.
    * @param vehicleTypeId - Selected vehicle type, or 0 for any type.
    */
-  protected onVehicleTypeChange(vehicleTypeId: number): void {
-    this.store.updateCriteria({vehicleTypeId: this.toFilterValue(vehicleTypeId)});
+  protected onVehicleTypeChange(vehicleTypeId: string | number): void {
+    this.store.updateCriteria({vehicleTypeId: vehicleTypeId === AvailableLoadSearch.ANY ? null : String(vehicleTypeId)});
   }
 
   /**

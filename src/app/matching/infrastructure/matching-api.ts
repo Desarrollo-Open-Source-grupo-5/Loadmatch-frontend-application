@@ -35,7 +35,7 @@ export class MatchingApi extends BaseApi {
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's vehicles.
    */
-  getCarrierVehicles = (carrierId: number): Observable<CarrierVehicle[]> =>
+  getCarrierVehicles = (carrierId: string): Observable<CarrierVehicle[]> =>
     this.carrierVehiclesEndpoint.getAll({carrierId});
 
   /**
@@ -50,7 +50,7 @@ export class MatchingApi extends BaseApi {
    * @param id - Load request identifier.
    * @returns Stream with the load.
    */
-  getLoadById = (id: number): Observable<AvailableLoad> =>
+  getLoadById = (id: string): Observable<AvailableLoad> =>
     this.availableLoadsEndpoint.getById(id);
 
   /**

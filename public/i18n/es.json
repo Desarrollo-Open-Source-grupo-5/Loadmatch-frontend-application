@@ -17,6 +17,7 @@
     "documents": "Documentos",
     "about": "Acerca de",
     "switch-profile": "Cambiar perfil",
+    "sign-in": "Iniciar sesión",
     "language": "Idioma preferido",
     "language-en": "Inglés",
     "language-es": "Español"
@@ -159,6 +160,21 @@
   "home": {
     "title": "Bienvenido a LoadMatch",
     "content": "LoadMatch conecta a las empresas que necesitan trasladar carga con transportistas que tienen capacidad disponible en todo el Perú."
+  },
+  "sign-in": {
+    "title": "Inicia sesión en LoadMatch",
+    "subtitle": "Ingresa con el correo y la contraseña de tu cuenta de empresa o de transportista.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "show-password": "Mostrar contraseña",
+    "hide-password": "Ocultar contraseña",
+    "submit": "Iniciar sesión",
+    "error": {
+      "required": "Este campo es obligatorio",
+      "email": "Ingresa un correo electrónico válido",
+      "invalid-credentials": "El correo o la contraseña son incorrectos.",
+      "unavailable": "La plataforma LoadMatch no está disponible. Verifica que el backend esté en ejecución e inténtalo de nuevo."
+    }
   },
   "profiles": {
     "enter-as-shipper": "Ingresar como Empresa",

@@ -10,6 +10,9 @@ export const environment = {
   */
   // API URL Version to be used until the LoadMatch Platform is implemented (json-server)
   platformProviderApiBaseUrl: 'http://localhost:3000/api/v1',
+  // LoadMatch Platform (Spring Boot backend). Bounded contexts move here as their endpoints are integrated.
+  platformApiBaseUrl: 'http://localhost:8080/api/v1',
+  platformTokensEndpointPath: '/tokens',
   platformProviderShippersEndpointPath: '/shippers',
   platformProviderCarriersEndpointPath: '/carriers',
   platformProviderVehicleTypesEndpointPath: '/vehicle-types',

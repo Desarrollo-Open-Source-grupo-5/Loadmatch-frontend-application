@@ -10,5 +10,5 @@ export interface BaseResource {
   /**
    * The unique identifier of the resource.
    */
-  id: number;
+  id: string;
 }

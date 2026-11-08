@@ -4,14 +4,14 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Identifier and name of a Fleet vehicle type, used by Trip Execution to label the vehicle of a trip.
  */
 export class TripVehicleType implements BaseEntity {
-  readonly #id: number;
+  readonly #id: string;
   readonly #name: string;
 
   /**
    * Creates a trip vehicle type projection.
    * @param vehicleType - Identifier and name.
    */
-  constructor(vehicleType: { id: number; name: string }) {
+  constructor(vehicleType: { id: string; name: string }) {
     this.#id = vehicleType.id;
     this.#name = vehicleType.name;
   }
@@ -19,7 +19,7 @@ export class TripVehicleType implements BaseEntity {
   /**
    * Vehicle type identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 

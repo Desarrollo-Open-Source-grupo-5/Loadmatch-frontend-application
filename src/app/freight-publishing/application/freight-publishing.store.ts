@@ -79,7 +79,7 @@ export class FreightPublishingStore {
   /**
    * Identifier of the load request whose assigned carrier was last requested, used to ignore late responses.
    */
-  private assignedCarrierRequestId: number | null = null;
+  private assignedCarrierRequestId: string | null = null;
 
   /**
    * Creates an instance of FreightPublishingStore, loads the vehicle type catalog and reloads the load requests every
@@ -105,7 +105,7 @@ export class FreightPublishingStore {
    * @param id - Load request identifier.
    * @returns Reactive selection for the requested load request.
    */
-  getLoadRequestById = (id: number): Signal<LoadRequest | undefined> =>
+  getLoadRequestById = (id: string): Signal<LoadRequest | undefined> =>
     computed(() => this.loadRequests().find(loadRequest => loadRequest.id === id));
 
   /**
@@ -121,7 +121,7 @@ export class FreightPublishingStore {
    * @param id - Vehicle type identifier.
    * @returns Reactive selection for the requested vehicle type.
    */
-  getVehicleTypeById = (id: number): Signal<VehicleTypeOption | undefined> =>
+  getVehicleTypeById = (id: string): Signal<VehicleTypeOption | undefined> =>
     computed(() => this.vehicleTypes().find(vehicleType => vehicleType.id === id));
 
   /**
@@ -172,7 +172,7 @@ export class FreightPublishingStore {
    * @param reason - Cancellation reason given by the shipper.
    * @param onSuccess - Callback invoked with the cancelled request.
    */
-  cancelLoadRequest = (id: number, reason: string, onSuccess?: (cancelled: LoadRequest) => void): void => {
+  cancelLoadRequest = (id: string, reason: string, onSuccess?: (cancelled: LoadRequest) => void): void => {
     const current = this.loadRequests().find(loadRequest => loadRequest.id === id);
     if (!current) {
       this.errorSignal.set(`Failed to cancel load request: ${id} not found`);
@@ -204,7 +204,7 @@ export class FreightPublishingStore {
    * Loads the carrier and vehicle assigned to a load request of the active shipper.
    * @param loadRequestId - Load request identifier.
    */
-  loadAssignedCarrier = (loadRequestId: number): void => {
+  loadAssignedCarrier = (loadRequestId: string): void => {
     const loadRequest = this.loadRequests().find(candidate => candidate.id === loadRequestId);
     if (!loadRequest?.hasAssignedCarrier()) {
       this.resetAssignedCarrier();
@@ -247,7 +247,7 @@ export class FreightPublishingStore {
    * Loads the load requests of a shipper from the API.
    * @param shipperId - Shipper identifier.
    */
-  private loadLoadRequests = (shipperId: number): void => {
+  private loadLoadRequests = (shipperId: string): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.freightPublishingApi.getLoadRequestsByShipper(shipperId).subscribe({

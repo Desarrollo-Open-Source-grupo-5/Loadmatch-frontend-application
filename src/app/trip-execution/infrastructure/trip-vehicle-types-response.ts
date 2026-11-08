@@ -4,7 +4,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
  * Subset of the `/vehicle-types` resource (owned by Fleet) read by Trip Execution.
  */
 export interface TripVehicleTypeResource extends BaseResource {
-  id: number;
+  id: string;
   name: string;
 }
 

@@ -44,7 +44,7 @@ export interface SearchCriteriaChanges {
   /**
    * Required vehicle type, or null for any type.
    */
-  vehicleTypeId?: number | null;
+  vehicleTypeId?: string | null;
   /**
    * Minimum cargo weight in kilograms, or null for any weight.
    */
@@ -69,7 +69,7 @@ export class SearchCriteria {
   readonly #compatibleWithVehicleOnly: boolean;
   readonly #sortBy: SortCriteria;
   readonly #maxTripDistanceKm: number | null;
-  readonly #vehicleTypeId: number | null;
+  readonly #vehicleTypeId: string | null;
   readonly #minWeightKg: number | null;
   readonly #minRateAmount: number | null;
 
@@ -83,7 +83,7 @@ export class SearchCriteria {
     compatibleWithVehicleOnly: boolean;
     sortBy: SortCriteria;
     maxTripDistanceKm?: number | null;
-    vehicleTypeId?: number | null;
+    vehicleTypeId?: string | null;
     minWeightKg?: number | null;
     minRateAmount?: number | null;
   }) {
@@ -157,7 +157,7 @@ export class SearchCriteria {
   /**
    * Required vehicle type, or null for any type.
    */
-  get vehicleTypeId(): number | null {
+  get vehicleTypeId(): string | null {
     return this.#vehicleTypeId;
   }
 

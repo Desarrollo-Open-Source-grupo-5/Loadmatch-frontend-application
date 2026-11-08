@@ -60,7 +60,7 @@ export class LoadRequestDetail {
   /**
    * Identifier taken from the route, or null when it is not a valid identifier.
    */
-  protected readonly loadRequestId: number | null = this.parseId(this.route.snapshot.paramMap.get('id'));
+  protected readonly loadRequestId: string | null = this.parseId(this.route.snapshot.paramMap.get('id'));
 
   /**
    * Consulted load request, once the store has loaded the shipper's load requests.
@@ -132,8 +132,7 @@ export class LoadRequestDetail {
    * @param id - Raw route parameter.
    * @returns The numeric identifier, or null when absent or invalid.
    */
-  private parseId(id: string | null): number | null {
-    const parsed = Number(id);
-    return id !== null && Number.isInteger(parsed) && parsed > 0 ? parsed : null;
+  private parseId(id: string | null): string | null {
+    return id !== null && id.trim().length > 0 ? id : null;
   }
 }

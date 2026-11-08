@@ -4,7 +4,7 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * Read-only projection of a Profiles carrier with the contact data a shipper needs.
  */
 export class CarrierContact implements BaseEntity {
-  #id: number;
+  #id: string;
   #firstNames: string;
   #lastNames: string;
   #phoneNumber: string;
@@ -16,7 +16,7 @@ export class CarrierContact implements BaseEntity {
    * @param contact - Identifier, names, phone number and reputation.
    */
   constructor(contact: {
-    id: number;
+    id: string;
     firstNames: string;
     lastNames: string;
     phoneNumber: string;
@@ -34,11 +34,11 @@ export class CarrierContact implements BaseEntity {
   /**
    * Carrier identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 

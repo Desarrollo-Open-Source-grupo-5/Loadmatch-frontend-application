@@ -25,7 +25,7 @@ export class DocumentsApiEndpoint extends BaseApiEndpoint<Document, DocumentReso
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's documents.
    */
-  getByCarrierId(carrierId: number): Observable<Document[]> {
+  getByCarrierId(carrierId: string): Observable<Document[]> {
     return this.getAll({carrierId});
   }
 }

@@ -28,6 +28,6 @@ export class FleetApi extends BaseApi {
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's vehicles.
    */
-  getVehiclesByCarrier = (carrierId: number): Observable<Vehicle[]> =>
+  getVehiclesByCarrier = (carrierId: string): Observable<Vehicle[]> =>
     this.vehiclesEndpoint.getAll({carrierId});
 }

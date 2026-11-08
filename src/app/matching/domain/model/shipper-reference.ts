@@ -5,7 +5,7 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  * carrier would work for.
  */
 export class ShipperReference implements BaseEntity {
-  readonly #id: number;
+  readonly #id: string;
   readonly #businessName: string;
   readonly #reputationAverage: number;
   readonly #reputationTotalRatings: number;
@@ -14,7 +14,7 @@ export class ShipperReference implements BaseEntity {
    * Creates a shipper reference.
    * @param reference - Identifier, business name and reputation.
    */
-  constructor(reference: { id: number; businessName: string; reputationAverage: number; reputationTotalRatings: number }) {
+  constructor(reference: { id: string; businessName: string; reputationAverage: number; reputationTotalRatings: number }) {
     this.#id = reference.id;
     this.#businessName = reference.businessName;
     this.#reputationAverage = reference.reputationAverage;
@@ -24,7 +24,7 @@ export class ShipperReference implements BaseEntity {
   /**
    * Shipper identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 

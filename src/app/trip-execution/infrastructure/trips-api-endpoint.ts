@@ -25,7 +25,7 @@ export class TripsApiEndpoint extends BaseApiEndpoint<Trip, TripResource, TripsR
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's trips.
    */
-  getByCarrierId(carrierId: number): Observable<Trip[]> {
+  getByCarrierId(carrierId: string): Observable<Trip[]> {
     return this.getAll({carrierId});
   }
 
@@ -34,7 +34,7 @@ export class TripsApiEndpoint extends BaseApiEndpoint<Trip, TripResource, TripsR
    * @param loadRequestId - Load request identifier.
    * @returns Stream with the matching trips.
    */
-  getByLoadRequestId(loadRequestId: number): Observable<Trip[]> {
+  getByLoadRequestId(loadRequestId: string): Observable<Trip[]> {
     return this.getAll({loadRequestId});
   }
 }

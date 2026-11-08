@@ -6,7 +6,7 @@ import {Reputation} from './reputation';
  * Independent carrier who transports loads (aggregate root `Carrier` of the Profiles context).
  */
 export class Carrier implements BaseEntity {
-  #id: number;
+  #id: string;
   #firstNames: string;
   #lastNames: string;
   #dni: string;
@@ -19,7 +19,7 @@ export class Carrier implements BaseEntity {
    * @param carrier - Carrier attributes.
    */
   constructor(carrier: {
-    id: number;
+    id: string;
     firstNames: string;
     lastNames: string;
     dni: string;
@@ -39,11 +39,11 @@ export class Carrier implements BaseEntity {
   /**
    * Carrier identifier.
    */
-  get id(): number {
+  get id(): string {
     return this.#id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this.#id = value;
   }
 

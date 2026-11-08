@@ -1,0 +1,43 @@
+.sign-in {
+  max-width: 420px;
+  margin: 48px auto;
+  padding: 32px 24px;
+  border: 1px solid var(--lm-color-slate-200);
+  border-radius: 12px;
+  background-color: var(--lm-color-white);
+}
+
+.sign-in__header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.sign-in__header h1 {
+  margin: 8px 0 4px;
+  font-size: 24px;
+}
+
+.sign-in__subtitle {
+  color: var(--lm-color-slate-600);
+}
+
+.sign-in__banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--lm-color-error);
+  color: var(--lm-color-error-text);
+}
+
+.sign-in__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sign-in__submit {
+  height: 44px;
+}

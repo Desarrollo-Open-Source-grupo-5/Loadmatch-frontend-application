@@ -20,6 +20,12 @@
       <mat-icon>switch_account</mat-icon>
       <span class="app-toolbar__label">{{ 'nav.switch-profile' | translate }}</span>
     </button>
+  } @else {
+    <a mat-stroked-button routerLink="/sign-in" routerLinkActive="app-toolbar__link--active"
+       [attr.aria-label]="'nav.sign-in' | translate">
+      <mat-icon>login</mat-icon>
+      <span class="app-toolbar__label">{{ 'nav.sign-in' | translate }}</span>
+    </a>
   }
   <a mat-button routerLink="/about" routerLinkActive="app-toolbar__link--active"
      [attr.aria-label]="'nav.about' | translate">

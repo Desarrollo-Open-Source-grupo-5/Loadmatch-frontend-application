@@ -30,7 +30,7 @@ export class TripExecutionApi extends BaseApi {
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's trips; a trip whose load request is missing is left out.
    */
-  getCarrierTrips = (carrierId: number): Observable<TripOverview[]> =>
+  getCarrierTrips = (carrierId: string): Observable<TripOverview[]> =>
     this.tripsEndpoint.getByCarrierId(carrierId).pipe(
       switchMap(trips => {
         if (!trips.length) {
@@ -63,7 +63,7 @@ export class TripExecutionApi extends BaseApi {
    * @param id - Load request identifier.
    * @returns Stream with the load request projection.
    */
-  getLoadRequest = (id: number): Observable<TripLoadRequest> =>
+  getLoadRequest = (id: string): Observable<TripLoadRequest> =>
     this.loadRequestsEndpoint.getById(id);
 
   /**
