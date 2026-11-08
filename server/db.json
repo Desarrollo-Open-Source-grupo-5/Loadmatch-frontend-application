@@ -2,6 +2,7 @@
   "shippers": [
     {
       "id": "1",
+      "userId": "a1000000-0000-4000-8000-000000000001",
       "ruc": "20512345671",
       "businessName": "Distribuidora Andina S.A.C.",
       "contactName": "Carla Mendoza Ríos",
@@ -11,6 +12,7 @@
     },
     {
       "id": "2",
+      "userId": "a1000000-0000-4000-8000-000000000002",
       "ruc": "20601234565",
       "businessName": "Agroexportadora Costa Norte S.A.C.",
       "contactName": "Luis Paredes Castillo",
@@ -20,6 +22,7 @@
     },
     {
       "id": "3",
+      "userId": "a1000000-0000-4000-8000-000000000003",
       "ruc": "20455678901",
       "businessName": "Ferretería Industrial Sur E.I.R.L.",
       "contactName": "Rosa Quispe Flores",
@@ -29,6 +32,7 @@
     },
     {
       "id": "4",
+      "userId": "a1000000-0000-4000-8000-000000000004",
       "ruc": "20609876540",
       "businessName": "Textiles Andinos del Sur S.A.C.",
       "contactName": "Miguel Huamán Torres",
@@ -40,6 +44,7 @@
   "carriers": [
     {
       "id": "1",
+      "userId": "c1000000-0000-4000-8000-000000000001",
       "firstNames": "Jorge Luis",
       "lastNames": "Ramírez Huamán",
       "dni": "45678912",
@@ -50,6 +55,7 @@
     },
     {
       "id": "2",
+      "userId": "c1000000-0000-4000-8000-000000000002",
       "firstNames": "María Elena",
       "lastNames": "Torres Vílchez",
       "dni": "70123456",
@@ -60,6 +66,7 @@
     },
     {
       "id": "3",
+      "userId": "c1000000-0000-4000-8000-000000000003",
       "firstNames": "Pedro",
       "lastNames": "Quispe Mamani",
       "dni": "41234567",
