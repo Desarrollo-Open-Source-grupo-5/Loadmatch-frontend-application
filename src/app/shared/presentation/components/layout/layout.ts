@@ -117,10 +117,10 @@ export class Layout {
   }
 
   /**
-   * Clears the active profile and returns to the profile chooser.
+   * Clears the active profile and returns to the sign-in view to enter with another account.
    */
   protected switchProfile(): void {
     this.activeProfileStore.clear();
-    this.router.navigate(['/home']).then();
+    this.router.navigate(['/sign-in']).then();
   }
 }

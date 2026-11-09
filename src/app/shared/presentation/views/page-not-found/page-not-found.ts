@@ -34,9 +34,9 @@ export class PageNotFound implements OnInit {
   }
 
   /**
-   * Navigates back to the home view.
+   * Navigates back to the entry point of the application (sign-in view).
    */
   protected navigateToHome() {
-    this.router.navigate(['/home']).then();
+    this.router.navigate(['/sign-in']).then();
   }
 }
