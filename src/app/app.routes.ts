@@ -26,6 +26,7 @@ const baseTitle = 'LoadMatch';
 export const routes: Routes = [
   { path: 'home',     component: Home, title: `${baseTitle} - Home` },
   { path: 'about',    loadComponent: about, title: `${baseTitle} - About` },
+  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: '',         loadChildren: iamRoutes },
   { path: 'shipper',  children: [
     { path: '', loadChildren: freightPublishingRoutes },
@@ -36,6 +37,5 @@ export const routes: Routes = [
     { path: '', loadChildren: tripExecutionCarrierRoutes },
     { path: '', loadChildren: documentsRoutes },
   ] },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**',       loadComponent: pageNotFound, title: `${baseTitle} - Page not found` },
 ];
