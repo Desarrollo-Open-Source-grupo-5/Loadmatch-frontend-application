@@ -26,7 +26,7 @@ const baseTitle = 'LoadMatch';
 export const routes: Routes = [
   { path: 'home',     component: Home, title: `${baseTitle} - Home` },
   { path: 'about',    loadComponent: about, title: `${baseTitle} - About` },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: '',         loadChildren: iamRoutes },
   { path: 'shipper',  children: [
     { path: '', loadChildren: freightPublishingRoutes },
