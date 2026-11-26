@@ -454,5 +454,31 @@
   "footer": {
     "company": "CargoLink Labs",
     "rights": "Todos los derechos reservados."
+  },
+  "shipper-register": {
+    "title": "Registra tu empresa",
+    "subtitle": "Crea una cuenta de empresa para publicar solicitudes de transporte.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "ruc": "RUC (11 dígitos)",
+    "business-name": "Razón social",
+    "contact-name": "Nombre de contacto",
+    "phone-number": "Teléfono",
+    "street": "Dirección",
+    "district": "Distrito",
+    "province": "Provincia",
+    "department": "Departamento",
+    "submit": "Crear cuenta de empresa",
+    "back-to-sign-in": "Volver a iniciar sesión",
+    "success": "Empresa registrada correctamente. Redirigiendo a inicio de sesión...",
+    "error": {
+      "required": "Este campo es obligatorio.",
+      "email": "Ingresa un correo electrónico válido.",
+      "password-length": "La contraseña debe tener al menos 6 caracteres.",
+      "ruc-format": "El RUC debe tener 11 dígitos.",
+      "duplicate": "Ya existe una empresa registrada con ese RUC o correo.",
+      "invalid": "Verifica los datos ingresados de la empresa.",
+      "unavailable": "No se pudo completar el registro. Inténtalo de nuevo."
+    }
   }
 }
