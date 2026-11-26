@@ -60,7 +60,7 @@
                             <dd>{{ item.trip.completedAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
                           } @else {
                             <dt>{{ 'carrier-trips.pickup' | translate }}</dt>
-                            <dd>{{ item.trip.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+                            <dd>{{ item.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
                           }
                         </div>
                         <div>
@@ -72,6 +72,10 @@
                           <dd>{{ item.shipperName }}</dd>
                         </div>
                       </dl>
+                      @if (isPlatformId(item.id)) {
+                        <app-trip-incidents [tripId]="item.id" [canReport]="canReportIncident(item.trip.status)"
+                                            (incidentReported)="refreshTrips()"/>
+                      }
                     </mat-card-content>
                   </mat-card>
                 </li>

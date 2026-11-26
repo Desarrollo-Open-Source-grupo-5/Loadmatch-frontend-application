@@ -14,8 +14,8 @@ export class TripVehiclesApiEndpoint extends BaseApiEndpoint<TripVehicle, TripVe
    * Creates an instance of TripVehiclesApiEndpoint
    * @param http - The HttpClient to be used for making API requests
    */
-  constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderVehiclesEndpointPath}`,
+  constructor(http: HttpClient, baseUrl = environment.platformProviderApiBaseUrl) {
+    super(http, `${baseUrl}${environment.platformProviderVehiclesEndpointPath}`,
       new TripVehicleAssembler());
   }
 }

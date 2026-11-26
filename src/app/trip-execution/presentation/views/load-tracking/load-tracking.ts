@@ -10,6 +10,8 @@ import {LocalizedDatePipe} from '../../../../shared/presentation/pipes/localized
 import {LocalizedNumberPipe} from '../../../../shared/presentation/pipes/localized-number.pipe';
 import {TripExecutionStore} from '../../../application/trip-execution.store';
 import {TripStatus} from '../../../domain/model/trip-status';
+import {isPlatformId} from '../../../domain/model/platform-id';
+import {TripIncidents} from '../../components/trip-incidents/trip-incidents';
 import {TripStatusChip} from '../../components/trip-status-chip/trip-status-chip';
 
 /**
@@ -45,6 +47,7 @@ export interface TrackingStep {
     LocalizedDatePipe,
     LocalizedNumberPipe,
     TripStatusChip,
+    TripIncidents,
     ProfileRequired
   ],
   selector: 'app-load-tracking',
@@ -52,6 +55,7 @@ export interface TrackingStep {
   templateUrl: './load-tracking.html',
 })
 export class LoadTracking {
+  protected readonly isPlatformId = isPlatformId;
   private static readonly CURRENT_STEP_ICONS: Partial<Record<TripStatus, string>> = {
     DELAYED: 'schedule',
     DISPUTED: 'report',

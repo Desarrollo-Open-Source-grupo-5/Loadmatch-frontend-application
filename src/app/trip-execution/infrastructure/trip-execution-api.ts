@@ -1,6 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {forkJoin, map, Observable, of, switchMap} from 'rxjs';
+import {catchError, forkJoin, map, Observable, of, switchMap, throwError} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {isPlatformId} from '../domain/model/platform-id';
 import {BaseApi} from '../../shared/infrastructure/base-api';
 import {TripLoadRequest} from '../domain/model/trip-load-request';
 import {TripOverview} from '../domain/model/trip-overview';
@@ -18,38 +20,43 @@ import {TripsApiEndpoint} from './trips-api-endpoint';
 @Injectable({providedIn: 'root'})
 export class TripExecutionApi extends BaseApi {
   private readonly http = inject(HttpClient);
-  private readonly tripsEndpoint = new TripsApiEndpoint(this.http);
-  private readonly loadRequestsEndpoint = new TripLoadRequestsApiEndpoint(this.http);
-  private readonly shippersEndpoint = new TripShippersApiEndpoint(this.http);
-  private readonly carriersEndpoint = new TripCarriersApiEndpoint(this.http);
-  private readonly vehiclesEndpoint = new TripVehiclesApiEndpoint(this.http);
-  private readonly vehicleTypesEndpoint = new TripVehicleTypesApiEndpoint(this.http);
+  private readonly provider = this.endpoints(environment.platformProviderApiBaseUrl);
+  private readonly platform = this.endpoints(environment.platformApiBaseUrl);
 
   /**
    * Retrieves the trips of a carrier with their route, rate, shipper and vehicle.
    * @param carrierId - Carrier identifier.
    * @returns Stream with the carrier's trips; a trip whose load request is missing is left out.
    */
-  getCarrierTrips = (carrierId: string): Observable<TripOverview[]> =>
-    this.tripsEndpoint.getByCarrierId(carrierId).pipe(
+  getCarrierTrips = (carrierId: string): Observable<TripOverview[]> => {
+    const usesPlatform = isPlatformId(carrierId);
+    const source = usesPlatform ? this.platform : this.provider;
+    return source.trips.getByCarrierId(carrierId).pipe(
       switchMap(trips => {
         if (!trips.length) {
           return of([]);
         }
+        const loadRequestIds = [...new Set(trips.map(trip => trip.loadRequestId))];
+        const shipperIds = [...new Set(trips.map(trip => trip.shipperId))];
+
         return forkJoin({
-          loadRequests: this.loadRequestsEndpoint.getAll({id: [...new Set(trips.map(trip => trip.loadRequestId))]}),
-          shippers: this.shippersEndpoint.getAll({id: [...new Set(trips.map(trip => trip.shipperId))]}),
-          vehicles: this.vehiclesEndpoint.getAll({carrierId}),
-          vehicleTypes: this.vehicleTypesEndpoint.getAll()
+          loadRequests: usesPlatform
+            ? forkJoin(loadRequestIds.map(id => this.ignoreMissing(source.loadRequests.getById(id))))
+            : source.loadRequests.getAll({id: loadRequestIds}),
+          shippers: usesPlatform
+            ? forkJoin(shipperIds.map(id => this.ignoreMissing(source.shippers.getById(id))))
+            : source.shippers.getAll({id: shipperIds}),
+          vehicles: source.vehicles.getAll({carrierId}),
+          vehicleTypes: source.vehicleTypes.getAll()
         }).pipe(
           map(({loadRequests, shippers, vehicles, vehicleTypes}) => trips.flatMap(trip => {
-            const loadRequest = loadRequests.find(candidate => candidate.id === trip.loadRequestId);
+            const loadRequest = loadRequests.find(candidate => candidate?.id === trip.loadRequestId);
             if (!loadRequest) {
               return [];
             }
             const vehicle = vehicles.find(candidate => candidate.id === trip.vehicleId);
             return [TripOverview.from(trip, loadRequest, {
-              shipper: shippers.find(candidate => candidate.id === trip.shipperId),
+              shipper: shippers.find(candidate => candidate?.id === trip.shipperId) ?? undefined,
               vehicle,
               vehicleTypeName: vehicleTypes.find(vehicleType => vehicleType.id === vehicle?.vehicleTypeId)?.name
             })];
@@ -57,6 +64,7 @@ export class TripExecutionApi extends BaseApi {
         );
       })
     );
+  };
 
   /**
    * Retrieves a load request, whatever its status, so the caller can check who owns it.
@@ -64,31 +72,58 @@ export class TripExecutionApi extends BaseApi {
    * @returns Stream with the load request projection.
    */
   getLoadRequest = (id: string): Observable<TripLoadRequest> =>
-    this.loadRequestsEndpoint.getById(id);
+    (isPlatformId(id) ? this.platform : this.provider).loadRequests.getById(id);
 
   /**
    * Retrieves the current (not cancelled) trip of a load request with its carrier and vehicle.
    * @param loadRequest - Load request read with {@link getLoadRequest}.
    * @returns Stream with the trip overview, or null when no carrier accepted the load request yet.
    */
-  getActiveTripOfLoadRequest = (loadRequest: TripLoadRequest): Observable<TripOverview | null> =>
-    this.tripsEndpoint.getByLoadRequestId(loadRequest.id).pipe(
+  getActiveTripOfLoadRequest = (loadRequest: TripLoadRequest): Observable<TripOverview | null> => {
+    const usesPlatform = isPlatformId(loadRequest.id);
+    const source = usesPlatform ? this.platform : this.provider;
+    const trips = usesPlatform
+      ? source.trips.getAll({shipperId: loadRequest.shipperId})
+      : source.trips.getByLoadRequestId(loadRequest.id);
+
+    return trips.pipe(
       switchMap(trips => {
         const trip = trips.find(candidate => candidate.loadRequestId === loadRequest.id && !candidate.isCancelled());
         if (!trip) {
           return of(null);
         }
         return forkJoin({
-          carrier: this.carriersEndpoint.getById(trip.carrierId),
-          vehicle: this.vehiclesEndpoint.getById(trip.vehicleId),
-          vehicleTypes: this.vehicleTypesEndpoint.getAll()
+          carrier: this.ignoreMissing(source.carriers.getById(trip.carrierId)),
+          vehicle: this.ignoreMissing(source.vehicles.getById(trip.vehicleId)),
+          vehicleTypes: source.vehicleTypes.getAll()
         }).pipe(
           map(({carrier, vehicle, vehicleTypes}) => TripOverview.from(trip, loadRequest, {
-            carrier,
-            vehicle,
-            vehicleTypeName: vehicleTypes.find(vehicleType => vehicleType.id === vehicle.vehicleTypeId)?.name
+            carrier: carrier ?? undefined,
+            vehicle: vehicle ?? undefined,
+            vehicleTypeName: vehicleTypes.find(vehicleType => vehicleType.id === vehicle?.vehicleTypeId)?.name
           }))
         );
       })
     );
+  };
+
+  private endpoints(baseUrl: string) {
+    return {
+      trips: new TripsApiEndpoint(this.http, baseUrl),
+      loadRequests: new TripLoadRequestsApiEndpoint(this.http, baseUrl),
+      shippers: new TripShippersApiEndpoint(this.http, baseUrl),
+      carriers: new TripCarriersApiEndpoint(this.http, baseUrl),
+      vehicles: new TripVehiclesApiEndpoint(this.http, baseUrl),
+      vehicleTypes: new TripVehicleTypesApiEndpoint(this.http, baseUrl)
+    };
+  }
+
+  private ignoreMissing<T>(request: Observable<T>): Observable<T | null> {
+    return request.pipe(
+      catchError((error: unknown) =>
+        error instanceof Error && error.message.endsWith('Resource not found')
+          ? of(null)
+          : throwError(() => error))
+    );
+  }
 }

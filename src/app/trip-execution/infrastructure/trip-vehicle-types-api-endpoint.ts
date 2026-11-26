@@ -14,8 +14,8 @@ export class TripVehicleTypesApiEndpoint extends BaseApiEndpoint<TripVehicleType
    * Creates an instance of TripVehicleTypesApiEndpoint
    * @param http - The HttpClient to be used for making API requests
    */
-  constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderVehicleTypesEndpointPath}`,
+  constructor(http: HttpClient, baseUrl = environment.platformProviderApiBaseUrl) {
+    super(http, `${baseUrl}${environment.platformProviderVehicleTypesEndpointPath}`,
       new TripVehicleTypeAssembler());
   }
 }

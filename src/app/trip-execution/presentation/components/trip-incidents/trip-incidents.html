@@ -1,0 +1,88 @@
+<mat-expansion-panel (opened)="load()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ 'trip-incidents.title' | translate }}</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  @if (reported()) {
+    <p class="trip-incidents__success" role="status">
+      {{ 'trip-incidents.reported' | translate }}
+    </p>
+  }
+  @if (loading()) {
+    <p role="status">{{ 'trip-incidents.loading' | translate }}</p>
+  } @else if (listFailed()) {
+    <p class="trip-incidents__error" role="alert">{{ 'trip-incidents.list-error' | translate }}</p>
+    <button mat-button type="button" (click)="load()">{{ 'trip-incidents.retry' | translate }}</button>
+  } @else if (!incidents().length) {
+    <p role="status">{{ 'trip-incidents.empty' | translate }}</p>
+  }
+
+  @if (incidents().length) {
+    <ul class="trip-incidents__list">
+      @for (incident of incidents(); track incident.id) {
+        <li>
+          <strong>{{ 'trip-incidents.type.' + incident.type | translate }}</strong>
+          <span>{{ incident.reportedAt | localizedDate: 'd MMM y, HH:mm' }}</span>
+          @if (incident.description) {
+            <p>{{ incident.description }}</p>
+          }
+          @if (incident.evidenceUrl) {
+            <button mat-button type="button" [disabled]="downloadingId() !== null" (click)="download(incident)">
+              <mat-icon aria-hidden="true">download</mat-icon>
+              {{ 'trip-incidents.download' | translate }}
+            </button>
+          }
+        </li>
+      }
+    </ul>
+  }
+  @if (downloadFailed()) {
+    <p class="trip-incidents__error" role="alert">{{ 'trip-incidents.download-error' | translate }}</p>
+  }
+
+  @if (canReport() && !reported()) {
+    @if (formOpen()) {
+      <form class="trip-incidents__form" [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'trip-incidents.type-label' | translate }}</mat-label>
+          <mat-select formControlName="type" required>
+            @for (type of incidentTypes; track type) {
+              <mat-option [value]="type">{{ 'trip-incidents.type.' + type | translate }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'trip-incidents.description-label' | translate }}</mat-label>
+          <textarea matInput formControlName="description" maxlength="500" rows="3"></textarea>
+        </mat-form-field>
+
+        <label class="trip-incidents__file">
+          <span>{{ 'trip-incidents.evidence' | translate }}</span>
+          <input #evidenceInput type="file" [accept]="acceptedTypes" required
+                 [attr.aria-invalid]="evidenceError() ? true : null" (change)="selectEvidence(evidenceInput)">
+        </label>
+        @if (evidenceError(); as message) {
+          <p class="trip-incidents__error" role="alert">{{ message | translate }}</p>
+        }
+        @if (reportFailed()) {
+          <p class="trip-incidents__error" role="alert">{{ 'trip-incidents.report-error' | translate }}</p>
+        }
+
+        <div class="trip-incidents__actions">
+          <button mat-button type="button" [disabled]="submitting()" (click)="cancelReport()">
+            {{ 'trip-incidents.cancel' | translate }}
+          </button>
+          <button mat-flat-button type="submit" [disabled]="form.invalid || !evidence() || submitting() || loading()">
+            {{ (submitting() ? 'trip-incidents.submitting' : 'trip-incidents.report') | translate }}
+          </button>
+        </div>
+      </form>
+    } @else {
+      <button mat-stroked-button type="button" (click)="formOpen.set(true)">
+        <mat-icon aria-hidden="true">report_problem</mat-icon>
+        {{ 'trip-incidents.report' | translate }}
+      </button>
+    }
+  }
+</mat-expansion-panel>

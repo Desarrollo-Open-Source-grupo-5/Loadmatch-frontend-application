@@ -402,6 +402,30 @@
     "unavailable-title": "Este flete ya no está disponible",
     "unavailable-message": "Otro transportista ya lo tomó, por lo que se retiró de tus resultados de búsqueda."
   },
+  "trip-incidents": {
+    "title": "Incidentes del viaje",
+    "loading": "Cargando incidentes…",
+    "empty": "Todavía no se han reportado incidentes para este viaje.",
+    "list-error": "No se pudieron cargar los incidentes.",
+    "retry": "Volver a intentar",
+    "report": "Reportar incidente",
+    "type-label": "Tipo de incidente",
+    "description-label": "Descripción (opcional)",
+    "evidence": "Foto de evidencia (JPG o PNG, hasta 5 MB)",
+    "evidence-type-error": "Selecciona una foto JPG o PNG.",
+    "evidence-size-error": "Selecciona una foto que no esté vacía y pese como máximo 5 MB.",
+    "report-error": "No se pudo reportar el incidente. Revisa el estado del viaje y la foto e inténtalo de nuevo.",
+    "reported": "Incidente reportado. El viaje ahora figura con retraso.",
+    "download": "Descargar evidencia",
+    "download-error": "No se pudo descargar la evidencia.",
+    "cancel": "Cancelar",
+    "submitting": "Reportando…",
+    "type": {
+      "ROAD_BLOCKAGE": "Bloqueo de carretera",
+      "MECHANICAL_FAILURE": "Falla mecánica",
+      "ACCIDENT": "Accidente"
+    }
+  },
   "carrier-trips": {
     "title": "Mis viajes",
     "subtitle": "Tus viajes aceptados, agrupados para organizar tu jornada.",

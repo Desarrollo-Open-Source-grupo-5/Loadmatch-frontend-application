@@ -21,7 +21,7 @@ export interface TripResource extends BaseResource {
   vehicleId: string;
   status: TripStatus;
   assignedAt: string;
-  pickupAt: string;
+  pickupAt?: string;
   deliveredAt: string | null;
   confirmedAt: string | null;
   completedAt: string | null;

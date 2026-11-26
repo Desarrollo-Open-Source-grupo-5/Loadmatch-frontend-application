@@ -52,13 +52,15 @@
           </ol>
 
           <dl class="load-tracking__facts">
-            <div>
-              <dt>{{ 'load-tracking.trip-distance' | translate }}</dt>
-              <dd>{{ 'load-tracking.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
-            </div>
+            @if (item.loadRequest.distanceKm !== null) {
+              <div>
+                <dt>{{ 'load-tracking.trip-distance' | translate }}</dt>
+                <dd>{{ 'load-tracking.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
+              </div>
+            }
             <div>
               <dt>{{ 'load-tracking.pickup' | translate }}</dt>
-              <dd>{{ item.trip.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
+              <dd>{{ item.pickupAt | localizedDate: 'd MMM y, HH:mm' }}</dd>
             </div>
             <div>
               <dt>{{ 'load-tracking.cargo' | translate }}</dt>
@@ -103,6 +105,9 @@
           </ol>
         </section>
       </div>
+      @if (isPlatformId(item.id)) {
+        <app-trip-incidents [tripId]="item.id"/>
+      }
     } @else if (store.loading()) {
       <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
     } @else if (store.error()) {

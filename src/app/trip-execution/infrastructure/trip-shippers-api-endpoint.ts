@@ -14,8 +14,8 @@ export class TripShippersApiEndpoint extends BaseApiEndpoint<TripShipper, TripSh
    * Creates an instance of TripShippersApiEndpoint
    * @param http - The HttpClient to be used for making API requests
    */
-  constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderShippersEndpointPath}`,
+  constructor(http: HttpClient, baseUrl = environment.platformProviderApiBaseUrl) {
+    super(http, `${baseUrl}${environment.platformProviderShippersEndpointPath}`,
       new TripShipperAssembler());
   }
 }

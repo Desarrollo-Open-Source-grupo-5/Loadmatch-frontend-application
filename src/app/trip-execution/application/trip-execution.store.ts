@@ -182,7 +182,7 @@ export class TripExecutionStore {
    * @returns A new ordered array.
    */
   private sortByPickup = (trips: TripOverview[]): TripOverview[] =>
-    [...trips].sort((a, b) => a.trip.pickupAt.getTime() - b.trip.pickupAt.getTime() || a.id.localeCompare(b.id));
+    [...trips].sort((a, b) => a.pickupAt.getTime() - b.pickupAt.getTime() || a.id.localeCompare(b.id));
 
   /**
    * Normalizes unknown errors into a display-friendly message.

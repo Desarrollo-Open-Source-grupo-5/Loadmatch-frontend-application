@@ -12,7 +12,7 @@ export class TripLoadRequest implements BaseEntity {
   readonly #originAddress: string;
   readonly #destinationDistrict: string;
   readonly #destinationAddress: string;
-  readonly #distanceKm: number;
+  readonly #distanceKm: number | null;
   readonly #cargoType: string;
   readonly #weightKg: number;
   readonly #offeredRate: Money;
@@ -29,7 +29,7 @@ export class TripLoadRequest implements BaseEntity {
     originAddress: string;
     destinationDistrict: string;
     destinationAddress: string;
-    distanceKm: number;
+    distanceKm: number | null;
     cargoType: string;
     weightKg: number;
     offeredRate: Money;
@@ -100,7 +100,7 @@ export class TripLoadRequest implements BaseEntity {
   /**
    * Trip distance between origin and destination, in kilometres.
    */
-  get distanceKm(): number {
+  get distanceKm(): number | null {
     return this.#distanceKm;
   }
 
