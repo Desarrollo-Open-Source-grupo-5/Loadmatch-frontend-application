@@ -114,5 +114,71 @@
       </mat-form-field>
     </div>
 
-      </form>
+    <h2 class="register__section">{{ 'carrier-register.section-vehicle' | translate }}</h2>
+    <div class="register__grid">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.vehicle-type' | translate }}</mat-label>
+        <mat-select formControlName="vehicleTypeId">
+          @for (type of vehicleTypes(); track type.id) {
+            <mat-option [value]="type.id">{{ type.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.vehicleTypeId.hasError('required')) {
+          <mat-error>{{ 'carrier-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.license-plate' | translate }}</mat-label>
+        <input matInput type="text" formControlName="licensePlate" maxlength="10" placeholder="ABC-123"/>
+        @if (form.controls.licensePlate.hasError('required')) {
+          <mat-error>{{ 'carrier-register.error.required' | translate }}</mat-error>
+        } @else if (form.controls.licensePlate.hasError('pattern')) {
+          <mat-error>{{ 'carrier-register.error.plate-format' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.brand' | translate }}</mat-label>
+        <input matInput type="text" formControlName="brand" maxlength="60"/>
+        @if (form.controls.brand.hasError('required')) {
+          <mat-error>{{ 'carrier-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.model' | translate }}</mat-label>
+        <input matInput type="text" formControlName="model" maxlength="60"/>
+        @if (form.controls.model.hasError('required')) {
+          <mat-error>{{ 'carrier-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.manufacture-year' | translate }}</mat-label>
+        <input matInput type="number" formControlName="manufactureYear"/>
+        @if (form.controls.manufactureYear.hasError('required')) {
+          <mat-error>{{ 'carrier-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'carrier-register.payload-kg' | translate }}</mat-label>
+        <input matInput type="number" formControlName="payloadKg"/>
+        @if (form.controls.payloadKg.hasError('required') || form.controls.payloadKg.hasError('min')) {
+          <mat-error>{{ 'carrier-register.error.payload-min' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <button mat-flat-button type="submit" class="register__submit" [disabled]="submitting()">
+      <mat-icon>local_shipping</mat-icon>
+      {{ 'carrier-register.submit' | translate }}
+    </button>
+
+    <a mat-stroked-button routerLink="/sign-in" class="register__back">
+      {{ 'carrier-register.back-to-sign-in' | translate }}
+    </a>
+  </form>
 </section>
+
