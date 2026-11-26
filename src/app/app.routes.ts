@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import {Home} from './shared/presentation/views/home/home';
+import {authGuard} from './iam/presentation/guards/auth.guard';
+import {roleGuard} from './iam/presentation/guards/role.guard';
 
 const about = () => import('./shared/presentation/views/about/about')
   .then(m => m.About);
@@ -31,11 +33,11 @@ export const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'register/shipper', loadComponent: shipperRegistration, title: `${baseTitle} - Register Shipper` },
   { path: '',         loadChildren: iamRoutes },
-  { path: 'shipper',  children: [
+  { path: 'shipper',  canActivate: [authGuard, roleGuard('SHIPPER')], children: [
     { path: '', loadChildren: freightPublishingRoutes },
     { path: '', loadChildren: tripExecutionShipperRoutes },
   ] },
-  { path: 'carrier',  children: [
+  { path: 'carrier',  canActivate: [authGuard, roleGuard('CARRIER')], children: [
     { path: '', loadChildren: matchingRoutes },
     { path: '', loadChildren: tripExecutionCarrierRoutes },
     { path: '', loadChildren: documentsRoutes },
