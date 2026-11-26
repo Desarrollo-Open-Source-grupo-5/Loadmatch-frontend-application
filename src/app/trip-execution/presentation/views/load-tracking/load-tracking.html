@@ -105,6 +105,9 @@
           </ol>
         </section>
       </div>
+      @if (isPlatformId(item.id)) {
+        <app-trip-incidents [tripId]="item.id"/>
+      }
     } @else if (store.loading()) {
       <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
     } @else if (store.error()) {

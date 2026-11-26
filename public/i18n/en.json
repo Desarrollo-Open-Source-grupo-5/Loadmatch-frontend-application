@@ -402,6 +402,30 @@
     "unavailable-title": "This load is no longer available",
     "unavailable-message": "Another carrier already took it, so it was removed from your search results."
   },
+  "trip-incidents": {
+    "title": "Trip incidents",
+    "loading": "Loading incidents…",
+    "empty": "No incidents have been reported for this trip.",
+    "list-error": "Could not load the incidents.",
+    "retry": "Try again",
+    "report": "Report incident",
+    "type-label": "Incident type",
+    "description-label": "Description (optional)",
+    "evidence": "Evidence photo (JPG or PNG, up to 5 MB)",
+    "evidence-type-error": "Choose a JPG or PNG photo.",
+    "evidence-size-error": "Choose a photo that is not empty and is no larger than 5 MB.",
+    "report-error": "Could not report the incident. Check the trip status and the selected photo, then try again.",
+    "reported": "Incident reported. The trip is now delayed.",
+    "download": "Download evidence",
+    "download-error": "Could not download the evidence.",
+    "cancel": "Cancel",
+    "submitting": "Reporting…",
+    "type": {
+      "ROAD_BLOCKAGE": "Road blockage",
+      "MECHANICAL_FAILURE": "Mechanical failure",
+      "ACCIDENT": "Accident"
+    }
+  },
   "carrier-trips": {
     "title": "My trips",
     "subtitle": "Your accepted trips, grouped to organize your work day.",

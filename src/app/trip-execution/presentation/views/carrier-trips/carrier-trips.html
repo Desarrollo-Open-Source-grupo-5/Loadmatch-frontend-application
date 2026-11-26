@@ -72,6 +72,10 @@
                           <dd>{{ item.shipperName }}</dd>
                         </div>
                       </dl>
+                      @if (isPlatformId(item.id)) {
+                        <app-trip-incidents [tripId]="item.id" [canReport]="canReportIncident(item.trip.status)"
+                                            (incidentReported)="refreshTrips()"/>
+                      }
                     </mat-card-content>
                   </mat-card>
                 </li>

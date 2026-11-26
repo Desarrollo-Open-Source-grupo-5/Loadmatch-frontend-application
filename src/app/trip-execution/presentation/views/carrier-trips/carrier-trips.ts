@@ -11,6 +11,9 @@ import {ProfileRequired} from '../../../../shared/presentation/components/profil
 import {LocalizedDatePipe} from '../../../../shared/presentation/pipes/localized-date.pipe';
 import {TripExecutionStore} from '../../../application/trip-execution.store';
 import {TRIP_GROUPS} from '../../../domain/model/trip-status';
+import {isPlatformId} from '../../../domain/model/platform-id';
+import {canReportIncident} from '../../../domain/model/trip-incident';
+import {TripIncidents} from '../../components/trip-incidents/trip-incidents';
 import {TripStatusChip} from '../../components/trip-status-chip/trip-status-chip';
 
 /**
@@ -31,6 +34,7 @@ import {TripStatusChip} from '../../components/trip-status-chip/trip-status-chip
     TranslatePipe,
     LocalizedDatePipe,
     TripStatusChip,
+    TripIncidents,
     ProfileRequired
   ],
   selector: 'app-carrier-trips',
@@ -38,6 +42,8 @@ import {TripStatusChip} from '../../components/trip-status-chip/trip-status-chip
   templateUrl: './carrier-trips.html',
 })
 export class CarrierTrips {
+  protected readonly isPlatformId = isPlatformId;
+  protected readonly canReportIncident = canReportIncident;
   private readonly activeProfileStore = inject(ActiveProfileStore);
 
   /**
@@ -72,5 +78,12 @@ export class CarrierTrips {
         }
       });
     });
+  }
+
+  protected refreshTrips(): void {
+    const carrierId = this.activeProfileStore.carrierId();
+    if (carrierId) {
+      this.store.loadCarrierTrips(carrierId);
+    }
   }
 }

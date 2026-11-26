@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  margin-block-start: 1rem;
+}
+
+.trip-incidents__form,
+.trip-incidents__file {
+  display: grid;
+  gap: .5rem;
+}
+
+.trip-incidents__form {
+  margin-block-start: 1rem;
+}
+
+.trip-incidents__file input {
+  max-inline-size: 100%;
+}
+
+.trip-incidents__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.trip-incidents__list {
+  display: grid;
+  gap: .75rem;
+  padding-inline-start: 1.25rem;
+}
+
+.trip-incidents__list span {
+  display: block;
+  color: var(--lm-color-slate-600);
+}
+
+.trip-incidents__list p {
+  overflow-wrap: anywhere;
+}
+
+.trip-incidents__error {
+  color: var(--lm-status-cancelled-text);
+}
+
+.trip-incidents__success {
+  color: var(--lm-status-delivered-text);
+}
