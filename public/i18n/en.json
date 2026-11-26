@@ -480,41 +480,5 @@
       "invalid": "Please verify the entered company data.",
       "unavailable": "Could not complete registration. Try again."
     }
-  },
-  "carrier-register": {
-    "title": "Register as a carrier",
-    "subtitle": "Create your driver profile and register your vehicle.",
-    "section-personal": "Personal and license details",
-    "section-vehicle": "Vehicle details",
-    "email": "Email",
-    "password": "Password",
-    "first-names": "First names",
-    "last-names": "Last names",
-    "dni": "DNI (8 digits)",
-    "phone-number": "Phone number",
-    "license-number": "License number",
-    "license-category": "License category",
-    "license-expiration": "License expiration date",
-    "operating-zone": "Operating zone",
-    "vehicle-type": "Vehicle type",
-    "license-plate": "License plate",
-    "brand": "Brand",
-    "model": "Model",
-    "manufacture-year": "Manufacture year",
-    "payload-kg": "Payload capacity (kg)",
-    "submit": "Create carrier account",
-    "back-to-sign-in": "Back to sign in",
-    "success": "Carrier registered successfully. Redirecting to sign in...",
-    "error": {
-      "required": "This field is required.",
-      "email": "Enter a valid email address.",
-      "password-length": "Password must be at least 6 characters.",
-      "dni-format": "DNI must have 8 digits.",
-      "plate-format": "License plate must follow ABC-123 format.",
-      "payload-min": "Payload capacity must be greater than 0.",
-      "duplicate": "A carrier with this DNI or email is already registered.",
-      "invalid": "Please verify the entered carrier or vehicle data.",
-      "unavailable": "Could not complete registration. Try again."
-    }
   }
 }
