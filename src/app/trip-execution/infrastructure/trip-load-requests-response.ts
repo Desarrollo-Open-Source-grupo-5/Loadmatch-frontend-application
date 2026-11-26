@@ -4,20 +4,23 @@ import {CurrencyCode} from '../../shared/domain/model/money';
 /**
  * Subset of the `/load-requests` resource (owned by Freight Publishing) read by Trip Execution.
  */
-export interface TripLoadRequestResource extends BaseResource {
+interface TripLoadRequestFields extends BaseResource {
   id: string;
   shipperId: string;
   originAddress: string;
   originDistrict: string;
   destinationAddress: string;
   destinationDistrict: string;
-  distanceKm: number;
+  distanceKm?: number | null;
   weightKg: number;
   cargoType: string;
-  rateAmount: number;
-  rateCurrency: CurrencyCode;
   pickupAt: string;
 }
+
+export type TripLoadRequestResource = TripLoadRequestFields & (
+  | { rateAmount: number; rateCurrency: CurrencyCode }
+  | { offeredRateAmount: number; currency: CurrencyCode }
+);
 
 /**
  * Envelope returned by the API for a collection of load requests.

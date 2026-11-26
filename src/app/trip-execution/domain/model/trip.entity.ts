@@ -14,7 +14,7 @@ export class Trip implements BaseEntity {
   readonly #vehicleId: string;
   readonly #status: TripStatus;
   readonly #assignedAt: Date;
-  readonly #pickupAt: Date;
+  readonly #pickupAt: Date | null;
   readonly #deliveredAt: Date | null;
   readonly #confirmedAt: Date | null;
   readonly #completedAt: Date | null;
@@ -32,7 +32,7 @@ export class Trip implements BaseEntity {
     vehicleId: string;
     status: TripStatus;
     assignedAt: Date;
-    pickupAt: Date;
+    pickupAt: Date | null;
     deliveredAt?: Date | null;
     confirmedAt?: Date | null;
     completedAt?: Date | null;
@@ -118,7 +118,7 @@ export class Trip implements BaseEntity {
   /**
    * Pickup date and time agreed in the load request.
    */
-  get pickupAt(): Date {
+  get pickupAt(): Date | null {
     return this.#pickupAt;
   }
 

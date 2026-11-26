@@ -21,10 +21,12 @@ export class TripLoadRequestAssembler implements BaseAssembler<TripLoadRequest, 
       originAddress: resource.originAddress,
       destinationDistrict: resource.destinationDistrict,
       destinationAddress: resource.destinationAddress,
-      distanceKm: resource.distanceKm,
+      distanceKm: resource.distanceKm ?? null,
       cargoType: resource.cargoType,
       weightKg: resource.weightKg,
-      offeredRate: new Money({amount: resource.rateAmount, currency: resource.rateCurrency}),
+      offeredRate: 'offeredRateAmount' in resource
+        ? new Money({amount: resource.offeredRateAmount, currency: resource.currency})
+        : new Money({amount: resource.rateAmount, currency: resource.rateCurrency}),
       pickupAt: new Date(resource.pickupAt)
     });
 

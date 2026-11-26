@@ -80,6 +80,10 @@ export class TripOverview {
     return this.#loadRequest;
   }
 
+  get pickupAt(): Date {
+    return this.#trip.pickupAt ?? this.#loadRequest.pickupAt;
+  }
+
   /**
    * Business name of the shipper.
    */

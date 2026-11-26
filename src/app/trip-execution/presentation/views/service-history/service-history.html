@@ -52,10 +52,12 @@
                 </p>
                 <p class="service-history__detail">{{ item.trip.loadRequestCode }} · {{ item.shipperName }}</p>
                 <dl class="service-history__facts">
-                  <div>
-                    <dt>{{ 'service-history.column-distance' | translate }}</dt>
-                    <dd>{{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
-                  </div>
+                  @if (item.loadRequest.distanceKm !== null) {
+                    <div>
+                      <dt>{{ 'service-history.column-distance' | translate }}</dt>
+                      <dd>{{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}</dd>
+                    </div>
+                  }
                   <div>
                     <dt>{{ 'service-history.column-rate' | translate }}</dt>
                     <dd>{{ item.loadRequest.offeredRate | money }}</dd>
@@ -87,7 +89,11 @@
           <ng-container matColumnDef="distance">
             <th mat-header-cell *matHeaderCellDef>{{ 'service-history.column-distance' | translate }}</th>
             <td mat-cell *matCellDef="let item">
-              {{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}
+              @if (item.loadRequest.distanceKm !== null) {
+                {{ 'service-history.distance-value' | translate: {distance: (item.loadRequest.distanceKm | localizedNumber: '1.0-1')} }}
+              } @else {
+                —
+              }
             </td>
           </ng-container>
           <ng-container matColumnDef="rate">

@@ -14,8 +14,8 @@ export class TripCarriersApiEndpoint extends BaseApiEndpoint<TripCarrier, TripCa
    * Creates an instance of TripCarriersApiEndpoint
    * @param http - The HttpClient to be used for making API requests
    */
-  constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderCarriersEndpointPath}`,
+  constructor(http: HttpClient, baseUrl = environment.platformProviderApiBaseUrl) {
+    super(http, `${baseUrl}${environment.platformProviderCarriersEndpointPath}`,
       new TripCarrierAssembler());
   }
 }

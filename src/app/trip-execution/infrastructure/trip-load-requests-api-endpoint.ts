@@ -14,8 +14,8 @@ export class TripLoadRequestsApiEndpoint extends BaseApiEndpoint<TripLoadRequest
    * Creates an instance of TripLoadRequestsApiEndpoint
    * @param http - The HttpClient to be used for making API requests
    */
-  constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderLoadRequestsEndpointPath}`,
+  constructor(http: HttpClient, baseUrl = environment.platformProviderApiBaseUrl) {
+    super(http, `${baseUrl}${environment.platformProviderLoadRequestsEndpointPath}`,
       new TripLoadRequestAssembler());
   }
 }
