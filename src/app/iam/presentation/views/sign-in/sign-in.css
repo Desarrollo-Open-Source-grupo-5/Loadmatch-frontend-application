@@ -28,7 +28,8 @@
   margin: 16px 0;
   padding: 12px 16px;
   border-radius: 8px;
-  background-color: var(--lm-color-error);
+  border: 1px solid var(--lm-color-error);
+  background-color: #FEE2E2;
   color: var(--lm-color-error-text);
 }
 
