@@ -1,0 +1,123 @@
+<section class="register">
+  <header class="register__header">
+    <img src="loadmatch-logo.png" alt="" width="48" height="48"/>
+    <h1>{{ 'shipper-register.title' | translate }}</h1>
+    <p class="register__subtitle">{{ 'shipper-register.subtitle' | translate }}</p>
+  </header>
+
+  @if (submitting()) {
+    <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+  }
+
+  @if (errorKey(); as key) {
+    <p class="register__banner register__banner--error" role="alert">
+      <mat-icon aria-hidden="true">error</mat-icon>
+      {{ key | translate }}
+    </p>
+  }
+
+  @if (registered()) {
+    <p class="register__banner register__banner--success" role="status">
+      <mat-icon aria-hidden="true">check_circle</mat-icon>
+      {{ 'shipper-register.success' | translate }}
+    </p>
+  }
+
+  <form class="register__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="register__grid">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.email' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email" autocomplete="email" maxlength="120"/>
+        @if (form.controls.email.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        } @else if (form.controls.email.hasError('email')) {
+          <mat-error>{{ 'shipper-register.error.email' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.password' | translate }}</mat-label>
+        <input matInput [type]="passwordVisible() ? 'text' : 'password'" formControlName="password" autocomplete="new-password"/>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+                [attr.aria-label]="(passwordVisible() ? 'sign-in.hide-password' : 'sign-in.show-password') | translate">
+          <mat-icon>{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (form.controls.password.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        } @else if (form.controls.password.hasError('minlength')) {
+          <mat-error>{{ 'shipper-register.error.password-length' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.ruc' | translate }}</mat-label>
+        <input matInput type="text" formControlName="ruc" maxlength="11"/>
+        @if (form.controls.ruc.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        } @else if (form.controls.ruc.hasError('pattern')) {
+          <mat-error>{{ 'shipper-register.error.ruc-format' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.business-name' | translate }}</mat-label>
+        <input matInput type="text" formControlName="businessName" maxlength="150"/>
+        @if (form.controls.businessName.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.contact-name' | translate }}</mat-label>
+        <input matInput type="text" formControlName="contactName" maxlength="120"/>
+        @if (form.controls.contactName.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.phone-number' | translate }}</mat-label>
+        <input matInput type="tel" formControlName="phoneNumber" maxlength="20"/>
+        @if (form.controls.phoneNumber.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.street' | translate }}</mat-label>
+        <input matInput type="text" formControlName="street" maxlength="150"/>
+        @if (form.controls.street.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.district' | translate }}</mat-label>
+        <input matInput type="text" formControlName="district" maxlength="80"/>
+        @if (form.controls.district.hasError('required')) {
+          <mat-error>{{ 'shipper-register.error.required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.province' | translate }}</mat-label>
+        <input matInput type="text" formControlName="province" maxlength="80"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'shipper-register.department' | translate }}</mat-label>
+        <input matInput type="text" formControlName="department" maxlength="80"/>
+      </mat-form-field>
+    </div>
+
+    <button mat-flat-button type="submit" class="register__submit" [disabled]="submitting()">
+      <mat-icon>business</mat-icon>
+      {{ 'shipper-register.submit' | translate }}
+    </button>
+
+    <a mat-stroked-button routerLink="/sign-in" class="register__back">
+      {{ 'shipper-register.back-to-sign-in' | translate }}
+    </a>
+  </form>
+</section>
+

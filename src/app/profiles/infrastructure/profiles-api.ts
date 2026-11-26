@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
 import {BaseApi} from '../../shared/infrastructure/base-api';
 import {Shipper} from '../domain/model/shipper.entity';
 import {Carrier} from '../domain/model/carrier.entity';
@@ -8,6 +9,8 @@ import {ShippersApiEndpoint} from './shippers-api-endpoint';
 import {CarriersApiEndpoint} from './carriers-api-endpoint';
 import {ProfileReferencesApiEndpoint} from './profile-references-api-endpoint';
 import {ProfileReference} from '../domain/model/profile-reference';
+import {RegisterShipperRequest} from './register-shipper-request';
+import {ShipperResource} from './shippers-response';
 
 /**
  * Infrastructure facade for shipper and carrier endpoint operations.
@@ -43,4 +46,15 @@ export class ProfilesApi extends BaseApi {
     role === 'SHIPPER'
       ? this.profileReferencesEndpoint.getShipperByUserId(userId)
       : this.profileReferencesEndpoint.getCarrierByUserId(userId);
+
+  /**
+   * Registers a new shipper account and business profile.
+   * @param request - Shipper registration payload.
+   * @returns Stream with the created shipper resource.
+   */
+  registerShipper = (request: RegisterShipperRequest): Observable<ShipperResource> =>
+    this.http.post<ShipperResource>(
+      `${environment.platformApiBaseUrl}${environment.platformProviderShippersEndpointPath}`,
+      request
+    );
 }

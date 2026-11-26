@@ -17,6 +17,10 @@ const iamRoutes = () =>
   import('./iam/presentation/iam.routes').then(m => m.iamRoutes);
 const documentsRoutes = () =>
   import('./documents/presentation/documents.routes').then(m => m.documentsRoutes);
+const shipperRegistration = () =>
+  import('./profiles/presentation/views/shipper-registration/shipper-registration').then(m => m.ShipperRegistration);
+const carrierRegistration = () =>
+  import('./profiles/presentation/views/carrier-registration/carrier-registration').then(m => m.CarrierRegistration);
 
 const baseTitle = 'LoadMatch';
 
@@ -27,6 +31,8 @@ export const routes: Routes = [
   { path: 'home',     component: Home, title: `${baseTitle} - Home` },
   { path: 'about',    loadComponent: about, title: `${baseTitle} - About` },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+  { path: 'register/shipper', loadComponent: shipperRegistration, title: `${baseTitle} - Register Shipper` },
+  { path: 'register/carrier', loadComponent: carrierRegistration, title: `${baseTitle} - Register Carrier` },
   { path: '',         loadChildren: iamRoutes },
   { path: 'shipper',  children: [
     { path: '', loadChildren: freightPublishingRoutes },
