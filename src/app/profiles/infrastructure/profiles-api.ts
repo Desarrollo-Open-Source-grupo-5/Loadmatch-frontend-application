@@ -10,7 +10,10 @@ import {CarriersApiEndpoint} from './carriers-api-endpoint';
 import {ProfileReferencesApiEndpoint} from './profile-references-api-endpoint';
 import {ProfileReference} from '../domain/model/profile-reference';
 import {RegisterShipperRequest} from './register-shipper-request';
+import {RegisterCarrierRequest} from './register-carrier-request';
+import {RegisterVehicleRequest} from './register-vehicle-request';
 import {ShipperResource} from './shippers-response';
+import {CarrierResource} from './carriers-response';
 
 /**
  * Infrastructure facade for shipper and carrier endpoint operations.
@@ -55,6 +58,28 @@ export class ProfilesApi extends BaseApi {
   registerShipper = (request: RegisterShipperRequest): Observable<ShipperResource> =>
     this.http.post<ShipperResource>(
       `${environment.platformApiBaseUrl}${environment.platformProviderShippersEndpointPath}`,
+      request
+    );
+
+  /**
+   * Registers a new carrier account and driver profile.
+   * @param request - Carrier registration payload.
+   * @returns Stream with the created carrier resource.
+   */
+  registerCarrier = (request: RegisterCarrierRequest): Observable<CarrierResource> =>
+    this.http.post<CarrierResource>(
+      `${environment.platformApiBaseUrl}${environment.platformProviderCarriersEndpointPath}`,
+      request
+    );
+
+  /**
+   * Registers a vehicle for a carrier.
+   * @param request - Vehicle registration payload.
+   * @returns Stream with the created vehicle response.
+   */
+  registerVehicle = (request: RegisterVehicleRequest): Observable<unknown> =>
+    this.http.post(
+      `${environment.platformApiBaseUrl}${environment.platformProviderVehiclesEndpointPath}`,
       request
     );
 }
