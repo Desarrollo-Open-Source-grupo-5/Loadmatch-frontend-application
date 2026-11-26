@@ -4,6 +4,7 @@ import {AuthenticatedUser} from '../domain/model/authenticated-user.entity';
 import {SignInCredentials} from '../domain/model/sign-in-credentials';
 import {UserRole} from '../domain/model/user-role';
 import {IamApi} from '../infrastructure/iam-api';
+import {ActiveProfileStore} from '../../shared/application/active-profile.store';
 
 /**
  * Reason why a sign in failed.
@@ -30,6 +31,7 @@ export class SessionStore {
   private static readonly STORAGE_KEY = 'loadmatch.session';
 
   private readonly iamApi = inject(IamApi);
+  private readonly activeProfileStore = inject(ActiveProfileStore);
 
   private readonly currentUserSignal = signal<AuthenticatedUser | null>(SessionStore.restore());
 
@@ -85,6 +87,16 @@ export class SessionStore {
   };
 
   /**
+   * Ends the session: forgets the authenticated user, its access token and the active profile.
+   */
+  signOut = (): void => {
+    this.currentUserSignal.set(null);
+    this.signInErrorSignal.set(null);
+    this.activeProfileStore.clear();
+    SessionStore.forget();
+  };
+
+  /**
    * Maps an HTTP error into the reason shown to the user.
    * @param error - Error raised by the sign-in request.
    * @returns INVALID_CREDENTIALS for 400/401 responses, otherwise UNAVAILABLE.
@@ -118,6 +130,17 @@ export class SessionStore {
       sessionStorage.setItem(SessionStore.STORAGE_KEY, JSON.stringify(session));
     } catch {
       // Storage is optional: the session still lives in memory.
+    }
+  }
+
+  /**
+   * Removes the persisted session, ignoring storage failures.
+   */
+  private static forget(): void {
+    try {
+      sessionStorage.removeItem(SessionStore.STORAGE_KEY);
+    } catch {
+      // Storage is optional: the session was already removed from memory.
     }
   }
 }
