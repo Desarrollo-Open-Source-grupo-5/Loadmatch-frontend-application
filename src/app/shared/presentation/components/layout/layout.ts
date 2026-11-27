@@ -10,6 +10,7 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/mater
 import {MatTooltip} from '@angular/material/tooltip';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ActiveProfileStore} from '../../../application/active-profile.store';
+import {SessionStore} from '../../../../iam/application/session.store';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
 import {NotificationBell} from '../notification-bell/notification-bell';
@@ -60,6 +61,7 @@ export interface NavigationOption {
 })
 export class Layout {
   private readonly activeProfileStore = inject(ActiveProfileStore);
+  private readonly sessionStore = inject(SessionStore);
   private readonly router = inject(Router);
   private readonly breakpointObserver = inject(BreakpointObserver);
 
@@ -123,6 +125,14 @@ export class Layout {
    */
   protected switchProfile(): void {
     this.activeProfileStore.clear();
+    this.router.navigate(['/sign-in']).then();
+  }
+
+  /**
+   * Ends the current session and returns to the sign-in view.
+   */
+  protected signOut(): void {
+    this.sessionStore.signOut();
     this.router.navigate(['/sign-in']).then();
   }
 }
