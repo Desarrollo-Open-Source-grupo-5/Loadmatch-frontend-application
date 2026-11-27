@@ -19,6 +19,8 @@ const iamRoutes = () =>
   import('./iam/presentation/iam.routes').then(m => m.iamRoutes);
 const documentsRoutes = () =>
   import('./documents/presentation/documents.routes').then(m => m.documentsRoutes);
+const shipperRatingRoutes = () =>
+  import('./rating/presentation/rating.routes').then(m => m.shipperRatingRoutes);
 const shipperRegistration = () =>
   import('./profiles/presentation/views/shipper-registration/shipper-registration').then(m => m.ShipperRegistration);
 const carrierRegistration = () =>
@@ -39,6 +41,7 @@ export const routes: Routes = [
   { path: 'shipper',  canActivate: [authGuard, roleGuard('SHIPPER')], children: [
     { path: '', loadChildren: freightPublishingRoutes },
     { path: '', loadChildren: tripExecutionShipperRoutes },
+    { path: '', loadChildren: shipperRatingRoutes },
   ] },
   { path: 'carrier',  canActivate: [authGuard, roleGuard('CARRIER')], children: [
     { path: '', loadChildren: matchingRoutes },
