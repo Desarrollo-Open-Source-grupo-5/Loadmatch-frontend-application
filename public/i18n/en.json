@@ -553,5 +553,22 @@
       "invalid": "Please verify the entered carrier or vehicle data.",
       "unavailable": "Could not complete registration. Try again."
     }
+  },
+  "rating": {
+    "shipper-title": "Rate the carrier",
+    "shipper-subtitle": "Share your experience about this completed trip.",
+    "carrier-title": "Rate the shipper",
+    "carrier-subtitle": "Share your experience with this company after payment.",
+    "score-label": "Rating from 1 to 5 stars",
+    "comment": "Comment (optional)",
+    "submit": "Submit rating",
+    "success": "Rating submitted successfully. Redirecting...",
+    "error": {
+      "comment-length": "Comment cannot exceed 500 characters.",
+      "already-rated": "You have already rated this trip.",
+      "not-eligible": "This trip is not eligible for rating yet.",
+      "missing-context": "Missing trip or active profile information.",
+      "unavailable": "Could not submit rating. Try again."
+    }
   }
 }
