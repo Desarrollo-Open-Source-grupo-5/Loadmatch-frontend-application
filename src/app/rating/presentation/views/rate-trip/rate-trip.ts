@@ -61,4 +61,46 @@ export class RateTrip implements OnInit {
   protected selectScore(value: number): void {
     this.form.controls.score.setValue(value);
   }
+
+  protected submit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const raterId = this.activeProfileStore.activeProfile()?.profileId;
+    if (!raterId || !this.tripId()) {
+      this.errorKey.set('rating.error.missing-context');
+      return;
+    }
+
+    this.submitting.set(true);
+    this.errorKey.set(null);
+
+    const raw = this.form.getRawValue();
+    this.ratingApi.registerRating({
+      tripId: this.tripId(),
+      raterId,
+      raterType: this.raterType(),
+      score: raw.score,
+      comment: raw.comment.trim() || undefined,
+    }).subscribe({
+      next: () => {
+        this.submitting.set(false);
+        this.submitted.set(true);
+        const target = this.raterType() === 'SHIPPER' ? '/shipper/loads' : '/carrier/trips';
+        setTimeout(() => void this.router.navigate([target]), 1200);
+      },
+      error: (err: unknown) => {
+        this.submitting.set(false);
+        if (err instanceof HttpErrorResponse && err.status === 409) {
+          this.errorKey.set('rating.error.already-rated');
+        } else if (err instanceof HttpErrorResponse && (err.status === 400 || err.status === 422)) {
+          this.errorKey.set('rating.error.not-eligible');
+        } else {
+          this.errorKey.set('rating.error.unavailable');
+        }
+      }
+    });
+  }
 }
