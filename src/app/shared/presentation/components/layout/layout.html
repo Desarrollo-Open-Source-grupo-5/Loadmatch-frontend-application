@@ -21,6 +21,12 @@
       <mat-icon>switch_account</mat-icon>
       <span class="app-toolbar__label">{{ 'nav.switch-profile' | translate }}</span>
     </button>
+    <button mat-stroked-button type="button" (click)="signOut()"
+            [attr.aria-label]="'nav.sign-out' | translate"
+            [matTooltip]="'nav.sign-out' | translate" [matTooltipDisabled]="!isHandset()">
+      <mat-icon>logout</mat-icon>
+      <span class="app-toolbar__label">{{ 'nav.sign-out' | translate }}</span>
+    </button>
   } @else {
     <a mat-stroked-button routerLink="/sign-in" routerLinkActive="app-toolbar__link--active"
        [attr.aria-label]="'nav.sign-in' | translate">
