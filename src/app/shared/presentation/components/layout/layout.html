@@ -9,6 +9,7 @@
     <span class="app-toolbar__brand-name">{{ 'app.brand-load' | translate }}<span class="app-toolbar__brand-accent">{{ 'app.brand-match' | translate }}</span></span>
   </a>
   <span class="mat-spacer"></span>
+  <app-notification-bell/>
   @if (activeProfile(); as profile) {
     <span class="app-toolbar__profile app-toolbar__label">
       <mat-icon aria-hidden="true">{{ profile.role === 'SHIPPER' ? 'domain' : 'local_shipping' }}</mat-icon>

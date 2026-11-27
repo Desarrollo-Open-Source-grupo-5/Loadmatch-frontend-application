@@ -1,0 +1,9 @@
+@if (store.available()) {
+  @let count = store.state().unreadCount;
+  <button mat-icon-button type="button" aria-haspopup="dialog" (click)="open()"
+          [attr.aria-label]="(count > 0 ? 'notifications.unread-label' : 'notifications.title') | translate: {count}"
+          [matTooltip]="'notifications.title' | translate">
+    <mat-icon aria-hidden="true" [matBadge]="count > 99 ? '99+' : count"
+              [matBadgeHidden]="count === 0" matBadgeSize="small">notifications</mat-icon>
+  </button>
+}
