@@ -504,5 +504,41 @@
       "invalid": "Verifica los datos ingresados de la empresa.",
       "unavailable": "No se pudo completar el registro. Inténtalo de nuevo."
     }
+  },
+  "carrier-register": {
+    "title": "Regístrate como transportista",
+    "subtitle": "Crea tu perfil de conductor y registra tu vehículo.",
+    "section-personal": "Datos personales y licencia",
+    "section-vehicle": "Datos del vehículo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "first-names": "Nombres",
+    "last-names": "Apellidos",
+    "dni": "DNI (8 dígitos)",
+    "phone-number": "Teléfono",
+    "license-number": "Número de licencia",
+    "license-category": "Categoría de licencia",
+    "license-expiration": "Fecha de vencimiento de licencia",
+    "operating-zone": "Zona de operación",
+    "vehicle-type": "Tipo de vehículo",
+    "license-plate": "Placa",
+    "brand": "Marca",
+    "model": "Modelo",
+    "manufacture-year": "Año de fabricación",
+    "payload-kg": "Capacidad de carga (kg)",
+    "submit": "Crear cuenta de transportista",
+    "back-to-sign-in": "Volver a iniciar sesión",
+    "success": "Transportista registrado correctamente. Redirigiendo a inicio de sesión...",
+    "error": {
+      "required": "Este campo es obligatorio.",
+      "email": "Ingresa un correo electrónico válido.",
+      "password-length": "La contraseña debe tener al menos 6 caracteres.",
+      "dni-format": "El DNI debe tener 8 dígitos.",
+      "plate-format": "La placa debe tener formato ABC-123.",
+      "payload-min": "La capacidad debe ser mayor que 0.",
+      "duplicate": "Ya existe un transportista registrado con ese DNI o correo.",
+      "invalid": "Verifica los datos ingresados del transportista o vehículo.",
+      "unavailable": "No se pudo completar el registro. Inténtalo de nuevo."
+    }
   }
 }
