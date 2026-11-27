@@ -553,5 +553,22 @@
       "invalid": "Verifica los datos ingresados del transportista o vehículo.",
       "unavailable": "No se pudo completar el registro. Inténtalo de nuevo."
     }
+  },
+  "rating": {
+    "shipper-title": "Califica al transportista",
+    "shipper-subtitle": "Comparte tu experiencia sobre este viaje completado.",
+    "carrier-title": "Califica a la empresa",
+    "carrier-subtitle": "Comparte tu experiencia con la empresa tras el pago.",
+    "score-label": "Calificación de 1 a 5 estrellas",
+    "comment": "Comentario (opcional)",
+    "submit": "Enviar calificación",
+    "success": "Calificación enviada correctamente. Redirigiendo...",
+    "error": {
+      "comment-length": "El comentario no puede superar los 500 caracteres.",
+      "already-rated": "Ya calificaste este viaje.",
+      "not-eligible": "Este viaje aún no cumple los requisitos para calificarse.",
+      "missing-context": "Falta información del viaje o del perfil activo.",
+      "unavailable": "No se pudo enviar la calificación. Inténtalo de nuevo."
+    }
   }
 }
