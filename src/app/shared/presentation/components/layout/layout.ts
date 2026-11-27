@@ -12,6 +12,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {ActiveProfileStore} from '../../../application/active-profile.store';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
+import {NotificationBell} from '../notification-bell/notification-bell';
 
 /**
  * Entry of the side navigation.
@@ -50,7 +51,8 @@ export interface NavigationOption {
     RouterOutlet,
     TranslatePipe,
     LanguageSwitcher,
-    FooterContent
+    FooterContent,
+    NotificationBell
   ],
   selector: 'app-layout',
   styleUrl: './layout.css',

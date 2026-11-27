@@ -402,6 +402,18 @@
     "unavailable-title": "Este flete ya no está disponible",
     "unavailable-message": "Otro transportista ya lo tomó, por lo que se retiró de tus resultados de búsqueda."
   },
+  "notifications": {
+    "title": "Notificaciones",
+    "unread-label": "Notificaciones ({{count}} sin leer)",
+    "urgent": "Urgente",
+    "empty": "No tienes notificaciones.",
+    "close": "Cerrar",
+    "retry": "Volver a intentar",
+    "errors": {
+      "list": "No se pudieron cargar las notificaciones.",
+      "mark-read": "No se pudieron marcar las notificaciones como leídas."
+    }
+  },
   "trip-incidents": {
     "title": "Incidentes del viaje",
     "loading": "Cargando incidentes…",

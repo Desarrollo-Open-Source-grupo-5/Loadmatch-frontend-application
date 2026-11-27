@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ 'notifications.title' | translate }}</h2>
+<mat-dialog-content>
+  @let state = store.state();
+  @if (state.loading) {
+    <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/>
+  }
+  @if (state.error) {
+    <p class="notification-error" role="alert">{{ ('notifications.errors.' + state.error) | translate }}</p>
+    <button mat-button type="button" [disabled]="state.loading" (click)="store.load()">
+      {{ 'notifications.retry' | translate }}
+    </button>
+  } @else if (!state.loading && !state.notifications.length) {
+    <p role="status">{{ 'notifications.empty' | translate }}</p>
+  }
+
+  @if (state.notifications.length) {
+    <ul class="notification-list">
+      @for (notification of state.notifications; track notification.id) {
+        <li class="notification" [class.notification--unread]="!notification.read">
+          <div class="notification__heading">
+            <strong>{{ notification.title }}</strong>
+            @if (notification.urgent) {
+              <span class="notification__urgent">{{ 'notifications.urgent' | translate }}</span>
+            }
+          </div>
+          <p>{{ notification.message }}</p>
+          <time [attr.datetime]="notification.createdAt.toISOString()">
+            {{ notification.createdAt | localizedDate: 'd MMM y, HH:mm' }}
+          </time>
+        </li>
+      }
+    </ul>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close type="button">{{ 'notifications.close' | translate }}</button>
+</mat-dialog-actions>

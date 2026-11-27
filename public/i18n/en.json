@@ -402,6 +402,18 @@
     "unavailable-title": "This load is no longer available",
     "unavailable-message": "Another carrier already took it, so it was removed from your search results."
   },
+  "notifications": {
+    "title": "Notifications",
+    "unread-label": "Notifications ({{count}} unread)",
+    "urgent": "Urgent",
+    "empty": "You have no notifications.",
+    "close": "Close",
+    "retry": "Try again",
+    "errors": {
+      "list": "Could not load notifications.",
+      "mark-read": "Could not mark the notifications as read."
+    }
+  },
   "trip-incidents": {
     "title": "Trip incidents",
     "loading": "Loading incidents…",

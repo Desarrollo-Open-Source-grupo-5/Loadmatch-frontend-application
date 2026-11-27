@@ -1,0 +1,50 @@
+.notification-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notification {
+  display: grid;
+  gap: 0.375rem;
+  padding: 0.875rem;
+  border-block-end: 1px solid var(--lm-color-slate-200);
+  overflow-wrap: anywhere;
+}
+
+.notification:last-child {
+  border-block-end: 0;
+}
+
+.notification--unread {
+  background: var(--lm-color-blue-tint);
+}
+
+.notification__heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.5rem;
+}
+
+.notification__urgent {
+  border-radius: 1rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--lm-status-cancelled-bg);
+  color: var(--lm-status-cancelled-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.notification p {
+  margin: 0;
+}
+
+.notification time {
+  color: var(--lm-color-slate-600);
+  font-size: 0.875rem;
+}
+
+.notification-error {
+  color: var(--lm-color-error-text);
+}
