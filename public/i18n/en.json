@@ -570,5 +570,27 @@
       "missing-context": "Missing trip or active profile information.",
       "unavailable": "Could not submit rating. Try again."
     }
+  },
+  "payment": {
+    "title": "Pay completed trip",
+    "subtitle": "Enter the approved payment order details to settle this trip.",
+    "amount-label": "Total amount (PEN)",
+    "method-label": "Payment method",
+    "method-card": "Card",
+    "token-label": "Payment order token",
+    "token-placeholder": "PayPal order ID or card token",
+    "submit": "Confirm payment",
+    "success-title": "Payment completed",
+    "success-body": "Your payment was registered. Redirecting to rate the carrier...",
+    "go-to-rating": "Rate carrier",
+    "error": {
+      "invalid-amount": "Enter a valid amount greater than 0.",
+      "token-required": "Payment token is required.",
+      "missing-trip": "Missing trip identifier.",
+      "rejected": "Payment was rejected by the gateway. Try another order.",
+      "already-paid": "This trip has already been paid.",
+      "not-eligible": "This trip is not eligible for payment yet.",
+      "unavailable": "Could not process payment. Try again."
+    }
   }
 }

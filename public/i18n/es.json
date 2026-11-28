@@ -570,5 +570,27 @@
       "missing-context": "Falta información del viaje o del perfil activo.",
       "unavailable": "No se pudo enviar la calificación. Inténtalo de nuevo."
     }
+  },
+  "payment": {
+    "title": "Pagar viaje completado",
+    "subtitle": "Ingresa los datos de la orden aprobada para liquidar este viaje.",
+    "amount-label": "Monto total (PEN)",
+    "method-label": "Método de pago",
+    "method-card": "Tarjeta",
+    "token-label": "Token de orden de pago",
+    "token-placeholder": "ID de orden de PayPal o token",
+    "submit": "Confirmar pago",
+    "success-title": "Pago completado",
+    "success-body": "Tu pago fue registrado. Redirigiendo para calificar al transportista...",
+    "go-to-rating": "Calificar transportista",
+    "error": {
+      "invalid-amount": "Ingresa un monto válido mayor que 0.",
+      "token-required": "El token de pago es obligatorio.",
+      "missing-trip": "Falta el identificador del viaje.",
+      "rejected": "El pago fue rechazado por la pasarela. Intenta con otra orden.",
+      "already-paid": "Este viaje ya fue pagado.",
+      "not-eligible": "Este viaje aún no cumple los requisitos para pagarse.",
+      "unavailable": "No se pudo procesar el pago. Inténtalo de nuevo."
+    }
   }
 }

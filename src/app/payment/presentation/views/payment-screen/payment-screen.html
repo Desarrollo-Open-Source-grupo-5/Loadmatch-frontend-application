@@ -1,0 +1,56 @@
+<section class="payment-page">
+  <header class="payment-page__header">
+    <h1>{{ 'payment.title' | translate }}</h1>
+    <p>{{ 'payment.subtitle' | translate }}</p>
+  </header>
+
+  @if (submitting()) {
+    <mat-progress-bar mode="indeterminate"/>
+  }
+
+  @if (paid()) {
+    <div class="payment-card payment-card--success" role="status">
+      <mat-icon aria-hidden="true">check_circle</mat-icon>
+      <h2>{{ 'payment.success-title' | translate }}</h2>
+      <p>{{ 'payment.success-body' | translate }}</p>
+      <button mat-flat-button type="button" (click)="goToRating()">
+        {{ 'payment.go-to-rating' | translate }}
+      </button>
+    </div>
+  } @else {
+    <form class="payment-card" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'payment.amount-label' | translate }}</mat-label>
+        <input matInput type="number" min="1" step="0.01" formControlName="totalAmount"/>
+        @if (form.controls.totalAmount.hasError('required') || form.controls.totalAmount.hasError('min')) {
+          <mat-error>{{ 'payment.error.invalid-amount' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'payment.method-label' | translate }}</mat-label>
+        <mat-select formControlName="method">
+          <mat-option value="PAYPAL">PayPal</mat-option>
+          <mat-option value="CARD">{{ 'payment.method-card' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'payment.token-label' | translate }}</mat-label>
+        <input matInput formControlName="paymentToken" [placeholder]="'payment.token-placeholder' | translate"/>
+        @if (form.controls.paymentToken.hasError('required')) {
+          <mat-error>{{ 'payment.error.token-required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      @if (errorKey(); as key) {
+        <p class="payment-error" role="alert">{{ key | translate }}</p>
+      }
+
+      <button mat-flat-button type="submit" [disabled]="submitting()">
+        {{ 'payment.submit' | translate }}
+      </button>
+    </form>
+  }
+</section>
+
