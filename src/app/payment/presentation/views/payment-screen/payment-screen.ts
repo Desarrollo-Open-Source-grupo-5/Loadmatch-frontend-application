@@ -67,4 +67,46 @@ export class PaymentScreen implements OnInit {
     void this.router.navigate(['/shipper/ratings', this.tripId()]);
   }
 
+  protected submit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    if (!this.tripId()) {
+      this.errorKey.set('payment.error.missing-trip');
+      return;
+    }
+
+    this.submitting.set(true);
+    this.errorKey.set(null);
+
+    const raw = this.form.getRawValue();
+    this.paymentApi.createPayment({
+      tripId: this.tripId(),
+      totalAmount: raw.totalAmount,
+      method: raw.method,
+      paymentToken: raw.paymentToken.trim(),
+    }).subscribe({
+      next: payment => {
+        this.submitting.set(false);
+        if (payment.status === 'COMPLETED') {
+          this.paid.set(true);
+          setTimeout(() => this.goToRating(), 1200);
+        } else {
+          this.errorKey.set('payment.error.rejected');
+        }
+      },
+      error: (err: unknown) => {
+        this.submitting.set(false);
+        if (err instanceof HttpErrorResponse && err.status === 409) {
+          this.errorKey.set('payment.error.already-paid');
+        } else if (err instanceof HttpErrorResponse && (err.status === 404 || err.status === 422)) {
+          this.errorKey.set('payment.error.not-eligible');
+        } else {
+          this.errorKey.set('payment.error.unavailable');
+        }
+      }
+    });
+  }
 }
+
