@@ -21,6 +21,8 @@ const documentsRoutes = () =>
   import('./documents/presentation/documents.routes').then(m => m.documentsRoutes);
 const shipperRatingRoutes = () =>
   import('./rating/presentation/rating.routes').then(m => m.shipperRatingRoutes);
+const carrierRatingRoutes = () =>
+  import('./rating/presentation/rating.routes').then(m => m.carrierRatingRoutes);
 const shipperPaymentRoutes = () =>
   import('./payment/presentation/payment.routes').then(m => m.shipperPaymentRoutes);
 const shipperRegistration = () =>
@@ -50,6 +52,7 @@ export const routes: Routes = [
     { path: '', loadChildren: matchingRoutes },
     { path: '', loadChildren: tripExecutionCarrierRoutes },
     { path: '', loadChildren: documentsRoutes },
+    { path: '', loadChildren: carrierRatingRoutes },
   ] },
   { path: '**',       loadComponent: pageNotFound, title: `${baseTitle} - Page not found` },
 ];
