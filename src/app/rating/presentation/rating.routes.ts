@@ -12,3 +12,10 @@ export const shipperRatingRoutes: Routes = [
   {path: 'ratings/:tripId', loadComponent: rateTrip, data: {raterType: 'SHIPPER'}, title: `${baseTitle} - Rate carrier`}
 ];
 
+/**
+ * Carrier rating routes (/carrier/ratings/:tripId).
+ */
+export const carrierRatingRoutes: Routes = [
+  {path: 'ratings/:tripId', loadComponent: rateTrip, data: {raterType: 'CARRIER'}, title: `${baseTitle} - Rate shipper`}
+];
+
